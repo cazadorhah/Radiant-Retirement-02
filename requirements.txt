@@ -1,0 +1,22 @@
+# Web templating
+Jinja2==3.1.2
+MarkupSafe==2.1.3
+
+# Data processing
+pandas==2.0.0
+numpy==1.24.3
+
+# API requests and web scraping
+requests==2.28.2
+beautifulsoup4==4.12.0
+googlemaps==4.10.0
+
+# HTML/XML processing
+lxml==4.9.2
+
+# Utility libraries
+python-slugify==8.0.1
+tqdm==4.65.0
+
+# Geospatial calculations (for finding nearby cities)
+geopy==2.3.0

@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% set active_page = 'home' %}
+
+{% block title %}Find Senior Living Options | Radiant Retirement{% endblock %}
+
+{% block description %}Find senior living and assisted living options across the 1,000 largest U.S. cities. Compare costs, amenities, and facilities.{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="container">
+        <h1 class="hero-title">Find Senior Living Options</h1>
+        
+        <div class="search-container">
+            <form action="/search.html" method="get" id="search-form">
+                <input type="text" name="q" id="search-input" placeholder="Search for a city or facility..." aria-label="Search for a city or facility">
+                <button type="submit" class="search-button">
+                    <span class="search-icon">&#x1F50D;</span>
+                    <span class="sr-only">Search</span>
+                </button>
+            </form>
+            <div id="search-suggestions" class="search-suggestions"></div>
+        </div>
+    </div>
+</section>
+
+<section class="featured-cities">
+    <div class="container">
+        <h2 class="section-title">Featured Cities</h2>
+        
+        <div class="city-grid">
+            {% for city in featured_cities %}
+            <a href="/city/{{ city.slug }}/" class="city-card{% if loop.index == 2 %} highlighted{% endif %}">
+                <h3 class="city-name">{{ city.name }}, {{ city.state_abbr }}</h3>
+                <p class="city-population">Population: {{ "{:,}".format(city.population) }}</p>
+                <p class="city-cost">Avg. Cost: ${{ "{:,}".format(city.avg_cost) }} / month</p>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="info-section">
+    <div class="container">
+        <div class="info-grid">
+            <div class="info-card">
+                <h3>Assisted Living</h3>
+                <p>Find communities that provide assistance with daily activities, meals, and personal care.</p>
+                <a href="/search.html?type=assisted-living" class="info-link">Learn More</a>
+            </div>
+            <div class="info-card">
+                <h3>Memory Care</h3>
+                <p>Specialized care for those with Alzheimer's, dementia, and other memory conditions.</p>
+                <a href="/search.html?type=memory-care" class="info-link">Learn More</a>
+            </div>
+            <div class="info-card">
+                <h3>Independent Living</h3>
+                <p>Communities designed for active seniors who want a maintenance-free lifestyle.</p>
+                <a href="/search.html?type=independent-living" class="info-link">Learn More</a>
+            </div>
+            <div class="info-card">
+                <h3>Nursing Homes</h3>
+                <p>Facilities providing 24-hour skilled nursing care for those with medical needs.</p>
+                <a href="/search.html?type=nursing-home" class="info-link">Learn More</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta-section">
+    <div class="container">
+        <h2>Find the Perfect Senior Living Option</h2>
+        <p>Compare costs, amenities, and read reviews for facilities across the United States.</p>
+        <a href="/browse-cities.html" class="cta-button">Browse Cities</a>
+    </div>
+</section>
+{% endblock %}

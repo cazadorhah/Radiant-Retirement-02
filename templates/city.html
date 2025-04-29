@@ -1,0 +1,213 @@
+{% extends "base.html" %}
+
+{% block title %}Senior Living in {{ city.city_info.name }}, {{ city.city_info.state }} | Radiant Retirement{% endblock %}
+
+{% block description %}{{ city.seo.descriptions.main }}{% endblock %}
+
+{% block extra_head %}
+<meta property="og:title" content="{{ city.seo.titles.main }}">
+<meta property="og:description" content="{{ city.seo.descriptions.main }}">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://radiantretirement.com/city/{{ city.city_info.slug }}/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "{{ city.seo.titles.main }}",
+  "description": "{{ city.seo.descriptions.main }}",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://radiantretirement.com/city/{{ city.city_info.slug }}/"
+  }
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<section class="city-hero">
+    <div class="container">
+        <h1>Senior Living in {{ city.city_info.name }}, {{ city.city_info.state }}</h1>
+        <div class="city-stats">
+            <div class="stat-item">
+                <span class="stat-label">Population:</span>
+                <span class="stat-value">{{ "{:,}".format(city.city_info.population) }}</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Avg. Assisted Living Cost:</span>
+                <span class="stat-value">${{ "{:,}".format(city.costs.assisted_living.monthly_avg) }}/month</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="city-content">
+    <div class="container">
+        <div class="city-content-grid">
+            <main class="city-main">
+                <section class="city-section" id="overview">
+                    <h2>Overview</h2>
+                    <p>Find the best senior living options in {{ city.city_info.name }}, {{ city.city_info.state }}. With a population of {{ "{:,}".format(city.city_info.population) }}, {{ city.city_info.name }} offers {{ city.meta.facility_count }} senior living communities with various levels of care and amenities to meet different needs and preferences.</p>
+                </section>
+
+                <section class="city-section" id="costs">
+                    <h2>Senior Living Costs in {{ city.city_info.name }}</h2>
+                    <div class="costs-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Care Type</th>
+                                    <th>Monthly Average</th>
+                                    <th>Yearly Average</th>
+                                    <th>Price Range</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Assisted Living</td>
+                                    <td>${{ "{:,}".format(city.costs.assisted_living.monthly_avg) }}</td>
+                                    <td>${{ "{:,}".format(city.costs.assisted_living.annual_avg) }}</td>
+                                    <td>${{ "{:,}".format(city.costs.assisted_living.monthly_range.low) }} - ${{ "{:,}".format(city.costs.assisted_living.monthly_range.high) }}/mo</td>
+                                </tr>
+                                <tr>
+                                    <td>Memory Care</td>
+                                    <td>${{ "{:,}".format(city.costs.memory_care.monthly_avg) }}</td>
+                                    <td>${{ "{:,}".format(city.costs.memory_care.annual_avg) }}</td>
+                                    <td>${{ "{:,}".format(city.costs.memory_care.monthly_range.low) }} - ${{ "{:,}".format(city.costs.memory_care.monthly_range.high) }}/mo</td>
+                                </tr>
+                                <tr>
+                                    <td>Independent Living</td>
+                                    <td>${{ "{:,}".format(city.costs.independent_living.monthly_avg) }}</td>
+                                    <td>${{ "{:,}".format(city.costs.independent_living.annual_avg) }}</td>
+                                    <td>${{ "{:,}".format(city.costs.independent_living.monthly_range.low) }} - ${{ "{:,}".format(city.costs.independent_living.monthly_range.high) }}/mo</td>
+                                </tr>
+                                <tr>
+                                    <td>Nursing Home</td>
+                                    <td>${{ "{:,}".format(city.costs.nursing_home.monthly_avg) }}</td>
+                                    <td>${{ "{:,}".format(city.costs.nursing_home.annual_avg) }}</td>
+                                    <td>${{ "{:,}".format(city.costs.nursing_home.monthly_range.low) }} - ${{ "{:,}".format(city.costs.nursing_home.monthly_range.high) }}/mo</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="cost-factors">
+                        <h3>Cost Factors in {{ city.city_info.name }}</h3>
+                        <ul>
+                            {% for factor in city.costs.cost_factors %}
+                            <li>{{ factor }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </section>
+
+                <section class="city-section" id="facilities">
+                    <h2>Top-Rated Senior Living Facilities in {{ city.city_info.name }}</h2>
+                    
+                    <div class="facilities-list">
+                        {% for facility in city.facilities %}
+                        <div class="facility-card">
+                            <div class="facility-header">
+                                <h3 class="facility-name">{{ facility.name }}</h3>
+                                <div class="facility-rating">
+                                    <span class="rating-value">{{ facility.ratings.overall }}</span>
+                                    <span class="rating-stars">
+                                        {% for i in range(5) %}
+                                            {% if i < facility.ratings.overall|int %}
+                                                ★
+                                            {% elif i < (facility.ratings.overall + 0.5)|int %}
+                                                ★
+                                            {% else %}
+                                                ☆
+                                            {% endif %}
+                                        {% endfor %}
+                                    </span>
+                                    <span class="review-count">({{ facility.ratings.review_count }} reviews)</span>
+                                </div>
+                            </div>
+                            
+                            <div class="facility-details">
+                                <div class="facility-address">
+                                    <p>{{ facility.address }}</p>
+                                    <p>{{ facility.city }}, {{ facility.state }} {{ facility.zip_code }}</p>
+                                    <p>{{ facility.phone }}</p>
+                                </div>
+                                
+                                <div class="facility-care-types">
+                                    <h4>Care Types:</h4>
+                                    <ul>
+                                        {% for type in facility.facility_type %}
+                                        <li>{{ type }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                                
+                                <div class="facility-features">
+                                    <h4>Features:</h4>
+                                    <ul>
+                                        {% for feature in facility.features %}
+                                        <li>{{ feature }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="facility-footer">
+                                <a href="{{ facility.website }}" class="facility-website" target="_blank" rel="noopener">Visit Website</a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </section>
+            </main>
+            
+            <aside class="city-sidebar">
+                <div class="sidebar-section">
+                    <h3>Nearby Cities</h3>
+                    <ul class="nearby-cities">
+                        {% for nearby in city.city_info.nearby_cities %}
+                        <li>
+                            <a href="/city/{{ nearby.slug }}/">
+                                <span class="nearby-city">{{ nearby.name }}, {{ nearby.state }}</span>
+                                <span class="nearby-distance">{{ nearby.distance }} miles</span>
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                
+                <div class="sidebar-section">
+                    <h3>Care Types</h3>
+                    <ul class="care-types">
+                        {% for care_type in city.seo.care_types %}
+                        <li>
+                            <a href="/search.html?city={{ city.city_info.slug }}&type={{ care_type|lower|replace(' ', '-') }}">
+                                {{ care_type }} in {{ city.city_info.name }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </aside>
+        </div>
+    </div>
+</section>
+
+<section class="related-cities">
+    <div class="container">
+        <h2>Discover More Cities in {{ city.city_info.state }}</h2>
+        <div class="related-cities-grid">
+            {% for related in related_cities %}
+            <a href="/city/{{ related.slug }}/" class="city-card">
+                <h3 class="city-name">{{ related.name }}, {{ related.state_abbr }}</h3>
+                <p class="city-population">Population: {{ "{:,}".format(related.population) }}</p>
+                <p class="city-cost">Avg. Cost: ${{ "{:,}".format(related.avg_cost) }} / month</p>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="/js/city.js"></script>
+{% endblock %}
