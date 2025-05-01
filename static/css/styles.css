@@ -114,7 +114,7 @@ ul, ol {
 }
 
 .logo {
-    font-family:'Dancing Script';
+    font-family:'Dancing Script', cursive;
     font-size: 40px;
     font-weight: normal;
     color: #ffffff;
