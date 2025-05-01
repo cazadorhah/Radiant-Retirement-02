@@ -128,7 +128,8 @@ ul, ol {
 }
 
 .main-nav a {
-    color: var(--text-primary);
+    font family: Georgia, serif;
+    color: #111827;
     font-size: var(--font-lg);
     text-decoration: none;
     padding: var(--spacing-2) 0;
