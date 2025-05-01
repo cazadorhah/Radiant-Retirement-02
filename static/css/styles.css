@@ -114,6 +114,13 @@ ul, ol {
 }
 
 .logo {
+  text-decoration: none;
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.logo-radiant {
     font-family: 'Dancing Script', cursive;
     font-size: var(--font-3xl);
     font-weight: bold;
@@ -121,7 +128,7 @@ ul, ol {
     text-decoration: none;
 }
 
-.logo2 {
+.logo-retirement {
     font-family: 'Merriweather', serif;
     font-size: var(--font-3xl);
     font-weight: bold;
