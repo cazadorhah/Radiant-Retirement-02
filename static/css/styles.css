@@ -114,11 +114,12 @@ ul, ol {
 }
 
 .logo {
-    font-family: "Lucida Handwriting", "Lucida Calligraphy", cursive;
-    font-size: var(--font-3xl);
-    font-weight: bold;
-    color: #ffffff;
-    text-decoration: none;
+    display: block;
+}
+
+.logo img {
+    max-height: 60px; /* Adjust this value based on your design needs */
+    width: auto;
 }
 
 .main-nav ul {
