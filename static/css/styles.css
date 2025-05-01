@@ -94,7 +94,7 @@ ul, ol {
 
 /* Header Styles */
 .site-header {
-    background-color: #f59e0b;
+    background-color: #FFA726;
     box-shadow: var(--shadow);
     position: relative;
     z-index: 10;
@@ -118,6 +118,7 @@ ul, ol {
     font-weight: bold;
     color: var(--secondary-yellow);
     text-decoration: none;
+    font-family: 'Dancing Script', cursive;
 }
 
 .main-nav ul {
