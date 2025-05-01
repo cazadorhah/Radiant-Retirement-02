@@ -121,19 +121,17 @@ ul, ol {
 }
 
 .logo-radiant {
-    font-family: 'Dancing Script', cursive;
-    font-size: var(--font-3xl);
-    font-weight: bold;
-    color: #ffffff;
-    text-decoration: none;
+  font-family: 'Dancing Script', cursive;
+  font-weight: 700;
+  font-size: 28px;
+  color: #fbbf24; /* Radiant yellow */
 }
 
 .logo-retirement {
-    font-family: 'Merriweather', serif;
-    font-size: var(--font-3xl);
-    font-weight: bold;
-    color: #1f2937;
-    text-decoration: none;
+  font-family: 'Merriweather', serif;
+  font-weight: 700;
+  font-size: 24px;
+  color: #1f2937; /* Charcoal/dark slate */
 }
 
 .main-nav ul {
