@@ -128,7 +128,7 @@ ul, ol {
 }
 
 .main-nav a {
-    font family: Georgia, serif;
+    font-family: Georgia, serif;
     color: #111827;
     font-size: var(--font-lg);
     text-decoration: none;
