@@ -113,10 +113,19 @@ ul, ol {
     align-items: center;
 }
 
-.logo {
+.logo-radiant {
+    font-family: 'Dancing Script', cursive;
     font-size: var(--font-3xl);
     font-weight: bold;
-    color: #ffffff;
+    color: #fbbf24;
+    text-decoration: none;
+}
+
+.logo-retirement {
+    font-family: 'Merriweather', serif;
+    font-size: var(--font-3xl);
+    font-weight: bold;
+    color: #1f2937;
     text-decoration: none;
 }
 
