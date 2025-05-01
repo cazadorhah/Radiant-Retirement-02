@@ -114,10 +114,10 @@ ul, ol {
 }
 
 .logo {
-    font-family:'Brush Script MT, cursive;
+    font-family:'Brush Script MT', cursive;
     font-size: var(--font-3xl);
     font-weight: bold;
-    color: var(--secondary-yellow);
+    color: #ffffff;
     text-decoration: none;
 }
 
