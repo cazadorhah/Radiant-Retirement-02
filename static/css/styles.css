@@ -66,7 +66,7 @@ a {
 }
 
 a:hover {
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 ul, ol {
@@ -114,12 +114,11 @@ ul, ol {
 }
 
 .logo {
-    display: block;
-}
-
-.logo img {
-    max-height: 60px; /* Adjust this value based on your design needs */
-    width: auto;
+    font-family:'Brush Script MT, cursive;
+    font-size: var(--font-3xl);
+    font-weight: bold;
+    color: var(--secondary-yellow);
+    text-decoration: none;
 }
 
 .main-nav ul {
