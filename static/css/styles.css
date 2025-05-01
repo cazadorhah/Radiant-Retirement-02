@@ -128,8 +128,7 @@ ul, ol {
 }
 
 .main-nav a {
-    font-family: Georgia, serif;
-    color: #111827;
+    color: var(--footer-bg);
     font-size: var(--font-lg);
     text-decoration: none;
     padding: var(--spacing-2) 0;
@@ -137,7 +136,7 @@ ul, ol {
 }
 
 .main-nav a:hover, .main-nav a.active {
-    color: var(--primary-blue);
+    color: var(--footer-bg);
 }
 
 .main-nav a.active::after {
