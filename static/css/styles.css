@@ -114,7 +114,7 @@ ul, ol {
 }
 
 .logo {
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: "Lucida Handwriting", "Lucida Calligraphy", cursive;
     font-size: var(--font-3xl);
     font-weight: bold;
     color: #ffffff;
