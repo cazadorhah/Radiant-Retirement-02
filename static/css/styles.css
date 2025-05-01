@@ -113,8 +113,8 @@ ul, ol {
     align-items: center;
 }
 
-.logo-radiant {
-    font-family: 'Dancing Script', cursive;
+.logo {
+    font-family: 'Merriweather', serif;
     font-size: var(--font-3xl);
     font-weight: bold;
     color: #fbbf24;
