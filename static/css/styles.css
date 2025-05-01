@@ -121,13 +121,13 @@ ul, ol {
     text-decoration: none;
 }
 
-.logo-retirement {
+/*.logo-retirement {
     font-family: 'Merriweather', serif;
     font-size: var(--font-3xl);
     font-weight: bold;
     color: #1f2937;
     text-decoration: none;
-}
+}*/
 
 .main-nav ul {
     display: flex;
