@@ -114,20 +114,20 @@ ul, ol {
 }
 
 .logo {
-    font-family: 'Merriweather', serif;
+    font-family: 'Dancing Script', cursive;
     font-size: var(--font-3xl);
     font-weight: bold;
-    color: #fbbf24;
+    color: #ffffff;
     text-decoration: none;
 }
 
-/*.logo-retirement {
+.logo2 {
     font-family: 'Merriweather', serif;
     font-size: var(--font-3xl);
     font-weight: bold;
     color: #1f2937;
     text-decoration: none;
-}*/
+}
 
 .main-nav ul {
     display: flex;
