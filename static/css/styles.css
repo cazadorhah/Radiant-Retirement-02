@@ -115,8 +115,8 @@ ul, ol {
 
 .logo {
     font-family:'Brush Script MT', cursive;
-    font-size: var(--font-3xl);
-    font-weight: bold;
+    font-size: 40px;
+    font-weight: normal;
     color: #ffffff;
     text-decoration: none;
 }
