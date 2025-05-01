@@ -94,7 +94,7 @@ ul, ol {
 
 /* Header Styles */
 .site-header {
-    background-color: var(--card-bg);
+    background-color: #f59e0b;
     box-shadow: var(--shadow);
     position: relative;
     z-index: 10;
