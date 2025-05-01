@@ -113,12 +113,10 @@ ul, ol {
     align-items: center;
 }
 
-.logo {
-    font-size: var(--font-3xl);
-    font-weight: bold;
-    color: var(--secondary-yellow);
-    text-decoration: none;
-    font-family: 'Dancing Script', cursive;
+.logo img {
+    height: 60px; /* Adjust based on header size
+    width: auto;
+    display: block;
 }
 
 .main-nav ul {
