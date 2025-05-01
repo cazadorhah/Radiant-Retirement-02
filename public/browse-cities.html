@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Browse senior living options across the 1,000 largest U.S. cities, organized by region and state.">
+    <title>Browse Senior Living Options by City | Radiant Retirement</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    
+<style>
+    .page-hero {
+        background-color: var(--primary-blue);
+        color: white;
+        padding: var(--spacing-12) 0;
+        text-align: center;
+    }
+    
+    .page-subtitle {
+        font-size: var(--font-lg);
+        margin-top: var(--spacing-4);
+    }
+    
+    .browse-section {
+        padding: var(--spacing-12) 0;
+    }
+    
+    .region-tabs {
+        margin-top: var(--spacing-6);
+    }
+    
+    .tab-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--spacing-2);
+        margin-bottom: var(--spacing-6);
+        border-bottom: 1px solid var(--border-light);
+    }
+    
+    .tab-button {
+        padding: var(--spacing-3) var(--spacing-6);
+        background: none;
+        border: none;
+        font-size: var(--font-base);
+        cursor: pointer;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .tab-button.active {
+        font-weight: bold;
+        color: var(--primary-blue);
+    }
+    
+    .tab-button.active::after {
+        content: '';
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background-color: var(--primary-blue);
+    }
+    
+    .region-counts {
+        font-size: var(--font-xs);
+        color: var(--text-secondary);
+        margin-top: var(--spacing-1);
+    }
+    
+    .tab-content {
+        display: block;
+    }
+    
+    .tab-content.hidden {
+        display: none;
+    }
+    
+    .region-states {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: var(--spacing-8);
+    }
+    
+    .state-container {
+        margin-bottom: var(--spacing-8);
+    }
+    
+    .state-name {
+        font-size: var(--font-xl);
+        margin-bottom: var(--spacing-4);
+        color: var(--text-primary);
+        border-bottom: 1px solid var(--border-light);
+        padding-bottom: var(--spacing-2);
+    }
+    
+    .state-cities {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: var(--spacing-4);
+    }
+    
+    .city-card-small {
+        background-color: var(--card-bg);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow);
+        padding: var(--spacing-4);
+        transition: transform 0.2s, box-shadow 0.2s;
+        text-decoration: none;
+        color: var(--text-primary);
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .city-card-small:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--shadow-md);
+        text-decoration: none;
+    }
+    
+    .city-card-small .city-name {
+        font-size: var(--font-lg);
+        margin-bottom: var(--spacing-2);
+        color: var(--text-primary);
+    }
+    
+    .city-meta {
+        display: flex;
+        justify-content: space-between;
+        color: var(--text-secondary);
+        font-size: var(--font-sm);
+        margin-bottom: var(--spacing-2);
+    }
+    
+    .city-cost {
+        margin-top: auto;
+        font-size: var(--font-sm);
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .cost-label {
+        color: var(--text-secondary);
+    }
+    
+    .cost-value {
+        font-weight: bold;
+        color: var(--primary-blue);
+    }
+    
+    @media (max-width: 768px) {
+        .tab-buttons {
+            flex-direction: column;
+            gap: 0;
+        }
+        
+        .tab-button {
+            width: 100%;
+            text-align: left;
+            padding: var(--spacing-3);
+            flex-direction: row;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border-light);
+        }
+        
+        .tab-button.active::after {
+            display: none;
+        }
+        
+        .region-states {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="logo-container">
+                <a href="/" class="logo">Radiant</a>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="/" >Home</a></li>
+                    <li><a href="/browse-cities.html" class="active">Browse Cities</a></li>
+                    <li><a href="/about.html" >About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        
+<section class="page-hero">
+    <div class="container">
+        <h1>Browse Cities</h1>
+        <p class="page-subtitle">Explore senior living options in the 1,000 largest U.S. cities</p>
+    </div>
+</section>
+
+<section class="browse-section">
+    <div class="container">
+        <div class="region-tabs">
+            <div class="tab-buttons">
+                
+                <button class="tab-button active" data-tab="northeast">
+                    Northeast
+                    <span class="region-counts">2 Cities, 16 Facilities</span>
+                </button>
+                
+                <button class="tab-button" data-tab="midwest">
+                    Midwest
+                    <span class="region-counts">1 Cities, 8 Facilities</span>
+                </button>
+                
+                <button class="tab-button" data-tab="south">
+                    South
+                    <span class="region-counts">3 Cities, 27 Facilities</span>
+                </button>
+                
+                <button class="tab-button" data-tab="west">
+                    West
+                    <span class="region-counts">4 Cities, 31 Facilities</span>
+                </button>
+                
+            </div>
+            
+            
+            <div class="tab-content" id="northeast">
+                <div class="region-states">
+                    
+                    <div class="state-container">
+                        <h2 class="state-name">New York</h2>
+                        
+                        <div class="state-cities">
+                            
+                            <a href="/city/new-york-ny/" class="city-card-small">
+                                <h3 class="city-name">New York</h3>
+                                <div class="city-meta">
+                                    <span class="city-population">Pop: 8,405,837</span>
+                                    <span class="city-facilities">10 Facilities</span>
+                                </div>
+                                <div class="city-cost">
+                                    <span class="cost-label">Avg. Assisted Living:</span>
+                                    <span class="cost-value">$7,898/mo</span>
+                                </div>
+                            </a>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="state-container">
+                        <h2 class="state-name">Pennsylvania</h2>
+                        
+                        <div class="state-cities">
+                            
+                            <a href="/city/philadelphia-pa/" class="city-card-small">
+                                <h3 class="city-name">Philadelphia</h3>
+                                <div class="city-meta">
+                                    <span class="city-population">Pop: 1,553,165</span>
+                                    <span class="city-facilities">6 Facilities</span>
+                                </div>
+                                <div class="city-cost">
+                                    <span class="cost-label">Avg. Assisted Living:</span>
+                                    <span class="cost-value">$5,445/mo</span>
+                                </div>
+                            </a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="tab-content hidden" id="midwest">
+                <div class="region-states">
+                    
+                    <div class="state-container">
+                        <h2 class="state-name">Illinois</h2>
+                        
+                        <div class="state-cities">
+                            
+                            <a href="/city/chicago-il/" class="city-card-small">
+                                <h3 class="city-name">Chicago</h3>
+                                <div class="city-meta">
+                                    <span class="city-population">Pop: 2,718,782</span>
+                                    <span class="city-facilities">8 Facilities</span>
+                                </div>
+                                <div class="city-cost">
+                                    <span class="cost-label">Avg. Assisted Living:</span>
+                                    <span class="cost-value">$5,434/mo</span>
+                                </div>
+                            </a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="tab-content hidden" id="south">
+                <div class="region-states">
+                    
+                    <div class="state-container">
+                        <h2 class="state-name">Texas</h2>
+                        
+                        <div class="state-cities">
+                            
+                            <a href="/city/houston-tx/" class="city-card-small">
+                                <h3 class="city-name">Houston</h3>
+                                <div class="city-meta">
+                                    <span class="city-population">Pop: 2,195,914</span>
+                                    <span class="city-facilities">9 Facilities</span>
+                                </div>
+                                <div class="city-cost">
+                                    <span class="cost-label">Avg. Assisted Living:</span>
+                                    <span class="cost-value">$4,050/mo</span>
+                                </div>
+                            </a>
+                            
+                            <a href="/city/san-antonio-tx/" class="city-card-small">
+                                <h3 class="city-name">San Antonio</h3>
+                                <div class="city-meta">
+                                    <span class="city-population">Pop: 1,409,019</span>
+                                    <span class="city-facilities">10 Facilities</span>
+                                </div>
+                                <div class="city-cost">
+                                    <span class="cost-label">Avg. Assisted Living:</span>
+                                    <span class="cost-value">$4,050/mo</span>
+                                </div>
+                            </a>
+                            
+                            <a href="/city/dallas-tx/" class="city-card-small">
+                                <h3 class="city-name">Dallas</h3>
+                                <div class="city-meta">
+                                    <span class="city-population">Pop: 1,257,676</span>
+                                    <span class="city-facilities">8 Facilities</span>
+                                </div>
+                                <div class="city-cost">
+                                    <span class="cost-label">Avg. Assisted Living:</span>
+                                    <span class="cost-value">$4,050/mo</span>
+                                </div>
+                            </a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="tab-content hidden" id="west">
+                <div class="region-states">
+                    
+                    <div class="state-container">
+                        <h2 class="state-name">Arizona</h2>
+                        
+                        <div class="state-cities">
+                            
+                            <a href="/city/phoenix-az/" class="city-card-small">
+                                <h3 class="city-name">Phoenix</h3>
+                                <div class="city-meta">
+                                    <span class="city-population">Pop: 1,513,367</span>
+                                    <span class="city-facilities">9 Facilities</span>
+                                </div>
+                                <div class="city-cost">
+                                    <span class="cost-label">Avg. Assisted Living:</span>
+                                    <span class="cost-value">$4,275/mo</span>
+                                </div>
+                            </a>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="state-container">
+                        <h2 class="state-name">California</h2>
+                        
+                        <div class="state-cities">
+                            
+                            <a href="/city/los-angeles-ca/" class="city-card-small">
+                                <h3 class="city-name">Los Angeles</h3>
+                                <div class="city-meta">
+                                    <span class="city-population">Pop: 3,884,307</span>
+                                    <span class="city-facilities">9 Facilities</span>
+                                </div>
+                                <div class="city-cost">
+                                    <span class="cost-label">Avg. Assisted Living:</span>
+                                    <span class="cost-value">$7,020/mo</span>
+                                </div>
+                            </a>
+                            
+                            <a href="/city/san-diego-ca/" class="city-card-small">
+                                <h3 class="city-name">San Diego</h3>
+                                <div class="city-meta">
+                                    <span class="city-population">Pop: 1,355,896</span>
+                                    <span class="city-facilities">8 Facilities</span>
+                                </div>
+                                <div class="city-cost">
+                                    <span class="cost-label">Avg. Assisted Living:</span>
+                                    <span class="cost-value">$6,727/mo</span>
+                                </div>
+                            </a>
+                            
+                            <a href="/city/san-jose-ca/" class="city-card-small">
+                                <h3 class="city-name">San Jose</h3>
+                                <div class="city-meta">
+                                    <span class="city-population">Pop: 998,537</span>
+                                    <span class="city-facilities">5 Facilities</span>
+                                </div>
+                                <div class="city-cost">
+                                    <span class="cost-label">Avg. Assisted Living:</span>
+                                    <span class="cost-value">$5,850/mo</span>
+                                </div>
+                            </a>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+<section class="cta-section">
+    <div class="container">
+        <h2>Looking for a Specific City?</h2>
+        <p>Use our search feature to quickly find senior living options in your area.</p>
+        <a href="/search.html" class="cta-button">Search Now</a>
+    </div>
+</section>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Radiant Retirement</h3>
+                    <p>Helping families find the perfect senior living options across the United States.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/browse-cities.html">Browse Cities</a></li>
+                        <li><a href="/about.html">About</a></li>
+                        <li><a href="/search.html">Search</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Popular Cities</h3>
+                    <ul>
+                        <li><a href="/city/new-york-ny/">New York, NY</a></li>
+                        <li><a href="/city/los-angeles-ca/">Los Angeles, CA</a></li>
+                        <li><a href="/city/chicago-il/">Chicago, IL</a></li>
+                        <li><a href="/city/phoenix-az/">Phoenix, AZ</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; {{ current_year }} Radiant Retirement. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/main.js"></script>
+    
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Tab switching functionality
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Get the tab ID to show
+                const tabToShow = this.getAttribute('data-tab');
+                
+                // Reset all buttons and hide all tabs
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.add('hidden'));
+                
+                // Activate the clicked button and show the corresponding tab
+                this.classList.add('active');
+                document.getElementById(tabToShow).classList.remove('hidden');
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
