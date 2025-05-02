@@ -1,1401 +1,296 @@
-{
-  "national_averages": {
-    "assisted_living": {
-      "monthly": 4500,
-      "annual": 54000
-    },
-    "memory_care": {
-      "monthly": 6000,
-      "annual": 72000
-    },
-    "independent_living": {
-      "monthly": 3200,
-      "annual": 38400
-    },
-    "nursing_home": {
-      "monthly": 8500,
-      "annual": 102000
+#!/usr/bin/env python3
+"""
+Fetch senior living facilities data using Google Maps API.
+This script processes the list of cities and retrieves nearby senior living facilities
+for each city, organizing them into a structured JSON format.
+"""
+
+import os
+import json
+import time
+import pandas as pd
+from tqdm import tqdm
+import googlemaps
+import random
+import logging
+
+# Set up logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
+
+# Search terms for senior living facilities
+FACILITY_TYPES = [
+    'assisted living',
+    'senior living',
+    'retirement home',
+    'nursing home',
+    'memory care',
+    'senior community'
+]
+
+# For demo purposes - in production, this would be replaced with actual API calls
+SAMPLE_FACILITY_NAMES = [
+    "Sunrise Senior Living",
+    "Brookdale Senior Living",
+    "Atria Senior Living",
+    "Leisure Care",
+    "Holiday Retirement",
+    "Life Care Services",
+    "Five Star Senior Living",
+    "Merrill Gardens",
+    "Senior Lifestyle",
+    "Capital Senior Living",
+    "Elmcroft Senior Living",
+    "Erickson Living",
+    "Watermark Retirement",
+    "Oakmont Senior Living",
+    "Silverado Senior Living",
+    "Belmont Village",
+    "Artis Senior Living",
+    "Legend Senior Living",
+    "Sunrise Villa",
+    "The Arbor Company"
+]
+
+# For demo - features that might be found at senior living facilities
+SAMPLE_FEATURES = [
+    "24-hour Staff",
+    "Restaurant-style Dining",
+    "Fitness Programs",
+    "Transportation Services",
+    "Housekeeping",
+    "Swimming Pool",
+    "Community Garden",
+    "Library",
+    "Weekly Events",
+    "Pet Friendly",
+    "24-hour Nursing",
+    "Physical Therapy",
+    "Private Rooms",
+    "Arts & Crafts Studio",
+    "Courtyard",
+    "Fine Dining",
+    "Concierge Services",
+    "Fitness Center",
+    "Social Activities",
+    "Beauty Salon",
+    "Movie Theater",
+    "Game Room",
+    "Walking Paths",
+    "Wellness Center",
+    "Emergency Call System"
+]
+
+# Types of care offered
+CARE_TYPES = [
+    "Independent Living",
+    "Assisted Living",
+    "Memory Care",
+    "Skilled Nursing",
+    "Rehabilitation",
+    "Respite Care",
+    "Continuing Care Retirement Community",
+    "Hospice Care"
+]
+
+
+def fetch_facilities_for_city(city_data, gmaps_client, max_results=1000):
+    """
+    Fetch senior living facilities for a given city using Google Maps API.
+    
+    In a production environment, this would make actual API calls.
+    For this demo, it generates sample data.
+    
+    Args:
+        city_data: Dictionary containing city information
+        gmaps_client: Google Maps API client
+        max_results: Maximum number of facilities to return per city
+        
+    Returns:
+        List of facilities for the city
+    """
+    city_name = city_data['name']
+    state_name = city_data['state']
+    city_slug = city_data['slug']
+    
+    logger.info(f"Fetching facilities for {city_name}, {state_name}")
+    
+    # In a real implementation, you would use the Google Maps API to search
+    # for senior living facilities near the city. For demo purposes, we'll
+    # generate some sample data.
+    
+    # Normally you'd do something like:
+    # facilities = []
+    # for facility_type in FACILITY_TYPES:
+    #     query = f"{facility_type} in {city_name}, {state_name}"
+    #     results = gmaps_client.places(query=query, location=coordinates, radius=25000)
+    #     facilities.extend(results['results'])
+    
+    # Generate some random sample data instead
+    num_facilities = random.randint(5, max_results)
+    facilities = []
+    
+    for i in range(num_facilities):
+        # Generate a random facility
+        facility_name = f"{random.choice(SAMPLE_FACILITY_NAMES)} of {city_name}"
+        facility_id = f"fac_{city_data['slug']}_{i+1:03d}"
+        
+        # Random coordinates near the city center
+        # In production, these would come from Google Maps API
+        lat_offset = random.uniform(-0.05, 0.05)
+        lng_offset = random.uniform(-0.05, 0.05)
+        lat = 0.0  # This would be city_data['coordinates']['lat']
+        lng = 0.0  # This would be city_data['coordinates']['lng']
+        
+        # For demo purposes, let's just add some sample coordinates
+        # These would actually be calculated based on the city location
+        if city_slug == "new-york-ny":
+            lat, lng = 40.7128, -74.0060
+        elif city_slug == "los-angeles-ca":
+            lat, lng = 34.0522, -118.2437
+        elif city_slug == "chicago-il":
+            lat, lng = 41.8781, -87.6298
+        elif city_slug == "houston-tx":
+            lat, lng = 29.7604, -95.3698
+        elif city_slug == "phoenix-az":
+            lat, lng = 33.4484, -112.0740
+        elif city_slug == "philadelphia-pa":
+            lat, lng = 39.9526, -75.1652
+        else:
+            # Generate random plausible US coordinates
+            lat, lng = random.uniform(24, 49), random.uniform(-125, -66)
+        
+        # Add the offset to make each facility in a slightly different location
+        facility_lat = lat + lat_offset
+        facility_lng = lng + lng_offset
+        
+        # Generate random address components
+        street_number = random.randint(100, 9999)
+        streets = ["Main St", "Oak Ave", "Maple Dr", "Washington Blvd", "Park Rd", "Lake St"]
+        street = random.choice(streets)
+        zip_code = f"{random.randint(10000, 99999)}"
+        
+        # Choose 1-3 random care types
+        num_care_types = random.randint(1, 3)
+        facility_care_types = random.sample(CARE_TYPES, num_care_types)
+        
+        # Choose 3-7 random features
+        num_features = random.randint(3, 7)
+        facility_features = random.sample(SAMPLE_FEATURES, num_features)
+        
+        # Generate random rating data
+        overall_rating = round(random.uniform(3.5, 5.0), 1)
+        care_quality = round(random.uniform(3.5, 5.0), 1)
+        facilities_rating = round(random.uniform(3.5, 5.0), 1)
+        staff_rating = round(random.uniform(3.5, 5.0), 1)
+        value_rating = round(random.uniform(3.5, 5.0), 1)
+        review_count = random.randint(10, 100)
+        
+        facility = {
+            "id": facility_id,
+            "name": facility_name,
+            "address": f"{street_number} {street}",
+            "city": city_name,
+            "state": state_name,
+            "zip_code": zip_code,
+            "phone": f"({random.randint(200, 999)}) 555-{random.randint(1000, 9999)}",
+            "website": f"https://www.{facility_name.lower().replace(' ', '')}.com".replace("of", "").replace(",", ""),
+            "coordinates": {
+                "lat": facility_lat,
+                "lng": facility_lng
+            },
+            "facility_type": facility_care_types,
+            "features": facility_features,
+            "capacity": random.randint(50, 250),
+            "ratings": {
+                "overall": overall_rating,
+                "care_quality": care_quality,
+                "facilities": facilities_rating,
+                "staff": staff_rating,
+                "value": value_rating,
+                "review_count": review_count
+            },
+            "city_slug": city_slug
+        }
+        
+        facilities.append(facility)
+        
+    return facilities
+
+
+def fetch_all_facilities(cities_file, output_file, google_api_key=None):
+    """
+    Fetch facilities for all cities and save to a JSON file.
+    
+    Args:
+        cities_file: Path to processed cities JSON file
+        output_file: Path to save facilities JSON
+        google_api_key: Google Maps API key (optional for demo)
+    """
+    # Set up Google Maps client if API key is provided
+    gmaps_client = None
+    if google_api_key:
+        gmaps_client = googlemaps.Client(key=google_api_key)
+    
+    # Load processed cities data
+    with open(cities_file, 'r') as f:
+        cities_data = json.load(f)
+    
+    logger.info(f"Loaded {len(cities_data)} cities from {cities_file}")
+    
+    # Initialize facilities list
+    all_facilities = []
+    cities_covered = 0
+    
+    # Process each city
+    for city_slug, city_data in tqdm(cities_data.items(), desc="Fetching facilities"):
+        # Fetch facilities for this city
+        city_facilities = fetch_facilities_for_city(city_data, gmaps_client)
+        
+        # Add to master list
+        all_facilities.extend(city_facilities)
+        
+        # Update count of cities with facilities
+        if city_facilities:
+            cities_covered += 1
+        
+        # Sleep to avoid hitting API rate limits (if using actual API)
+        if google_api_key:
+            time.sleep(0.5)
+    
+    # Create output dictionary
+    facilities_data = {
+        "facilities": all_facilities,
+        "meta": {
+            "total_count": len(all_facilities),
+            "cities_covered": cities_covered,
+            "last_updated": pd.Timestamp.now().isoformat()
+        }
     }
-  },
-  "state_averages": {
-    "Alabama": {
-      "assisted_living": {
-        "monthly": 3825,
-        "annual": 45900
-      },
-      "memory_care": {
-        "monthly": 5100,
-        "annual": 61200
-      },
-      "independent_living": {
-        "monthly": 2720,
-        "annual": 32640
-      },
-      "nursing_home": {
-        "monthly": 7225,
-        "annual": 86700
-      }
-    },
-    "Alaska": {
-      "assisted_living": {
-        "monthly": 5625,
-        "annual": 67500
-      },
-      "memory_care": {
-        "monthly": 7500,
-        "annual": 90000
-      },
-      "independent_living": {
-        "monthly": 4000,
-        "annual": 48000
-      },
-      "nursing_home": {
-        "monthly": 10625,
-        "annual": 127500
-      }
-    },
-    "Arizona": {
-      "assisted_living": {
-        "monthly": 4275,
-        "annual": 51300
-      },
-      "memory_care": {
-        "monthly": 5700,
-        "annual": 68400
-      },
-      "independent_living": {
-        "monthly": 3040,
-        "annual": 36480
-      },
-      "nursing_home": {
-        "monthly": 8075,
-        "annual": 96900
-      }
-    },
-    "Arkansas": {
-      "assisted_living": {
-        "monthly": 3600,
-        "annual": 43200
-      },
-      "memory_care": {
-        "monthly": 4800,
-        "annual": 57600
-      },
-      "independent_living": {
-        "monthly": 2560,
-        "annual": 30720
-      },
-      "nursing_home": {
-        "monthly": 6800,
-        "annual": 81600
-      }
-    },
-    "California": {
-      "assisted_living": {
-        "monthly": 5850,
-        "annual": 70200
-      },
-      "memory_care": {
-        "monthly": 7800,
-        "annual": 93600
-      },
-      "independent_living": {
-        "monthly": 4160,
-        "annual": 49920
-      },
-      "nursing_home": {
-        "monthly": 11050,
-        "annual": 132600
-      }
-    },
-    "Colorado": {
-      "assisted_living": {
-        "monthly": 4725,
-        "annual": 56700
-      },
-      "memory_care": {
-        "monthly": 6300,
-        "annual": 75600
-      },
-      "independent_living": {
-        "monthly": 3360,
-        "annual": 40320
-      },
-      "nursing_home": {
-        "monthly": 8925,
-        "annual": 107100
-      }
-    },
-    "Connecticut": {
-      "assisted_living": {
-        "monthly": 5625,
-        "annual": 67500
-      },
-      "memory_care": {
-        "monthly": 7500,
-        "annual": 90000
-      },
-      "independent_living": {
-        "monthly": 4000,
-        "annual": 48000
-      },
-      "nursing_home": {
-        "monthly": 10625,
-        "annual": 127500
-      }
-    },
-    "Delaware": {
-      "assisted_living": {
-        "monthly": 4950,
-        "annual": 59400
-      },
-      "memory_care": {
-        "monthly": 6600,
-        "annual": 79200
-      },
-      "independent_living": {
-        "monthly": 3520,
-        "annual": 42240
-      },
-      "nursing_home": {
-        "monthly": 9350,
-        "annual": 112200
-      }
-    },
-    "Florida": {
-      "assisted_living": {
-        "monthly": 4500,
-        "annual": 54000
-      },
-      "memory_care": {
-        "monthly": 6000,
-        "annual": 72000
-      },
-      "independent_living": {
-        "monthly": 3200,
-        "annual": 38400
-      },
-      "nursing_home": {
-        "monthly": 8500,
-        "annual": 102000
-      }
-    },
-    "Georgia": {
-      "assisted_living": {
-        "monthly": 4050,
-        "annual": 48600
-      },
-      "memory_care": {
-        "monthly": 5400,
-        "annual": 64800
-      },
-      "independent_living": {
-        "monthly": 2880,
-        "annual": 34560
-      },
-      "nursing_home": {
-        "monthly": 7650,
-        "annual": 91800
-      }
-    },
-    "Hawaii": {
-      "assisted_living": {
-        "monthly": 6300,
-        "annual": 75600
-      },
-      "memory_care": {
-        "monthly": 8400,
-        "annual": 100800
-      },
-      "independent_living": {
-        "monthly": 4480,
-        "annual": 53760
-      },
-      "nursing_home": {
-        "monthly": 11900,
-        "annual": 142800
-      }
-    },
-    "Idaho": {
-      "assisted_living": {
-        "monthly": 4050,
-        "annual": 48600
-      },
-      "memory_care": {
-        "monthly": 5400,
-        "annual": 64800
-      },
-      "independent_living": {
-        "monthly": 2880,
-        "annual": 34560
-      },
-      "nursing_home": {
-        "monthly": 7650,
-        "annual": 91800
-      }
-    },
-    "Illinois": {
-      "assisted_living": {
-        "monthly": 4725,
-        "annual": 56700
-      },
-      "memory_care": {
-        "monthly": 6300,
-        "annual": 75600
-      },
-      "independent_living": {
-        "monthly": 3360,
-        "annual": 40320
-      },
-      "nursing_home": {
-        "monthly": 8925,
-        "annual": 107100
-      }
-    },
-    "Indiana": {
-      "assisted_living": {
-        "monthly": 3825,
-        "annual": 45900
-      },
-      "memory_care": {
-        "monthly": 5100,
-        "annual": 61200
-      },
-      "independent_living": {
-        "monthly": 2720,
-        "annual": 32640
-      },
-      "nursing_home": {
-        "monthly": 7225,
-        "annual": 86700
-      }
-    },
-    "Iowa": {
-      "assisted_living": {
-        "monthly": 3825,
-        "annual": 45900
-      },
-      "memory_care": {
-        "monthly": 5100,
-        "annual": 61200
-      },
-      "independent_living": {
-        "monthly": 2720,
-        "annual": 32640
-      },
-      "nursing_home": {
-        "monthly": 7225,
-        "annual": 86700
-      }
-    },
-    "Kansas": {
-      "assisted_living": {
-        "monthly": 3825,
-        "annual": 45900
-      },
-      "memory_care": {
-        "monthly": 5100,
-        "annual": 61200
-      },
-      "independent_living": {
-        "monthly": 2720,
-        "annual": 32640
-      },
-      "nursing_home": {
-        "monthly": 7225,
-        "annual": 86700
-      }
-    },
-    "Kentucky": {
-      "assisted_living": {
-        "monthly": 3825,
-        "annual": 45900
-      },
-      "memory_care": {
-        "monthly": 5100,
-        "annual": 61200
-      },
-      "independent_living": {
-        "monthly": 2720,
-        "annual": 32640
-      },
-      "nursing_home": {
-        "monthly": 7225,
-        "annual": 86700
-      }
-    },
-    "Louisiana": {
-      "assisted_living": {
-        "monthly": 3825,
-        "annual": 45900
-      },
-      "memory_care": {
-        "monthly": 5100,
-        "annual": 61200
-      },
-      "independent_living": {
-        "monthly": 2720,
-        "annual": 32640
-      },
-      "nursing_home": {
-        "monthly": 7225,
-        "annual": 86700
-      }
-    },
-    "Maine": {
-      "assisted_living": {
-        "monthly": 4950,
-        "annual": 59400
-      },
-      "memory_care": {
-        "monthly": 6600,
-        "annual": 79200
-      },
-      "independent_living": {
-        "monthly": 3520,
-        "annual": 42240
-      },
-      "nursing_home": {
-        "monthly": 9350,
-        "annual": 112200
-      }
-    },
-    "Maryland": {
-      "assisted_living": {
-        "monthly": 5175,
-        "annual": 62100
-      },
-      "memory_care": {
-        "monthly": 6900,
-        "annual": 82800
-      },
-      "independent_living": {
-        "monthly": 3680,
-        "annual": 44160
-      },
-      "nursing_home": {
-        "monthly": 9775,
-        "annual": 117300
-      }
-    },
-    "Massachusetts": {
-      "assisted_living": {
-        "monthly": 5850,
-        "annual": 70200
-      },
-      "memory_care": {
-        "monthly": 7800,
-        "annual": 93600
-      },
-      "independent_living": {
-        "monthly": 4160,
-        "annual": 49920
-      },
-      "nursing_home": {
-        "monthly": 11050,
-        "annual": 132600
-      }
-    },
-    "Michigan": {
-      "assisted_living": {
-        "monthly": 4275,
-        "annual": 51300
-      },
-      "memory_care": {
-        "monthly": 5700,
-        "annual": 68400
-      },
-      "independent_living": {
-        "monthly": 3040,
-        "annual": 36480
-      },
-      "nursing_home": {
-        "monthly": 8075,
-        "annual": 96900
-      }
-    },
-    "Minnesota": {
-      "assisted_living": {
-        "monthly": 4500,
-        "annual": 54000
-      },
-      "memory_care": {
-        "monthly": 6000,
-        "annual": 72000
-      },
-      "independent_living": {
-        "monthly": 3200,
-        "annual": 38400
-      },
-      "nursing_home": {
-        "monthly": 8500,
-        "annual": 102000
-      }
-    },
-    "Mississippi": {
-      "assisted_living": {
-        "monthly": 3600,
-        "annual": 43200
-      },
-      "memory_care": {
-        "monthly": 4800,
-        "annual": 57600
-      },
-      "independent_living": {
-        "monthly": 2560,
-        "annual": 30720
-      },
-      "nursing_home": {
-        "monthly": 6800,
-        "annual": 81600
-      }
-    },
-    "Missouri": {
-      "assisted_living": {
-        "monthly": 4050,
-        "annual": 48600
-      },
-      "memory_care": {
-        "monthly": 5400,
-        "annual": 64800
-      },
-      "independent_living": {
-        "monthly": 2880,
-        "annual": 34560
-      },
-      "nursing_home": {
-        "monthly": 7650,
-        "annual": 91800
-      }
-    },
-    "Montana": {
-      "assisted_living": {
-        "monthly": 4275,
-        "annual": 51300
-      },
-      "memory_care": {
-        "monthly": 5700,
-        "annual": 68400
-      },
-      "independent_living": {
-        "monthly": 3040,
-        "annual": 36480
-      },
-      "nursing_home": {
-        "monthly": 8075,
-        "annual": 96900
-      }
-    },
-    "Nebraska": {
-      "assisted_living": {
-        "monthly": 4050,
-        "annual": 48600
-      },
-      "memory_care": {
-        "monthly": 5400,
-        "annual": 64800
-      },
-      "independent_living": {
-        "monthly": 2880,
-        "annual": 34560
-      },
-      "nursing_home": {
-        "monthly": 7650,
-        "annual": 91800
-      }
-    },
-    "Nevada": {
-      "assisted_living": {
-        "monthly": 4500,
-        "annual": 54000
-      },
-      "memory_care": {
-        "monthly": 6000,
-        "annual": 72000
-      },
-      "independent_living": {
-        "monthly": 3200,
-        "annual": 38400
-      },
-      "nursing_home": {
-        "monthly": 8500,
-        "annual": 102000
-      }
-    },
-    "New Hampshire": {
-      "assisted_living": {
-        "monthly": 5175,
-        "annual": 62100
-      },
-      "memory_care": {
-        "monthly": 6900,
-        "annual": 82800
-      },
-      "independent_living": {
-        "monthly": 3680,
-        "annual": 44160
-      },
-      "nursing_home": {
-        "monthly": 9775,
-        "annual": 117300
-      }
-    },
-    "New Jersey": {
-      "assisted_living": {
-        "monthly": 5625,
-        "annual": 67500
-      },
-      "memory_care": {
-        "monthly": 7500,
-        "annual": 90000
-      },
-      "independent_living": {
-        "monthly": 4000,
-        "annual": 48000
-      },
-      "nursing_home": {
-        "monthly": 10625,
-        "annual": 127500
-      }
-    },
-    "New Mexico": {
-      "assisted_living": {
-        "monthly": 4050,
-        "annual": 48600
-      },
-      "memory_care": {
-        "monthly": 5400,
-        "annual": 64800
-      },
-      "independent_living": {
-        "monthly": 2880,
-        "annual": 34560
-      },
-      "nursing_home": {
-        "monthly": 7650,
-        "annual": 91800
-      }
-    },
-    "New York": {
-      "assisted_living": {
-        "monthly": 6075,
-        "annual": 72900
-      },
-      "memory_care": {
-        "monthly": 8100,
-        "annual": 97200
-      },
-      "independent_living": {
-        "monthly": 4320,
-        "annual": 51840
-      },
-      "nursing_home": {
-        "monthly": 11475,
-        "annual": 137700
-      }
-    },
-    "North Carolina": {
-      "assisted_living": {
-        "monthly": 4050,
-        "annual": 48600
-      },
-      "memory_care": {
-        "monthly": 5400,
-        "annual": 64800
-      },
-      "independent_living": {
-        "monthly": 2880,
-        "annual": 34560
-      },
-      "nursing_home": {
-        "monthly": 7650,
-        "annual": 91800
-      }
-    },
-    "North Dakota": {
-      "assisted_living": {
-        "monthly": 4275,
-        "annual": 51300
-      },
-      "memory_care": {
-        "monthly": 5700,
-        "annual": 68400
-      },
-      "independent_living": {
-        "monthly": 3040,
-        "annual": 36480
-      },
-      "nursing_home": {
-        "monthly": 8075,
-        "annual": 96900
-      }
-    },
-    "Ohio": {
-      "assisted_living": {
-        "monthly": 4050,
-        "annual": 48600
-      },
-      "memory_care": {
-        "monthly": 5400,
-        "annual": 64800
-      },
-      "independent_living": {
-        "monthly": 2880,
-        "annual": 34560
-      },
-      "nursing_home": {
-        "monthly": 7650,
-        "annual": 91800
-      }
-    },
-    "Oklahoma": {
-      "assisted_living": {
-        "monthly": 3825,
-        "annual": 45900
-      },
-      "memory_care": {
-        "monthly": 5100,
-        "annual": 61200
-      },
-      "independent_living": {
-        "monthly": 2720,
-        "annual": 32640
-      },
-      "nursing_home": {
-        "monthly": 7225,
-        "annual": 86700
-      }
-    },
-    "Oregon": {
-      "assisted_living": {
-        "monthly": 4950,
-        "annual": 59400
-      },
-      "memory_care": {
-        "monthly": 6600,
-        "annual": 79200
-      },
-      "independent_living": {
-        "monthly": 3520,
-        "annual": 42240
-      },
-      "nursing_home": {
-        "monthly": 9350,
-        "annual": 112200
-      }
-    },
-    "Pennsylvania": {
-      "assisted_living": {
-        "monthly": 4950,
-        "annual": 59400
-      },
-      "memory_care": {
-        "monthly": 6600,
-        "annual": 79200
-      },
-      "independent_living": {
-        "monthly": 3520,
-        "annual": 42240
-      },
-      "nursing_home": {
-        "monthly": 9350,
-        "annual": 112200
-      }
-    },
-    "Rhode Island": {
-      "assisted_living": {
-        "monthly": 5400,
-        "annual": 64800
-      },
-      "memory_care": {
-        "monthly": 7200,
-        "annual": 86400
-      },
-      "independent_living": {
-        "monthly": 3840,
-        "annual": 46080
-      },
-      "nursing_home": {
-        "monthly": 10200,
-        "annual": 122400
-      }
-    },
-    "South Carolina": {
-      "assisted_living": {
-        "monthly": 4050,
-        "annual": 48600
-      },
-      "memory_care": {
-        "monthly": 5400,
-        "annual": 64800
-      },
-      "independent_living": {
-        "monthly": 2880,
-        "annual": 34560
-      },
-      "nursing_home": {
-        "monthly": 7650,
-        "annual": 91800
-      }
-    },
-    "South Dakota": {
-      "assisted_living": {
-        "monthly": 4050,
-        "annual": 48600
-      },
-      "memory_care": {
-        "monthly": 5400,
-        "annual": 64800
-      },
-      "independent_living": {
-        "monthly": 2880,
-        "annual": 34560
-      },
-      "nursing_home": {
-        "monthly": 7650,
-        "annual": 91800
-      }
-    },
-    "Tennessee": {
-      "assisted_living": {
-        "monthly": 3825,
-        "annual": 45900
-      },
-      "memory_care": {
-        "monthly": 5100,
-        "annual": 61200
-      },
-      "independent_living": {
-        "monthly": 2720,
-        "annual": 32640
-      },
-      "nursing_home": {
-        "monthly": 7225,
-        "annual": 86700
-      }
-    },
-    "Texas": {
-      "assisted_living": {
-        "monthly": 4050,
-        "annual": 48600
-      },
-      "memory_care": {
-        "monthly": 5400,
-        "annual": 64800
-      },
-      "independent_living": {
-        "monthly": 2880,
-        "annual": 34560
-      },
-      "nursing_home": {
-        "monthly": 7650,
-        "annual": 91800
-      }
-    },
-    "Utah": {
-      "assisted_living": {
-        "monthly": 4275,
-        "annual": 51300
-      },
-      "memory_care": {
-        "monthly": 5700,
-        "annual": 68400
-      },
-      "independent_living": {
-        "monthly": 3040,
-        "annual": 36480
-      },
-      "nursing_home": {
-        "monthly": 8075,
-        "annual": 96900
-      }
-    },
-    "Vermont": {
-      "assisted_living": {
-        "monthly": 5175,
-        "annual": 62100
-      },
-      "memory_care": {
-        "monthly": 6900,
-        "annual": 82800
-      },
-      "independent_living": {
-        "monthly": 3680,
-        "annual": 44160
-      },
-      "nursing_home": {
-        "monthly": 9775,
-        "annual": 117300
-      }
-    },
-    "Virginia": {
-      "assisted_living": {
-        "monthly": 4725,
-        "annual": 56700
-      },
-      "memory_care": {
-        "monthly": 6300,
-        "annual": 75600
-      },
-      "independent_living": {
-        "monthly": 3360,
-        "annual": 40320
-      },
-      "nursing_home": {
-        "monthly": 8925,
-        "annual": 107100
-      }
-    },
-    "Washington": {
-      "assisted_living": {
-        "monthly": 5175,
-        "annual": 62100
-      },
-      "memory_care": {
-        "monthly": 6900,
-        "annual": 82800
-      },
-      "independent_living": {
-        "monthly": 3680,
-        "annual": 44160
-      },
-      "nursing_home": {
-        "monthly": 9775,
-        "annual": 117300
-      }
-    },
-    "West Virginia": {
-      "assisted_living": {
-        "monthly": 3825,
-        "annual": 45900
-      },
-      "memory_care": {
-        "monthly": 5100,
-        "annual": 61200
-      },
-      "independent_living": {
-        "monthly": 2720,
-        "annual": 32640
-      },
-      "nursing_home": {
-        "monthly": 7225,
-        "annual": 86700
-      }
-    },
-    "Wisconsin": {
-      "assisted_living": {
-        "monthly": 4275,
-        "annual": 51300
-      },
-      "memory_care": {
-        "monthly": 5700,
-        "annual": 68400
-      },
-      "independent_living": {
-        "monthly": 3040,
-        "annual": 36480
-      },
-      "nursing_home": {
-        "monthly": 8075,
-        "annual": 96900
-      }
-    },
-    "Wyoming": {
-      "assisted_living": {
-        "monthly": 4050,
-        "annual": 48600
-      },
-      "memory_care": {
-        "monthly": 5400,
-        "annual": 64800
-      },
-      "independent_living": {
-        "monthly": 2880,
-        "annual": 34560
-      },
-      "nursing_home": {
-        "monthly": 7650,
-        "annual": 91800
-      }
-    },
-    "District of Columbia": {
-      "assisted_living": {
-        "monthly": 6300,
-        "annual": 75600
-      },
-      "memory_care": {
-        "monthly": 8400,
-        "annual": 100800
-      },
-      "independent_living": {
-        "monthly": 4480,
-        "annual": 53760
-      },
-      "nursing_home": {
-        "monthly": 11900,
-        "annual": 142800
-      }
-    }
-  },
-  "cities": {
-    "new-york-ny": {
-      "city": "New York",
-      "state": "New York",
-      "assisted_living": {
-        "monthly_avg": 7898,
-        "annual_avg": 94776,
-        "monthly_range": {
-          "low": 5924,
-          "high": 11452
-        }
-      },
-      "memory_care": {
-        "monthly_avg": 10530,
-        "annual_avg": 126360,
-        "monthly_range": {
-          "low": 7898,
-          "high": 15268
-        }
-      },
-      "independent_living": {
-        "monthly_avg": 5616,
-        "annual_avg": 67392,
-        "monthly_range": {
-          "low": 4212,
-          "high": 7020
-        }
-      },
-      "nursing_home": {
-        "monthly_avg": 14918,
-        "annual_avg": 179016,
-        "monthly_range": {
-          "low": 12680,
-          "high": 21631
-        }
-      },
-      "cost_factors": [
-        "High urban property values",
-        "Premium staffing costs",
-        "Luxury amenities in many facilities",
-        "Luxury facilities with premium amenities",
-        "Resort-style services and accommodations",
-        "Specialized medical staff on premises"
-      ]
-    },
-    "los-angeles-ca": {
-      "city": "Los Angeles",
-      "state": "California",
-      "assisted_living": {
-        "monthly_avg": 7020,
-        "annual_avg": 84240,
-        "monthly_range": {
-          "low": 5265,
-          "high": 10179
-        }
-      },
-      "memory_care": {
-        "monthly_avg": 9360,
-        "annual_avg": 112320,
-        "monthly_range": {
-          "low": 7020,
-          "high": 13572
-        }
-      },
-      "independent_living": {
-        "monthly_avg": 4992,
-        "annual_avg": 59904,
-        "monthly_range": {
-          "low": 3744,
-          "high": 6240
-        }
-      },
-      "nursing_home": {
-        "monthly_avg": 13260,
-        "annual_avg": 159120,
-        "monthly_range": {
-          "low": 11271,
-          "high": 19227
-        }
-      },
-      "cost_factors": [
-        "High urban property values",
-        "Premium staffing costs",
-        "Luxury amenities in many facilities",
-        "Luxury facilities with premium amenities",
-        "Resort-style services and accommodations",
-        "Specialized medical staff on premises"
-      ]
-    },
-    "chicago-il": {
-      "city": "Chicago",
-      "state": "Illinois",
-      "assisted_living": {
-        "monthly_avg": 5434,
-        "annual_avg": 65208,
-        "monthly_range": {
-          "low": 4076,
-          "high": 7879
-        }
-      },
-      "memory_care": {
-        "monthly_avg": 7245,
-        "annual_avg": 86940,
-        "monthly_range": {
-          "low": 5434,
-          "high": 10505
-        }
-      },
-      "independent_living": {
-        "monthly_avg": 3864,
-        "annual_avg": 46368,
-        "monthly_range": {
-          "low": 2898,
-          "high": 4830
-        }
-      },
-      "nursing_home": {
-        "monthly_avg": 10264,
-        "annual_avg": 123168,
-        "monthly_range": {
-          "low": 8724,
-          "high": 14883
-        }
-      },
-      "cost_factors": [
-        "High urban property values",
-        "Premium staffing costs",
-        "Luxury amenities in many facilities",
-        "Luxury facilities with premium amenities",
-        "Resort-style services and accommodations",
-        "Specialized medical staff on premises"
-      ]
-    },
-    "houston-tx": {
-      "city": "Houston",
-      "state": "Texas",
-      "assisted_living": {
-        "monthly_avg": 4050,
-        "annual_avg": 48600,
-        "monthly_range": {
-          "low": 3038,
-          "high": 5872
-        }
-      },
-      "memory_care": {
-        "monthly_avg": 5400,
-        "annual_avg": 64800,
-        "monthly_range": {
-          "low": 4050,
-          "high": 7830
-        }
-      },
-      "independent_living": {
-        "monthly_avg": 2880,
-        "annual_avg": 34560,
-        "monthly_range": {
-          "low": 2160,
-          "high": 3600
-        }
-      },
-      "nursing_home": {
-        "monthly_avg": 7650,
-        "annual_avg": 91800,
-        "monthly_range": {
-          "low": 6502,
-          "high": 11092
-        }
-      },
-      "cost_factors": [
-        "High urban property values",
-        "Premium staffing costs",
-        "Luxury amenities in many facilities",
-        "Luxury facilities with premium amenities",
-        "Resort-style services and accommodations",
-        "Specialized medical staff on premises"
-      ]
-    },
-    "philadelphia-pa": {
-      "city": "Philadelphia",
-      "state": "Pennsylvania",
-      "assisted_living": {
-        "monthly_avg": 5445,
-        "annual_avg": 65340,
-        "monthly_range": {
-          "low": 4084,
-          "high": 7895
-        }
-      },
-      "memory_care": {
-        "monthly_avg": 7260,
-        "annual_avg": 87120,
-        "monthly_range": {
-          "low": 5445,
-          "high": 10527
-        }
-      },
-      "independent_living": {
-        "monthly_avg": 3872,
-        "annual_avg": 46464,
-        "monthly_range": {
-          "low": 2904,
-          "high": 4840
-        }
-      },
-      "nursing_home": {
-        "monthly_avg": 10285,
-        "annual_avg": 123420,
-        "monthly_range": {
-          "low": 8742,
-          "high": 14913
-        }
-      },
-      "cost_factors": [
-        "High urban property values",
-        "Premium staffing costs",
-        "Luxury amenities in many facilities",
-        "Luxury facilities with premium amenities",
-        "Resort-style services and accommodations",
-        "Specialized medical staff on premises"
-      ]
-    },
-    "phoenix-az": {
-      "city": "Phoenix",
-      "state": "Arizona",
-      "assisted_living": {
-        "monthly_avg": 4275,
-        "annual_avg": 51300,
-        "monthly_range": {
-          "low": 3206,
-          "high": 6199
-        }
-      },
-      "memory_care": {
-        "monthly_avg": 5700,
-        "annual_avg": 68400,
-        "monthly_range": {
-          "low": 4275,
-          "high": 8265
-        }
-      },
-      "independent_living": {
-        "monthly_avg": 3040,
-        "annual_avg": 36480,
-        "monthly_range": {
-          "low": 2280,
-          "high": 3800
-        }
-      },
-      "nursing_home": {
-        "monthly_avg": 8075,
-        "annual_avg": 96900,
-        "monthly_range": {
-          "low": 6864,
-          "high": 11709
-        }
-      },
-      "cost_factors": [
-        "High urban property values",
-        "Nonprofit facilities in the area",
-        "Premium staffing costs",
-        "Luxury amenities in many facilities",
-        "Luxury facilities with premium amenities",
-        "Various subsidy programs available",
-        "Resort-style services and accommodations",
-        "Specialized medical staff on premises",
-        "More affordable options available"
-      ]
-    },
-    "san-antonio-tx": {
-      "city": "San Antonio",
-      "state": "Texas",
-      "assisted_living": {
-        "monthly_avg": 4050,
-        "annual_avg": 48600,
-        "monthly_range": {
-          "low": 3038,
-          "high": 5872
-        }
-      },
-      "memory_care": {
-        "monthly_avg": 5400,
-        "annual_avg": 64800,
-        "monthly_range": {
-          "low": 4050,
-          "high": 7830
-        }
-      },
-      "independent_living": {
-        "monthly_avg": 2880,
-        "annual_avg": 34560,
-        "monthly_range": {
-          "low": 2160,
-          "high": 3600
-        }
-      },
-      "nursing_home": {
-        "monthly_avg": 7650,
-        "annual_avg": 91800,
-        "monthly_range": {
-          "low": 6502,
-          "high": 11092
-        }
-      },
-      "cost_factors": [
-        "High urban property values",
-        "Nonprofit facilities in the area",
-        "Premium staffing costs",
-        "Luxury amenities in many facilities",
-        "Luxury facilities with premium amenities",
-        "Various subsidy programs available",
-        "Resort-style services and accommodations",
-        "Specialized medical staff on premises",
-        "More affordable options available"
-      ]
-    },
-    "san-diego-ca": {
-      "city": "San Diego",
-      "state": "California",
-      "assisted_living": {
-        "monthly_avg": 6727,
-        "annual_avg": 80724,
-        "monthly_range": {
-          "low": 5045,
-          "high": 9754
-        }
-      },
-      "memory_care": {
-        "monthly_avg": 8970,
-        "annual_avg": 107640,
-        "monthly_range": {
-          "low": 6728,
-          "high": 13006
-        }
-      },
-      "independent_living": {
-        "monthly_avg": 4784,
-        "annual_avg": 57408,
-        "monthly_range": {
-          "low": 3588,
-          "high": 5980
-        }
-      },
-      "nursing_home": {
-        "monthly_avg": 12707,
-        "annual_avg": 152484,
-        "monthly_range": {
-          "low": 10801,
-          "high": 18425
-        }
-      },
-      "cost_factors": [
-        "High urban property values",
-        "Nonprofit facilities in the area",
-        "Premium staffing costs",
-        "Luxury amenities in many facilities",
-        "Luxury facilities with premium amenities",
-        "Various subsidy programs available",
-        "Resort-style services and accommodations",
-        "Specialized medical staff on premises",
-        "More affordable options available"
-      ]
-    },
-    "dallas-tx": {
-      "city": "Dallas",
-      "state": "Texas",
-      "assisted_living": {
-        "monthly_avg": 4050,
-        "annual_avg": 48600,
-        "monthly_range": {
-          "low": 3038,
-          "high": 5872
-        }
-      },
-      "memory_care": {
-        "monthly_avg": 5400,
-        "annual_avg": 64800,
-        "monthly_range": {
-          "low": 4050,
-          "high": 7830
-        }
-      },
-      "independent_living": {
-        "monthly_avg": 2880,
-        "annual_avg": 34560,
-        "monthly_range": {
-          "low": 2160,
-          "high": 3600
-        }
-      },
-      "nursing_home": {
-        "monthly_avg": 7650,
-        "annual_avg": 91800,
-        "monthly_range": {
-          "low": 6502,
-          "high": 11092
-        }
-      },
-      "cost_factors": [
-        "High urban property values",
-        "Nonprofit facilities in the area",
-        "Premium staffing costs",
-        "Luxury amenities in many facilities",
-        "Luxury facilities with premium amenities",
-        "Various subsidy programs available",
-        "Resort-style services and accommodations",
-        "Specialized medical staff on premises",
-        "More affordable options available"
-      ]
-    },
-    "san-jose-ca": {
-      "city": "San Jose",
-      "state": "California",
-      "assisted_living": {
-        "monthly_avg": 5850,
-        "annual_avg": 70200,
-        "monthly_range": {
-          "low": 4388,
-          "high": 8482
-        }
-      },
-      "memory_care": {
-        "monthly_avg": 7800,
-        "annual_avg": 93600,
-        "monthly_range": {
-          "low": 5850,
-          "high": 11310
-        }
-      },
-      "independent_living": {
-        "monthly_avg": 4160,
-        "annual_avg": 49920,
-        "monthly_range": {
-          "low": 3120,
-          "high": 5200
-        }
-      },
-      "nursing_home": {
-        "monthly_avg": 11050,
-        "annual_avg": 132600,
-        "monthly_range": {
-          "low": 9392,
-          "high": 16022
-        }
-      },
-      "cost_factors": [
-        "Large selection of facilities",
-        "Varied neighborhood pricing",
-        "Moderate urban cost of living"
-      ]
-    }
-  },
-  "meta": {
-    "last_updated": "2025-05-03",
-    "sources": [
-      "Genworth Cost of Care Survey",
-      "Senior Living Association Database",
-      "Internal Market Analysis"
-    ],
-    "cities_covered": 10,
-    "states_covered": 51
-  }
-}
+    
+    # Ensure output directory exists
+    os.makedirs(os.path.dirname(output_file), exist_ok=True)
+    
+    # Save to JSON file
+    with open(output_file, 'w') as f:
+        json.dump(facilities_data, f, indent=2)
+    
+    logger.info(f"Saved {len(all_facilities)} facilities covering {cities_covered} cities to {output_file}")
+    
+    return facilities_data
+
+
+if __name__ == "__main__":
+    # Define paths
+    data_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), 'data')
+    cities_file = os.path.join(data_dir, 'processed_cities.json')
+    output_file = os.path.join(data_dir, 'facilities.json')
+    
+    # Read API key from environment variable (or use None for demo)
+    api_key = os.environ.get("GOOGLE_MAPS_API_KEY")
+    
+    # Fetch facilities
+    fetch_all_facilities(cities_file, output_file, api_key)
