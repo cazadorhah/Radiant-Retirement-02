@@ -1,0 +1,82 @@
+{
+  "new-york-ny": {
+    "name": "New York",
+    "state": "New York",
+    "population": 8405837,
+    "slug": "new-york-ny",
+    "nearby_cities": [],
+    "avg_cost": 5500
+  },
+  "los-angeles-ca": {
+    "name": "Los Angeles",
+    "state": "California",
+    "population": 3884307,
+    "slug": "los-angeles-ca",
+    "nearby_cities": [],
+    "avg_cost": 5000
+  },
+  "chicago-il": {
+    "name": "Chicago",
+    "state": "Illinois",
+    "population": 2718782,
+    "slug": "chicago-il",
+    "nearby_cities": [],
+    "avg_cost": 4500
+  },
+  "houston-tx": {
+    "name": "Houston",
+    "state": "Texas",
+    "population": 2195914,
+    "slug": "houston-tx",
+    "nearby_cities": [],
+    "avg_cost": 3800
+  },
+  "philadelphia-pa": {
+    "name": "Philadelphia",
+    "state": "Pennsylvania",
+    "population": 1553165,
+    "slug": "philadelphia-pa",
+    "nearby_cities": [],
+    "avg_cost": 4200
+  },
+  "phoenix-az": {
+    "name": "Phoenix",
+    "state": "Arizona",
+    "population": 1513367,
+    "slug": "phoenix-az",
+    "nearby_cities": [],
+    "avg_cost": 3900
+  },
+  "san-antonio-tx": {
+    "name": "San Antonio",
+    "state": "Texas",
+    "population": 1409019,
+    "slug": "san-antonio-tx",
+    "nearby_cities": [],
+    "avg_cost": 3800
+  },
+  "san-diego-ca": {
+    "name": "San Diego",
+    "state": "California",
+    "population": 1355896,
+    "slug": "san-diego-ca",
+    "nearby_cities": [],
+    "avg_cost": 5000
+  },
+  "dallas-tx": {
+    "name": "Dallas",
+    "state": "Texas",
+    "population": 1257676,
+    "slug": "dallas-tx",
+    "nearby_cities": [],
+    "avg_cost": 3800
+  },
+  "san-jose-ca": {
+    "name": "San Jose",
+    "state": "California",
+    "population": 998537,
+    "slug": "san-jose-ca",
+    "nearby_cities": [],
+    "avg_cost": 5000
+  }
+}

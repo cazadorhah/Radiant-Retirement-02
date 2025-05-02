@@ -1,0 +1,1401 @@
+{
+  "national_averages": {
+    "assisted_living": {
+      "monthly": 4500,
+      "annual": 54000
+    },
+    "memory_care": {
+      "monthly": 6000,
+      "annual": 72000
+    },
+    "independent_living": {
+      "monthly": 3200,
+      "annual": 38400
+    },
+    "nursing_home": {
+      "monthly": 8500,
+      "annual": 102000
+    }
+  },
+  "state_averages": {
+    "Alabama": {
+      "assisted_living": {
+        "monthly": 3825,
+        "annual": 45900
+      },
+      "memory_care": {
+        "monthly": 5100,
+        "annual": 61200
+      },
+      "independent_living": {
+        "monthly": 2720,
+        "annual": 32640
+      },
+      "nursing_home": {
+        "monthly": 7225,
+        "annual": 86700
+      }
+    },
+    "Alaska": {
+      "assisted_living": {
+        "monthly": 5625,
+        "annual": 67500
+      },
+      "memory_care": {
+        "monthly": 7500,
+        "annual": 90000
+      },
+      "independent_living": {
+        "monthly": 4000,
+        "annual": 48000
+      },
+      "nursing_home": {
+        "monthly": 10625,
+        "annual": 127500
+      }
+    },
+    "Arizona": {
+      "assisted_living": {
+        "monthly": 4275,
+        "annual": 51300
+      },
+      "memory_care": {
+        "monthly": 5700,
+        "annual": 68400
+      },
+      "independent_living": {
+        "monthly": 3040,
+        "annual": 36480
+      },
+      "nursing_home": {
+        "monthly": 8075,
+        "annual": 96900
+      }
+    },
+    "Arkansas": {
+      "assisted_living": {
+        "monthly": 3600,
+        "annual": 43200
+      },
+      "memory_care": {
+        "monthly": 4800,
+        "annual": 57600
+      },
+      "independent_living": {
+        "monthly": 2560,
+        "annual": 30720
+      },
+      "nursing_home": {
+        "monthly": 6800,
+        "annual": 81600
+      }
+    },
+    "California": {
+      "assisted_living": {
+        "monthly": 5850,
+        "annual": 70200
+      },
+      "memory_care": {
+        "monthly": 7800,
+        "annual": 93600
+      },
+      "independent_living": {
+        "monthly": 4160,
+        "annual": 49920
+      },
+      "nursing_home": {
+        "monthly": 11050,
+        "annual": 132600
+      }
+    },
+    "Colorado": {
+      "assisted_living": {
+        "monthly": 4725,
+        "annual": 56700
+      },
+      "memory_care": {
+        "monthly": 6300,
+        "annual": 75600
+      },
+      "independent_living": {
+        "monthly": 3360,
+        "annual": 40320
+      },
+      "nursing_home": {
+        "monthly": 8925,
+        "annual": 107100
+      }
+    },
+    "Connecticut": {
+      "assisted_living": {
+        "monthly": 5625,
+        "annual": 67500
+      },
+      "memory_care": {
+        "monthly": 7500,
+        "annual": 90000
+      },
+      "independent_living": {
+        "monthly": 4000,
+        "annual": 48000
+      },
+      "nursing_home": {
+        "monthly": 10625,
+        "annual": 127500
+      }
+    },
+    "Delaware": {
+      "assisted_living": {
+        "monthly": 4950,
+        "annual": 59400
+      },
+      "memory_care": {
+        "monthly": 6600,
+        "annual": 79200
+      },
+      "independent_living": {
+        "monthly": 3520,
+        "annual": 42240
+      },
+      "nursing_home": {
+        "monthly": 9350,
+        "annual": 112200
+      }
+    },
+    "Florida": {
+      "assisted_living": {
+        "monthly": 4500,
+        "annual": 54000
+      },
+      "memory_care": {
+        "monthly": 6000,
+        "annual": 72000
+      },
+      "independent_living": {
+        "monthly": 3200,
+        "annual": 38400
+      },
+      "nursing_home": {
+        "monthly": 8500,
+        "annual": 102000
+      }
+    },
+    "Georgia": {
+      "assisted_living": {
+        "monthly": 4050,
+        "annual": 48600
+      },
+      "memory_care": {
+        "monthly": 5400,
+        "annual": 64800
+      },
+      "independent_living": {
+        "monthly": 2880,
+        "annual": 34560
+      },
+      "nursing_home": {
+        "monthly": 7650,
+        "annual": 91800
+      }
+    },
+    "Hawaii": {
+      "assisted_living": {
+        "monthly": 6300,
+        "annual": 75600
+      },
+      "memory_care": {
+        "monthly": 8400,
+        "annual": 100800
+      },
+      "independent_living": {
+        "monthly": 4480,
+        "annual": 53760
+      },
+      "nursing_home": {
+        "monthly": 11900,
+        "annual": 142800
+      }
+    },
+    "Idaho": {
+      "assisted_living": {
+        "monthly": 4050,
+        "annual": 48600
+      },
+      "memory_care": {
+        "monthly": 5400,
+        "annual": 64800
+      },
+      "independent_living": {
+        "monthly": 2880,
+        "annual": 34560
+      },
+      "nursing_home": {
+        "monthly": 7650,
+        "annual": 91800
+      }
+    },
+    "Illinois": {
+      "assisted_living": {
+        "monthly": 4725,
+        "annual": 56700
+      },
+      "memory_care": {
+        "monthly": 6300,
+        "annual": 75600
+      },
+      "independent_living": {
+        "monthly": 3360,
+        "annual": 40320
+      },
+      "nursing_home": {
+        "monthly": 8925,
+        "annual": 107100
+      }
+    },
+    "Indiana": {
+      "assisted_living": {
+        "monthly": 3825,
+        "annual": 45900
+      },
+      "memory_care": {
+        "monthly": 5100,
+        "annual": 61200
+      },
+      "independent_living": {
+        "monthly": 2720,
+        "annual": 32640
+      },
+      "nursing_home": {
+        "monthly": 7225,
+        "annual": 86700
+      }
+    },
+    "Iowa": {
+      "assisted_living": {
+        "monthly": 3825,
+        "annual": 45900
+      },
+      "memory_care": {
+        "monthly": 5100,
+        "annual": 61200
+      },
+      "independent_living": {
+        "monthly": 2720,
+        "annual": 32640
+      },
+      "nursing_home": {
+        "monthly": 7225,
+        "annual": 86700
+      }
+    },
+    "Kansas": {
+      "assisted_living": {
+        "monthly": 3825,
+        "annual": 45900
+      },
+      "memory_care": {
+        "monthly": 5100,
+        "annual": 61200
+      },
+      "independent_living": {
+        "monthly": 2720,
+        "annual": 32640
+      },
+      "nursing_home": {
+        "monthly": 7225,
+        "annual": 86700
+      }
+    },
+    "Kentucky": {
+      "assisted_living": {
+        "monthly": 3825,
+        "annual": 45900
+      },
+      "memory_care": {
+        "monthly": 5100,
+        "annual": 61200
+      },
+      "independent_living": {
+        "monthly": 2720,
+        "annual": 32640
+      },
+      "nursing_home": {
+        "monthly": 7225,
+        "annual": 86700
+      }
+    },
+    "Louisiana": {
+      "assisted_living": {
+        "monthly": 3825,
+        "annual": 45900
+      },
+      "memory_care": {
+        "monthly": 5100,
+        "annual": 61200
+      },
+      "independent_living": {
+        "monthly": 2720,
+        "annual": 32640
+      },
+      "nursing_home": {
+        "monthly": 7225,
+        "annual": 86700
+      }
+    },
+    "Maine": {
+      "assisted_living": {
+        "monthly": 4950,
+        "annual": 59400
+      },
+      "memory_care": {
+        "monthly": 6600,
+        "annual": 79200
+      },
+      "independent_living": {
+        "monthly": 3520,
+        "annual": 42240
+      },
+      "nursing_home": {
+        "monthly": 9350,
+        "annual": 112200
+      }
+    },
+    "Maryland": {
+      "assisted_living": {
+        "monthly": 5175,
+        "annual": 62100
+      },
+      "memory_care": {
+        "monthly": 6900,
+        "annual": 82800
+      },
+      "independent_living": {
+        "monthly": 3680,
+        "annual": 44160
+      },
+      "nursing_home": {
+        "monthly": 9775,
+        "annual": 117300
+      }
+    },
+    "Massachusetts": {
+      "assisted_living": {
+        "monthly": 5850,
+        "annual": 70200
+      },
+      "memory_care": {
+        "monthly": 7800,
+        "annual": 93600
+      },
+      "independent_living": {
+        "monthly": 4160,
+        "annual": 49920
+      },
+      "nursing_home": {
+        "monthly": 11050,
+        "annual": 132600
+      }
+    },
+    "Michigan": {
+      "assisted_living": {
+        "monthly": 4275,
+        "annual": 51300
+      },
+      "memory_care": {
+        "monthly": 5700,
+        "annual": 68400
+      },
+      "independent_living": {
+        "monthly": 3040,
+        "annual": 36480
+      },
+      "nursing_home": {
+        "monthly": 8075,
+        "annual": 96900
+      }
+    },
+    "Minnesota": {
+      "assisted_living": {
+        "monthly": 4500,
+        "annual": 54000
+      },
+      "memory_care": {
+        "monthly": 6000,
+        "annual": 72000
+      },
+      "independent_living": {
+        "monthly": 3200,
+        "annual": 38400
+      },
+      "nursing_home": {
+        "monthly": 8500,
+        "annual": 102000
+      }
+    },
+    "Mississippi": {
+      "assisted_living": {
+        "monthly": 3600,
+        "annual": 43200
+      },
+      "memory_care": {
+        "monthly": 4800,
+        "annual": 57600
+      },
+      "independent_living": {
+        "monthly": 2560,
+        "annual": 30720
+      },
+      "nursing_home": {
+        "monthly": 6800,
+        "annual": 81600
+      }
+    },
+    "Missouri": {
+      "assisted_living": {
+        "monthly": 4050,
+        "annual": 48600
+      },
+      "memory_care": {
+        "monthly": 5400,
+        "annual": 64800
+      },
+      "independent_living": {
+        "monthly": 2880,
+        "annual": 34560
+      },
+      "nursing_home": {
+        "monthly": 7650,
+        "annual": 91800
+      }
+    },
+    "Montana": {
+      "assisted_living": {
+        "monthly": 4275,
+        "annual": 51300
+      },
+      "memory_care": {
+        "monthly": 5700,
+        "annual": 68400
+      },
+      "independent_living": {
+        "monthly": 3040,
+        "annual": 36480
+      },
+      "nursing_home": {
+        "monthly": 8075,
+        "annual": 96900
+      }
+    },
+    "Nebraska": {
+      "assisted_living": {
+        "monthly": 4050,
+        "annual": 48600
+      },
+      "memory_care": {
+        "monthly": 5400,
+        "annual": 64800
+      },
+      "independent_living": {
+        "monthly": 2880,
+        "annual": 34560
+      },
+      "nursing_home": {
+        "monthly": 7650,
+        "annual": 91800
+      }
+    },
+    "Nevada": {
+      "assisted_living": {
+        "monthly": 4500,
+        "annual": 54000
+      },
+      "memory_care": {
+        "monthly": 6000,
+        "annual": 72000
+      },
+      "independent_living": {
+        "monthly": 3200,
+        "annual": 38400
+      },
+      "nursing_home": {
+        "monthly": 8500,
+        "annual": 102000
+      }
+    },
+    "New Hampshire": {
+      "assisted_living": {
+        "monthly": 5175,
+        "annual": 62100
+      },
+      "memory_care": {
+        "monthly": 6900,
+        "annual": 82800
+      },
+      "independent_living": {
+        "monthly": 3680,
+        "annual": 44160
+      },
+      "nursing_home": {
+        "monthly": 9775,
+        "annual": 117300
+      }
+    },
+    "New Jersey": {
+      "assisted_living": {
+        "monthly": 5625,
+        "annual": 67500
+      },
+      "memory_care": {
+        "monthly": 7500,
+        "annual": 90000
+      },
+      "independent_living": {
+        "monthly": 4000,
+        "annual": 48000
+      },
+      "nursing_home": {
+        "monthly": 10625,
+        "annual": 127500
+      }
+    },
+    "New Mexico": {
+      "assisted_living": {
+        "monthly": 4050,
+        "annual": 48600
+      },
+      "memory_care": {
+        "monthly": 5400,
+        "annual": 64800
+      },
+      "independent_living": {
+        "monthly": 2880,
+        "annual": 34560
+      },
+      "nursing_home": {
+        "monthly": 7650,
+        "annual": 91800
+      }
+    },
+    "New York": {
+      "assisted_living": {
+        "monthly": 6075,
+        "annual": 72900
+      },
+      "memory_care": {
+        "monthly": 8100,
+        "annual": 97200
+      },
+      "independent_living": {
+        "monthly": 4320,
+        "annual": 51840
+      },
+      "nursing_home": {
+        "monthly": 11475,
+        "annual": 137700
+      }
+    },
+    "North Carolina": {
+      "assisted_living": {
+        "monthly": 4050,
+        "annual": 48600
+      },
+      "memory_care": {
+        "monthly": 5400,
+        "annual": 64800
+      },
+      "independent_living": {
+        "monthly": 2880,
+        "annual": 34560
+      },
+      "nursing_home": {
+        "monthly": 7650,
+        "annual": 91800
+      }
+    },
+    "North Dakota": {
+      "assisted_living": {
+        "monthly": 4275,
+        "annual": 51300
+      },
+      "memory_care": {
+        "monthly": 5700,
+        "annual": 68400
+      },
+      "independent_living": {
+        "monthly": 3040,
+        "annual": 36480
+      },
+      "nursing_home": {
+        "monthly": 8075,
+        "annual": 96900
+      }
+    },
+    "Ohio": {
+      "assisted_living": {
+        "monthly": 4050,
+        "annual": 48600
+      },
+      "memory_care": {
+        "monthly": 5400,
+        "annual": 64800
+      },
+      "independent_living": {
+        "monthly": 2880,
+        "annual": 34560
+      },
+      "nursing_home": {
+        "monthly": 7650,
+        "annual": 91800
+      }
+    },
+    "Oklahoma": {
+      "assisted_living": {
+        "monthly": 3825,
+        "annual": 45900
+      },
+      "memory_care": {
+        "monthly": 5100,
+        "annual": 61200
+      },
+      "independent_living": {
+        "monthly": 2720,
+        "annual": 32640
+      },
+      "nursing_home": {
+        "monthly": 7225,
+        "annual": 86700
+      }
+    },
+    "Oregon": {
+      "assisted_living": {
+        "monthly": 4950,
+        "annual": 59400
+      },
+      "memory_care": {
+        "monthly": 6600,
+        "annual": 79200
+      },
+      "independent_living": {
+        "monthly": 3520,
+        "annual": 42240
+      },
+      "nursing_home": {
+        "monthly": 9350,
+        "annual": 112200
+      }
+    },
+    "Pennsylvania": {
+      "assisted_living": {
+        "monthly": 4950,
+        "annual": 59400
+      },
+      "memory_care": {
+        "monthly": 6600,
+        "annual": 79200
+      },
+      "independent_living": {
+        "monthly": 3520,
+        "annual": 42240
+      },
+      "nursing_home": {
+        "monthly": 9350,
+        "annual": 112200
+      }
+    },
+    "Rhode Island": {
+      "assisted_living": {
+        "monthly": 5400,
+        "annual": 64800
+      },
+      "memory_care": {
+        "monthly": 7200,
+        "annual": 86400
+      },
+      "independent_living": {
+        "monthly": 3840,
+        "annual": 46080
+      },
+      "nursing_home": {
+        "monthly": 10200,
+        "annual": 122400
+      }
+    },
+    "South Carolina": {
+      "assisted_living": {
+        "monthly": 4050,
+        "annual": 48600
+      },
+      "memory_care": {
+        "monthly": 5400,
+        "annual": 64800
+      },
+      "independent_living": {
+        "monthly": 2880,
+        "annual": 34560
+      },
+      "nursing_home": {
+        "monthly": 7650,
+        "annual": 91800
+      }
+    },
+    "South Dakota": {
+      "assisted_living": {
+        "monthly": 4050,
+        "annual": 48600
+      },
+      "memory_care": {
+        "monthly": 5400,
+        "annual": 64800
+      },
+      "independent_living": {
+        "monthly": 2880,
+        "annual": 34560
+      },
+      "nursing_home": {
+        "monthly": 7650,
+        "annual": 91800
+      }
+    },
+    "Tennessee": {
+      "assisted_living": {
+        "monthly": 3825,
+        "annual": 45900
+      },
+      "memory_care": {
+        "monthly": 5100,
+        "annual": 61200
+      },
+      "independent_living": {
+        "monthly": 2720,
+        "annual": 32640
+      },
+      "nursing_home": {
+        "monthly": 7225,
+        "annual": 86700
+      }
+    },
+    "Texas": {
+      "assisted_living": {
+        "monthly": 4050,
+        "annual": 48600
+      },
+      "memory_care": {
+        "monthly": 5400,
+        "annual": 64800
+      },
+      "independent_living": {
+        "monthly": 2880,
+        "annual": 34560
+      },
+      "nursing_home": {
+        "monthly": 7650,
+        "annual": 91800
+      }
+    },
+    "Utah": {
+      "assisted_living": {
+        "monthly": 4275,
+        "annual": 51300
+      },
+      "memory_care": {
+        "monthly": 5700,
+        "annual": 68400
+      },
+      "independent_living": {
+        "monthly": 3040,
+        "annual": 36480
+      },
+      "nursing_home": {
+        "monthly": 8075,
+        "annual": 96900
+      }
+    },
+    "Vermont": {
+      "assisted_living": {
+        "monthly": 5175,
+        "annual": 62100
+      },
+      "memory_care": {
+        "monthly": 6900,
+        "annual": 82800
+      },
+      "independent_living": {
+        "monthly": 3680,
+        "annual": 44160
+      },
+      "nursing_home": {
+        "monthly": 9775,
+        "annual": 117300
+      }
+    },
+    "Virginia": {
+      "assisted_living": {
+        "monthly": 4725,
+        "annual": 56700
+      },
+      "memory_care": {
+        "monthly": 6300,
+        "annual": 75600
+      },
+      "independent_living": {
+        "monthly": 3360,
+        "annual": 40320
+      },
+      "nursing_home": {
+        "monthly": 8925,
+        "annual": 107100
+      }
+    },
+    "Washington": {
+      "assisted_living": {
+        "monthly": 5175,
+        "annual": 62100
+      },
+      "memory_care": {
+        "monthly": 6900,
+        "annual": 82800
+      },
+      "independent_living": {
+        "monthly": 3680,
+        "annual": 44160
+      },
+      "nursing_home": {
+        "monthly": 9775,
+        "annual": 117300
+      }
+    },
+    "West Virginia": {
+      "assisted_living": {
+        "monthly": 3825,
+        "annual": 45900
+      },
+      "memory_care": {
+        "monthly": 5100,
+        "annual": 61200
+      },
+      "independent_living": {
+        "monthly": 2720,
+        "annual": 32640
+      },
+      "nursing_home": {
+        "monthly": 7225,
+        "annual": 86700
+      }
+    },
+    "Wisconsin": {
+      "assisted_living": {
+        "monthly": 4275,
+        "annual": 51300
+      },
+      "memory_care": {
+        "monthly": 5700,
+        "annual": 68400
+      },
+      "independent_living": {
+        "monthly": 3040,
+        "annual": 36480
+      },
+      "nursing_home": {
+        "monthly": 8075,
+        "annual": 96900
+      }
+    },
+    "Wyoming": {
+      "assisted_living": {
+        "monthly": 4050,
+        "annual": 48600
+      },
+      "memory_care": {
+        "monthly": 5400,
+        "annual": 64800
+      },
+      "independent_living": {
+        "monthly": 2880,
+        "annual": 34560
+      },
+      "nursing_home": {
+        "monthly": 7650,
+        "annual": 91800
+      }
+    },
+    "District of Columbia": {
+      "assisted_living": {
+        "monthly": 6300,
+        "annual": 75600
+      },
+      "memory_care": {
+        "monthly": 8400,
+        "annual": 100800
+      },
+      "independent_living": {
+        "monthly": 4480,
+        "annual": 53760
+      },
+      "nursing_home": {
+        "monthly": 11900,
+        "annual": 142800
+      }
+    }
+  },
+  "cities": {
+    "new-york-ny": {
+      "city": "New York",
+      "state": "New York",
+      "assisted_living": {
+        "monthly_avg": 7898,
+        "annual_avg": 94776,
+        "monthly_range": {
+          "low": 5924,
+          "high": 11452
+        }
+      },
+      "memory_care": {
+        "monthly_avg": 10530,
+        "annual_avg": 126360,
+        "monthly_range": {
+          "low": 7898,
+          "high": 15268
+        }
+      },
+      "independent_living": {
+        "monthly_avg": 5616,
+        "annual_avg": 67392,
+        "monthly_range": {
+          "low": 4212,
+          "high": 7020
+        }
+      },
+      "nursing_home": {
+        "monthly_avg": 14918,
+        "annual_avg": 179016,
+        "monthly_range": {
+          "low": 12680,
+          "high": 21631
+        }
+      },
+      "cost_factors": [
+        "Resort-style services and accommodations",
+        "High urban property values",
+        "Premium staffing costs",
+        "Luxury amenities in many facilities",
+        "Specialized medical staff on premises",
+        "Luxury facilities with premium amenities"
+      ]
+    },
+    "los-angeles-ca": {
+      "city": "Los Angeles",
+      "state": "California",
+      "assisted_living": {
+        "monthly_avg": 7020,
+        "annual_avg": 84240,
+        "monthly_range": {
+          "low": 5265,
+          "high": 10179
+        }
+      },
+      "memory_care": {
+        "monthly_avg": 9360,
+        "annual_avg": 112320,
+        "monthly_range": {
+          "low": 7020,
+          "high": 13572
+        }
+      },
+      "independent_living": {
+        "monthly_avg": 4992,
+        "annual_avg": 59904,
+        "monthly_range": {
+          "low": 3744,
+          "high": 6240
+        }
+      },
+      "nursing_home": {
+        "monthly_avg": 13260,
+        "annual_avg": 159120,
+        "monthly_range": {
+          "low": 11271,
+          "high": 19227
+        }
+      },
+      "cost_factors": [
+        "Resort-style services and accommodations",
+        "High urban property values",
+        "Premium staffing costs",
+        "Luxury amenities in many facilities",
+        "Specialized medical staff on premises",
+        "Luxury facilities with premium amenities"
+      ]
+    },
+    "chicago-il": {
+      "city": "Chicago",
+      "state": "Illinois",
+      "assisted_living": {
+        "monthly_avg": 5434,
+        "annual_avg": 65208,
+        "monthly_range": {
+          "low": 4076,
+          "high": 7879
+        }
+      },
+      "memory_care": {
+        "monthly_avg": 7245,
+        "annual_avg": 86940,
+        "monthly_range": {
+          "low": 5434,
+          "high": 10505
+        }
+      },
+      "independent_living": {
+        "monthly_avg": 3864,
+        "annual_avg": 46368,
+        "monthly_range": {
+          "low": 2898,
+          "high": 4830
+        }
+      },
+      "nursing_home": {
+        "monthly_avg": 10264,
+        "annual_avg": 123168,
+        "monthly_range": {
+          "low": 8724,
+          "high": 14883
+        }
+      },
+      "cost_factors": [
+        "Resort-style services and accommodations",
+        "High urban property values",
+        "Premium staffing costs",
+        "Luxury amenities in many facilities",
+        "Specialized medical staff on premises",
+        "Luxury facilities with premium amenities"
+      ]
+    },
+    "houston-tx": {
+      "city": "Houston",
+      "state": "Texas",
+      "assisted_living": {
+        "monthly_avg": 4050,
+        "annual_avg": 48600,
+        "monthly_range": {
+          "low": 3038,
+          "high": 5872
+        }
+      },
+      "memory_care": {
+        "monthly_avg": 5400,
+        "annual_avg": 64800,
+        "monthly_range": {
+          "low": 4050,
+          "high": 7830
+        }
+      },
+      "independent_living": {
+        "monthly_avg": 2880,
+        "annual_avg": 34560,
+        "monthly_range": {
+          "low": 2160,
+          "high": 3600
+        }
+      },
+      "nursing_home": {
+        "monthly_avg": 7650,
+        "annual_avg": 91800,
+        "monthly_range": {
+          "low": 6502,
+          "high": 11092
+        }
+      },
+      "cost_factors": [
+        "Resort-style services and accommodations",
+        "High urban property values",
+        "Premium staffing costs",
+        "Luxury amenities in many facilities",
+        "Specialized medical staff on premises",
+        "Luxury facilities with premium amenities"
+      ]
+    },
+    "philadelphia-pa": {
+      "city": "Philadelphia",
+      "state": "Pennsylvania",
+      "assisted_living": {
+        "monthly_avg": 5445,
+        "annual_avg": 65340,
+        "monthly_range": {
+          "low": 4084,
+          "high": 7895
+        }
+      },
+      "memory_care": {
+        "monthly_avg": 7260,
+        "annual_avg": 87120,
+        "monthly_range": {
+          "low": 5445,
+          "high": 10527
+        }
+      },
+      "independent_living": {
+        "monthly_avg": 3872,
+        "annual_avg": 46464,
+        "monthly_range": {
+          "low": 2904,
+          "high": 4840
+        }
+      },
+      "nursing_home": {
+        "monthly_avg": 10285,
+        "annual_avg": 123420,
+        "monthly_range": {
+          "low": 8742,
+          "high": 14913
+        }
+      },
+      "cost_factors": [
+        "Resort-style services and accommodations",
+        "High urban property values",
+        "Premium staffing costs",
+        "Luxury amenities in many facilities",
+        "Specialized medical staff on premises",
+        "Luxury facilities with premium amenities"
+      ]
+    },
+    "phoenix-az": {
+      "city": "Phoenix",
+      "state": "Arizona",
+      "assisted_living": {
+        "monthly_avg": 4275,
+        "annual_avg": 51300,
+        "monthly_range": {
+          "low": 3206,
+          "high": 6199
+        }
+      },
+      "memory_care": {
+        "monthly_avg": 5700,
+        "annual_avg": 68400,
+        "monthly_range": {
+          "low": 4275,
+          "high": 8265
+        }
+      },
+      "independent_living": {
+        "monthly_avg": 3040,
+        "annual_avg": 36480,
+        "monthly_range": {
+          "low": 2280,
+          "high": 3800
+        }
+      },
+      "nursing_home": {
+        "monthly_avg": 8075,
+        "annual_avg": 96900,
+        "monthly_range": {
+          "low": 6864,
+          "high": 11709
+        }
+      },
+      "cost_factors": [
+        "More affordable options available",
+        "Resort-style services and accommodations",
+        "High urban property values",
+        "Premium staffing costs",
+        "Luxury amenities in many facilities",
+        "Specialized medical staff on premises",
+        "Nonprofit facilities in the area",
+        "Luxury facilities with premium amenities",
+        "Various subsidy programs available"
+      ]
+    },
+    "san-antonio-tx": {
+      "city": "San Antonio",
+      "state": "Texas",
+      "assisted_living": {
+        "monthly_avg": 4050,
+        "annual_avg": 48600,
+        "monthly_range": {
+          "low": 3038,
+          "high": 5872
+        }
+      },
+      "memory_care": {
+        "monthly_avg": 5400,
+        "annual_avg": 64800,
+        "monthly_range": {
+          "low": 4050,
+          "high": 7830
+        }
+      },
+      "independent_living": {
+        "monthly_avg": 2880,
+        "annual_avg": 34560,
+        "monthly_range": {
+          "low": 2160,
+          "high": 3600
+        }
+      },
+      "nursing_home": {
+        "monthly_avg": 7650,
+        "annual_avg": 91800,
+        "monthly_range": {
+          "low": 6502,
+          "high": 11092
+        }
+      },
+      "cost_factors": [
+        "More affordable options available",
+        "Resort-style services and accommodations",
+        "High urban property values",
+        "Premium staffing costs",
+        "Luxury amenities in many facilities",
+        "Specialized medical staff on premises",
+        "Nonprofit facilities in the area",
+        "Luxury facilities with premium amenities",
+        "Various subsidy programs available"
+      ]
+    },
+    "san-diego-ca": {
+      "city": "San Diego",
+      "state": "California",
+      "assisted_living": {
+        "monthly_avg": 6727,
+        "annual_avg": 80724,
+        "monthly_range": {
+          "low": 5045,
+          "high": 9754
+        }
+      },
+      "memory_care": {
+        "monthly_avg": 8970,
+        "annual_avg": 107640,
+        "monthly_range": {
+          "low": 6728,
+          "high": 13006
+        }
+      },
+      "independent_living": {
+        "monthly_avg": 4784,
+        "annual_avg": 57408,
+        "monthly_range": {
+          "low": 3588,
+          "high": 5980
+        }
+      },
+      "nursing_home": {
+        "monthly_avg": 12707,
+        "annual_avg": 152484,
+        "monthly_range": {
+          "low": 10801,
+          "high": 18425
+        }
+      },
+      "cost_factors": [
+        "More affordable options available",
+        "Resort-style services and accommodations",
+        "High urban property values",
+        "Premium staffing costs",
+        "Luxury amenities in many facilities",
+        "Specialized medical staff on premises",
+        "Nonprofit facilities in the area",
+        "Luxury facilities with premium amenities",
+        "Various subsidy programs available"
+      ]
+    },
+    "dallas-tx": {
+      "city": "Dallas",
+      "state": "Texas",
+      "assisted_living": {
+        "monthly_avg": 4050,
+        "annual_avg": 48600,
+        "monthly_range": {
+          "low": 3038,
+          "high": 5872
+        }
+      },
+      "memory_care": {
+        "monthly_avg": 5400,
+        "annual_avg": 64800,
+        "monthly_range": {
+          "low": 4050,
+          "high": 7830
+        }
+      },
+      "independent_living": {
+        "monthly_avg": 2880,
+        "annual_avg": 34560,
+        "monthly_range": {
+          "low": 2160,
+          "high": 3600
+        }
+      },
+      "nursing_home": {
+        "monthly_avg": 7650,
+        "annual_avg": 91800,
+        "monthly_range": {
+          "low": 6502,
+          "high": 11092
+        }
+      },
+      "cost_factors": [
+        "More affordable options available",
+        "Resort-style services and accommodations",
+        "High urban property values",
+        "Premium staffing costs",
+        "Luxury amenities in many facilities",
+        "Specialized medical staff on premises",
+        "Nonprofit facilities in the area",
+        "Luxury facilities with premium amenities",
+        "Various subsidy programs available"
+      ]
+    },
+    "san-jose-ca": {
+      "city": "San Jose",
+      "state": "California",
+      "assisted_living": {
+        "monthly_avg": 5850,
+        "annual_avg": 70200,
+        "monthly_range": {
+          "low": 4388,
+          "high": 8482
+        }
+      },
+      "memory_care": {
+        "monthly_avg": 7800,
+        "annual_avg": 93600,
+        "monthly_range": {
+          "low": 5850,
+          "high": 11310
+        }
+      },
+      "independent_living": {
+        "monthly_avg": 4160,
+        "annual_avg": 49920,
+        "monthly_range": {
+          "low": 3120,
+          "high": 5200
+        }
+      },
+      "nursing_home": {
+        "monthly_avg": 11050,
+        "annual_avg": 132600,
+        "monthly_range": {
+          "low": 9392,
+          "high": 16022
+        }
+      },
+      "cost_factors": [
+        "Varied neighborhood pricing",
+        "Moderate urban cost of living",
+        "Large selection of facilities"
+      ]
+    }
+  },
+  "meta": {
+    "last_updated": "2025-04-29",
+    "sources": [
+      "Genworth Cost of Care Survey",
+      "Senior Living Association Database",
+      "Internal Market Analysis"
+    ],
+    "cities_covered": 10,
+    "states_covered": 51
+  }
+}
