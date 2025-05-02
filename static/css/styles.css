@@ -94,7 +94,7 @@ ul, ol {
 
 /* Header Styles */
 .site-header {
-    background-color: #FFA726;
+    background-color: #ed8b23;
     box-shadow: var(--shadow);
     position: relative;
     z-index: 10;
