@@ -12,10 +12,10 @@ import copy
 from datetime import datetime
 
 # Configuration
-NUM_CITIES_TO_ADD = 90  # Change this to add more or fewer cities
-CSV_PATH = "D:\Part-Time Job-Related\Audiobook Proofreading (Hunter Haley)\Radiant Retirement\Radiant-Retirement-02-main - Copy\Radiant-Retirement-02-main\data\cities.csv"  # Path to your cities.csv file
-COMBINED_DATA_PATH = "D:\Part-Time Job-Related\Audiobook Proofreading (Hunter Haley)\Radiant Retirement\Radiant-Retirement-02-main - Copy\Radiant-Retirement-02-main\data\combined_data.json"  # Path to your combined_data.json file
-OUTPUT_PATH = "D:\Part-Time Job-Related\Audiobook Proofreading (Hunter Haley)\Radiant Retirement\Radiant-Retirement-02-main - Copy\Radiant-Retirement-02-main\data\combined_data.json"  # Where to save the expanded data
+NUM_CITIES_TO_ADD = 90  
+CSV_PATH = "data\cities.csv"  
+COMBINED_DATA_PATH = "data\combined_data.json" 
+OUTPUT_PATH = "data\combined_data.json"  
 
 # Company names for generating facilities
 COMPANY_NAMES = [
