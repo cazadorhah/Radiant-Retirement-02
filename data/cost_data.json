@@ -974,12 +974,12 @@
         }
       },
       "cost_factors": [
-        "Resort-style services and accommodations",
         "High urban property values",
         "Premium staffing costs",
         "Luxury amenities in many facilities",
-        "Specialized medical staff on premises",
-        "Luxury facilities with premium amenities"
+        "Luxury facilities with premium amenities",
+        "Resort-style services and accommodations",
+        "Specialized medical staff on premises"
       ]
     },
     "los-angeles-ca": {
@@ -1018,12 +1018,12 @@
         }
       },
       "cost_factors": [
-        "Resort-style services and accommodations",
         "High urban property values",
         "Premium staffing costs",
         "Luxury amenities in many facilities",
-        "Specialized medical staff on premises",
-        "Luxury facilities with premium amenities"
+        "Luxury facilities with premium amenities",
+        "Resort-style services and accommodations",
+        "Specialized medical staff on premises"
       ]
     },
     "chicago-il": {
@@ -1062,12 +1062,12 @@
         }
       },
       "cost_factors": [
-        "Resort-style services and accommodations",
         "High urban property values",
         "Premium staffing costs",
         "Luxury amenities in many facilities",
-        "Specialized medical staff on premises",
-        "Luxury facilities with premium amenities"
+        "Luxury facilities with premium amenities",
+        "Resort-style services and accommodations",
+        "Specialized medical staff on premises"
       ]
     },
     "houston-tx": {
@@ -1106,12 +1106,12 @@
         }
       },
       "cost_factors": [
-        "Resort-style services and accommodations",
         "High urban property values",
         "Premium staffing costs",
         "Luxury amenities in many facilities",
-        "Specialized medical staff on premises",
-        "Luxury facilities with premium amenities"
+        "Luxury facilities with premium amenities",
+        "Resort-style services and accommodations",
+        "Specialized medical staff on premises"
       ]
     },
     "philadelphia-pa": {
@@ -1150,12 +1150,12 @@
         }
       },
       "cost_factors": [
-        "Resort-style services and accommodations",
         "High urban property values",
         "Premium staffing costs",
         "Luxury amenities in many facilities",
-        "Specialized medical staff on premises",
-        "Luxury facilities with premium amenities"
+        "Luxury facilities with premium amenities",
+        "Resort-style services and accommodations",
+        "Specialized medical staff on premises"
       ]
     },
     "phoenix-az": {
@@ -1194,15 +1194,15 @@
         }
       },
       "cost_factors": [
-        "More affordable options available",
-        "Resort-style services and accommodations",
         "High urban property values",
+        "Nonprofit facilities in the area",
         "Premium staffing costs",
         "Luxury amenities in many facilities",
-        "Specialized medical staff on premises",
-        "Nonprofit facilities in the area",
         "Luxury facilities with premium amenities",
-        "Various subsidy programs available"
+        "Various subsidy programs available",
+        "Resort-style services and accommodations",
+        "Specialized medical staff on premises",
+        "More affordable options available"
       ]
     },
     "san-antonio-tx": {
@@ -1241,15 +1241,15 @@
         }
       },
       "cost_factors": [
-        "More affordable options available",
-        "Resort-style services and accommodations",
         "High urban property values",
+        "Nonprofit facilities in the area",
         "Premium staffing costs",
         "Luxury amenities in many facilities",
-        "Specialized medical staff on premises",
-        "Nonprofit facilities in the area",
         "Luxury facilities with premium amenities",
-        "Various subsidy programs available"
+        "Various subsidy programs available",
+        "Resort-style services and accommodations",
+        "Specialized medical staff on premises",
+        "More affordable options available"
       ]
     },
     "san-diego-ca": {
@@ -1288,15 +1288,15 @@
         }
       },
       "cost_factors": [
-        "More affordable options available",
-        "Resort-style services and accommodations",
         "High urban property values",
+        "Nonprofit facilities in the area",
         "Premium staffing costs",
         "Luxury amenities in many facilities",
-        "Specialized medical staff on premises",
-        "Nonprofit facilities in the area",
         "Luxury facilities with premium amenities",
-        "Various subsidy programs available"
+        "Various subsidy programs available",
+        "Resort-style services and accommodations",
+        "Specialized medical staff on premises",
+        "More affordable options available"
       ]
     },
     "dallas-tx": {
@@ -1335,15 +1335,15 @@
         }
       },
       "cost_factors": [
-        "More affordable options available",
-        "Resort-style services and accommodations",
         "High urban property values",
+        "Nonprofit facilities in the area",
         "Premium staffing costs",
         "Luxury amenities in many facilities",
-        "Specialized medical staff on premises",
-        "Nonprofit facilities in the area",
         "Luxury facilities with premium amenities",
-        "Various subsidy programs available"
+        "Various subsidy programs available",
+        "Resort-style services and accommodations",
+        "Specialized medical staff on premises",
+        "More affordable options available"
       ]
     },
     "san-jose-ca": {
@@ -1382,14 +1382,14 @@
         }
       },
       "cost_factors": [
+        "Large selection of facilities",
         "Varied neighborhood pricing",
-        "Moderate urban cost of living",
-        "Large selection of facilities"
+        "Moderate urban cost of living"
       ]
     }
   },
   "meta": {
-    "last_updated": "2025-04-29",
+    "last_updated": "2025-05-03",
     "sources": [
       "Genworth Cost of Care Survey",
       "Senior Living Association Database",
