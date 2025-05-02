@@ -97,7 +97,7 @@ CARE_TYPES = [
 ]
 
 
-def fetch_facilities_for_city(city_data, gmaps_client, max_results=10):
+def fetch_facilities_for_city(city_data, gmaps_client, max_results=1000):
     """
     Fetch senior living facilities for a given city using Google Maps API.
     
