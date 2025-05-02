@@ -113,6 +113,12 @@ ul, ol {
     align-items: center;
 }
 
+.logo {
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
 /*.logo {
     font-family:'Brush Script MT', cursive;
     font-size: 44px;
