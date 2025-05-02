@@ -113,12 +113,12 @@ ul, ol {
     align-items: center;
 }
 
-/*.logo {
+.logo {
     font-family:'Brush Script MT', cursive;
     font-size: 44px;
     font-weight: lighter;
     color: #ffffff;
-    text-decoration: none;*/
+    text-decoration: none;
 }
 
 .main-nav ul {
