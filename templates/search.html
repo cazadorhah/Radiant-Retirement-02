@@ -4,6 +4,11 @@
 
 {% block description %}Search for senior living options by city, state, or facility across the United States.{% endblock %}
 
+{% block head_extra %}
+<!-- Add autocomplete CSS -->
+<link rel="stylesheet" href="/css/autocomplete.css">
+{% endblock %}
+
 {% block content %}
 <section class="search-hero">
     <div class="container">
@@ -17,6 +22,7 @@
                     <span class="sr-only">Search</span>
                 </button>
             </form>
+            <!-- Autocomplete container will be added here by JavaScript -->
         </div>
         
         <div class="search-filters">
@@ -63,7 +69,8 @@
 <section class="search-results">
     <div class="container">
         <div class="results-meta">
-            <h2>{{ results|length }} Results {% if query %}for "{{ query }}"{% endif %}</h2>
+            <h2 id="results-count">{% if results %}{{ results|length }} Results {% if query %}for "{{ query }}"{% endif %}{% else %}Results{% endif %}</h2>
+            
             {% if care_type or state or cost_range %}
             <div class="active-filters">
                 <span>Active Filters:</span>
@@ -115,7 +122,10 @@
             </div>
             
             <div class="tab-content" id="all">
-                {% if results|length == 0 %}
+                {% if use_netlify_function %}
+                <!-- Initial loading state for Netlify function-based search -->
+                <div class="loading">Loading results...</div>
+                {% elif results|length == 0 %}
                 <div class="no-results">
                     <p>No results found for your search criteria.</p>
                     <p>Try adjusting your filters or search term.</p>
@@ -189,6 +199,7 @@
             </div>
             
             <div class="tab-content hidden" id="cities">
+                {% if not use_netlify_function %}
                 {% set city_results = results|selectattr('type', 'equalto', 'city')|list %}
                 {% if city_results|length == 0 %}
                 <div class="no-results">
@@ -220,9 +231,11 @@
                     </div>
                     {% endfor %}
                 {% endif %}
+                {% endif %}
             </div>
             
             <div class="tab-content hidden" id="facilities">
+                {% if not use_netlify_function %}
                 {% set facility_results = results|selectattr('type', 'equalto', 'facility')|list %}
                 {% if facility_results|length == 0 %}
                 <div class="no-results">
@@ -267,10 +280,13 @@
                     </div>
                     {% endfor %}
                 {% endif %}
+                {% endif %}
             </div>
+            
+            <!-- Client-side pagination will be added here by JavaScript -->
         </div>
         
-        {% if page_count > 1 %}
+        {% if not use_netlify_function and page_count > 1 %}
         <div class="pagination">
             {% if current_page > 1 %}
             <a href="{{ pagination_url(current_page - 1) }}" class="page-link prev">Previous</a>
@@ -297,4 +313,11 @@
 
 {% block extra_scripts %}
 <script src="/js/search.js"></script>
+<script>
+    // Configuration for search.js
+    document.addEventListener('DOMContentLoaded', function() {
+        // Set a flag to indicate whether to use server-side or client-side search
+        window.useNetlifyFunction = {% if use_netlify_function %}true{% else %}false{% endif %};
+    });
+</script>
 {% endblock %}
