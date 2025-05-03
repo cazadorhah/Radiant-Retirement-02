@@ -85,8 +85,40 @@ def generate_search_page(combined_data_path, template_dir, output_dir):
     
     logger.info(f"Search page generated at {output_path}")
     
-    # Also generate a search data JSON file for client-side searching
+    # Generate search data files
     generate_search_data(data['cities'], output_dir)
+    generate_city_index(data['cities'], output_dir)
+
+def generate_city_index(cities_data, output_dir):
+    """
+    Generate a simplified JSON file for autocomplete in the /data directory.
+    
+    Args:
+        cities_data: Dictionary of city data
+        output_dir: Directory where the JSON file will be saved
+    """
+    city_index = []
+    
+    # Extract city data for autocomplete
+    for city_slug, city_data in cities_data.items():
+        city_index.append({
+            'slug': city_slug,
+            'name': city_data['city_info']['name'],
+            'state': city_data['city_info']['state'],
+            'url': f"/city/{city_slug}/"
+        })
+    
+    # Create data directory
+    data_dir = os.path.join(output_dir, 'data')
+    os.makedirs(data_dir, exist_ok=True)
+    
+    # Save to JSON file
+    output_path = os.path.join(data_dir, 'city-index.json')
+    
+    with open(output_path, 'w') as f:
+        json.dump(city_index, f)
+    
+    logger.info(f"City index for autocomplete generated at {output_path} with {len(city_index)} cities")
 
 def generate_search_data(cities_data, output_dir):
     """
