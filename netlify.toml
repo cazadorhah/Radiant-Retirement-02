@@ -1,6 +1,7 @@
 [build]
   command = "python scripts/build.py"
   publish = "public"
+  functions = "netlify/functions"  # Add this line for functions
 
 [build.environment]
   PYTHON_VERSION = "3.9"
@@ -13,6 +14,12 @@
 [[redirects]]
   from = "/city/*"
   to = "/city/:splat/index.html"
+  status = 200
+
+# Add this redirect for the search API function
+[[redirects]]
+  from = "/api/search"
+  to = "/.netlify/functions/search"
   status = 200
 
 [[redirects]]
