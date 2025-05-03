@@ -420,7 +420,7 @@ def create_placeholder_html():
 
 def generate_sitemap():
     """Generate a sitemap.xml file for the website."""
-    base_url = "https://seniorlivingdirectory.com"  # Replace with your actual domain
+    base_url = "https://radiantretirement.netlify.app/"  # Replace with your actual domain
     
     # Start the sitemap XML content
     sitemap_content = """<?xml version="1.0" encoding="UTF-8"?>
@@ -464,7 +464,7 @@ def generate_sitemap():
 
 def generate_robots_txt():
     """Generate a robots.txt file for the website."""
-    base_url = "https://seniorlivingdirectory.com"  # Replace with your actual domain
+    base_url = "https://radiantretirement.netlify.app/"  # Replace with your actual domain
     
     robots_content = f"""User-agent: *
 Allow: /
@@ -478,9 +478,6 @@ Sitemap: {base_url}/sitemap.xml
     
     logger.info("Generated robots.txt")
 
-# Add this function to your build.py script, somewhere before the main() function
-
-# Add this function to your build.py script, somewhere before the main() function
 
 def setup_netlify_functions():
     """Set up the Netlify functions directory and copy necessary function files."""
@@ -491,17 +488,9 @@ def setup_netlify_functions():
     functions_dir = os.path.join(netlify_dir, 'functions')
     os.makedirs(functions_dir, exist_ok=True)
     
-    # Check if search function exists in scripts directory
-    search_function_src = os.path.join(SCRIPTS_DIR, 'netlify_functions', 'search.js')
+    # Create a basic search function
     search_function_dest = os.path.join(functions_dir, 'search.js')
-    
-    if os.path.exists(search_function_src):
-        # Copy the function file
-        shutil.copy2(search_function_src, search_function_dest)
-        logger.info(f"Copied search function from {search_function_src} to {search_function_dest}")
-    else:
-        # Create a basic search function if it doesn't exist
-        basic_search_function = """// netlify/functions/search.js
+    basic_search_function = """// netlify/functions/search.js
 const fs = require('fs');
 const path = require('path');
 
@@ -512,22 +501,30 @@ exports.handler = async function(event, context) {
     const query = (params.q || '').toLowerCase();
     const page = parseInt(params.page) || 1;
     const limit = parseInt(params.limit) || 50;
+    const stateFilter = params.state || '';
+    const careTypeFilter = params.type || '';
+    const costFilter = params.cost || '';
+    
+    console.log(`Processing search: query="${query}", page=${page}, limit=${limit}, state=${stateFilter}`);
     
     // In Netlify Functions, we need to use a different path to access our data
-    let searchData;
+    let cityData = [];
+    let facilityData = [];
     
     try {
       // First try to access from the published directory (for production)
       const dataPath = path.join(__dirname, '../../public/js/search-data.json');
       if (fs.existsSync(dataPath)) {
-        searchData = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
+        const searchData = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
+        cityData = searchData.cities || [];
+        facilityData = searchData.facilities || [];
+        console.log(`Loaded ${cityData.length} cities and ${facilityData.length} facilities from ${dataPath}`);
       } else {
         // If that fails, try the city-index.json
         const cityIndexPath = path.join(__dirname, '../../public/data/city-index.json');
         if (fs.existsSync(cityIndexPath)) {
-          // Convert the city index format to the format we need
-          const cityData = JSON.parse(fs.readFileSync(cityIndexPath, 'utf8'));
-          searchData = { cities: cityData, facilities: [] };
+          cityData = JSON.parse(fs.readFileSync(cityIndexPath, 'utf8'));
+          console.log(`Loaded ${cityData.length} cities from ${cityIndexPath}`);
         } else {
           throw new Error('Search data files not found');
         }
@@ -536,72 +533,98 @@ exports.handler = async function(event, context) {
       console.error('Error loading search data:', fileError);
       return {
         statusCode: 500,
-        body: JSON.stringify({ error: 'Failed to load search data', message: fileError.message })
+        body: JSON.stringify({ 
+          error: 'Failed to load search data',
+          message: fileError.message
+        })
       };
     }
     
-    // Filter results based on query
+    // Define our results array
     let results = [];
-    const cities = searchData.cities || [];
-    const facilities = searchData.facilities || [];
     
-    // Filter cities
+    // Filter city results
+    let filteredCities = cityData;
+    
+    // Apply text search if query exists
     if (query) {
-      cities.forEach(city => {
+      filteredCities = filteredCities.filter(city => {
         const cityName = (city.name || '').toLowerCase();
         const stateName = (city.state || '').toLowerCase();
-        if (cityName.includes(query) || stateName.includes(query)) {
-          results.push({
-            type: 'city',
-            slug: city.slug,
-            name: city.name,
-            state: city.state,
-            url: city.url || `/city/${city.slug}/`,
-            population: city.population || 0,
-            assisted_living_cost: city.assisted_living_cost || 0,
-            memory_care_cost: city.memory_care_cost || 0,
-            facility_count: city.facility_count || 0
-          });
-        }
+        return cityName.includes(query) || stateName.includes(query);
       });
+    }
+    
+    // Apply state filter if it exists
+    if (stateFilter) {
+      filteredCities = filteredCities.filter(city => {
+        const stateAbbr = (city.state_abbr || '').toLowerCase();
+        const stateName = (city.state || '').toLowerCase();
+        return stateAbbr === stateFilter.toLowerCase() || stateName === stateFilter.toLowerCase();
+      });
+    }
+    
+    // Add filtered cities to results
+    results = filteredCities.map(city => ({
+      type: 'city',
+      slug: city.slug,
+      name: city.name,
+      state: city.state,
+      url: city.url || `/city/${city.slug}/`,
+      population: city.population || 0,
+      assisted_living_cost: city.assisted_living_cost || 0,
+      memory_care_cost: city.memory_care_cost || 0,
+      facility_count: city.facility_count || 0
+    }));
+    
+    // Filter facility results and add to results if we have facility data
+    if (facilityData.length > 0) {
+      let filteredFacilities = facilityData;
       
-      // Filter facilities
-      facilities.forEach(facility => {
-        const facilityName = (facility.name || '').toLowerCase();
-        const cityName = (facility.city || '').toLowerCase();
-        const stateName = (facility.state || '').toLowerCase();
-        if (facilityName.includes(query) || cityName.includes(query) || stateName.includes(query)) {
-          results.push({
-            type: 'facility',
-            id: facility.id,
-            name: facility.name,
-            city: facility.city,
-            state: facility.state,
-            city_slug: facility.city_slug,
-            address: facility.address,
-            rating: facility.rating || 0,
-            care_types: facility.care_types || [],
-            url: `/city/${facility.city_slug}/#facility-${facility.id}`
-          });
-        }
-      });
-    } else {
-      // If no query, include all cities but limit
-      results = cities.slice(0, limit).map(city => ({
-        type: 'city',
-        slug: city.slug,
-        name: city.name,
-        state: city.state,
-        url: city.url || `/city/${city.slug}/`,
-        population: city.population || 0,
-        assisted_living_cost: city.assisted_living_cost || 0,
-        memory_care_cost: city.memory_care_cost || 0,
-        facility_count: city.facility_count || 0
-      }));
+      // Apply text search if query exists
+      if (query) {
+        filteredFacilities = filteredFacilities.filter(facility => {
+          const facilityName = (facility.name || '').toLowerCase();
+          const cityName = (facility.city || '').toLowerCase();
+          const stateName = (facility.state || '').toLowerCase();
+          return facilityName.includes(query) || cityName.includes(query) || stateName.includes(query);
+        });
+      }
+      
+      // Apply state filter if it exists
+      if (stateFilter) {
+        filteredFacilities = filteredFacilities.filter(facility => {
+          const state = (facility.state || '').toLowerCase();
+          return state === stateFilter.toLowerCase();
+        });
+      }
+      
+      // Apply care type filter if it exists
+      if (careTypeFilter) {
+        filteredFacilities = filteredFacilities.filter(facility => {
+          const careTypes = facility.care_types || [];
+          return careTypes.some(type => type.toLowerCase().includes(careTypeFilter.toLowerCase()));
+        });
+      }
+      
+      // Add filtered facilities to results
+      results = results.concat(filteredFacilities.map(facility => ({
+        type: 'facility',
+        id: facility.id,
+        name: facility.name,
+        city: facility.city,
+        state: facility.state,
+        city_slug: facility.city_slug,
+        address: facility.address,
+        rating: facility.rating || 0,
+        care_types: facility.care_types || [],
+        url: `/city/${facility.city_slug}/#facility-${facility.id}`
+      })));
     }
     
     // Get total count before pagination
     const total = results.length;
+    console.log(`Found ${total} matching results`);
     
     // Apply pagination
     const startIndex = (page - 1) * limit;
@@ -629,15 +652,16 @@ exports.handler = async function(event, context) {
       statusCode: 500,
       body: JSON.stringify({ 
         error: 'Search function error', 
-        message: error.message
+        message: error.message,
+        stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
       })
     };
   }
 };
 """
-        with open(search_function_dest, 'w') as f:
-            f.write(basic_search_function)
-        logger.info(f"Created basic search function at {search_function_dest}")
+    with open(search_function_dest, 'w') as f:
+        f.write(basic_search_function)
+    logger.info(f"Created search function at {search_function_dest}")
     
     # Create or update netlify.toml file
     netlify_toml_path = os.path.join(PROJECT_ROOT, 'netlify.toml')
@@ -658,56 +682,6 @@ exports.handler = async function(event, context) {
     
     return True
 
-# Then, modify the main() function to call this new function:
-def main():
-    """Main function to run the build process."""
-    parser = argparse.ArgumentParser(description="Build the senior living directory website")
-    parser.add_argument("--skip-data", action="store_true", help="Skip data processing")
-    parser.add_argument("--skip-pages", action="store_true", help="Skip page generation")
-    args = parser.parse_args()
-    
-    # Record the overall start time
-    start_time = time.time()
-    logger.info("Starting build process...")
-    
-    # Ensure directories exist
-    ensure_directories()
-    
-    # Check for required data files
-    if not check_data_files():
-        logger.error("Missing required data files. Exiting.")
-        return 1
-    
-    # Run data processing
-    if not args.skip_data:
-        if not run_data_processing():
-            logger.error("Data processing failed. Exiting.")
-            return 1
-    else:
-        logger.info("Skipping data processing as requested")
-    
-    # Run page generation
-    if not args.skip_pages:
-        if not run_page_generation():
-            logger.error("Page generation failed. Exiting.")
-            return 1
-    else:
-        logger.info("Skipping page generation as requested")
-    
-    # Copy static assets
-    copy_static_assets()
-    
-    # Setup Netlify functions
-    setup_netlify_functions()
-    
-    # Generate sitemap and robots.txt
-    generate_sitemap()
-    generate_robots_txt()
-    
-    # Calculate and log total time
-    elapsed_time = time.time() - start_time
-    logger.info(f"Build completed successfully in {elapsed_time:.2f} seconds")
-    return 0
 
 def main():
     """Main function to run the build process."""
@@ -749,52 +723,6 @@ def main():
     
     # Setup Netlify functions
     setup_netlify_functions()
-    
-    # Generate sitemap and robots.txt
-    generate_sitemap()
-    generate_robots_txt()
-    
-    # Calculate and log total time
-    elapsed_time = time.time() - start_time
-    logger.info(f"Build completed successfully in {elapsed_time:.2f} seconds")
-    return 0
-def main():
-    """Main function to run the build process."""
-    parser = argparse.ArgumentParser(description="Build the senior living directory website")
-    parser.add_argument("--skip-data", action="store_true", help="Skip data processing")
-    parser.add_argument("--skip-pages", action="store_true", help="Skip page generation")
-    args = parser.parse_args()
-    
-    # Record the overall start time
-    start_time = time.time()
-    logger.info("Starting build process...")
-    
-    # Ensure directories exist
-    ensure_directories()
-    
-    # Check for required data files
-    if not check_data_files():
-        logger.error("Missing required data files. Exiting.")
-        return 1
-    
-    # Run data processing
-    if not args.skip_data:
-        if not run_data_processing():
-            logger.error("Data processing failed. Exiting.")
-            return 1
-    else:
-        logger.info("Skipping data processing as requested")
-    
-    # Run page generation
-    if not args.skip_pages:
-        if not run_page_generation():
-            logger.error("Page generation failed. Exiting.")
-            return 1
-    else:
-        logger.info("Skipping page generation as requested")
-    
-    # Copy static assets
-    copy_static_assets()
     
     # Generate sitemap and robots.txt
     generate_sitemap()
