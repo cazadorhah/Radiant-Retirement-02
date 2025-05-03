@@ -14,22 +14,45 @@ document.addEventListener('DOMContentLoaded', function() {
     let totalResults = 0;
     let allCityData = []; // Will store all city data for autocomplete
     
+    // Debug logging
+    console.log('Search script initialized');
+    
     // Load city data for autocomplete
     function loadCityData() {
+        console.log('Attempting to load city data from /data/city-index.json');
+        
         fetch('/data/city-index.json')
             .then(response => {
+                console.log('City data response status:', response.status);
                 if (!response.ok) {
                     throw new Error(`Failed to load city data: ${response.status} ${response.statusText}`);
                 }
                 return response.json();
             })
             .then(data => {
+                console.log(`Successfully loaded ${data.length} cities for autocomplete`);
                 allCityData = data;
-                console.log(`Loaded ${data.length} cities for autocomplete`);
                 initializeAutocomplete();
             })
             .catch(error => {
                 console.error('Error loading city data:', error);
+                // Try alternate location if primary fails
+                console.log('Trying alternate location for city data...');
+                fetch('/js/search-data.json')
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`Failed to load backup city data: ${response.status} ${response.statusText}`);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log(`Successfully loaded ${data.length} cities from backup location`);
+                        allCityData = data;
+                        initializeAutocomplete();
+                    })
+                    .catch(backupError => {
+                        console.error('Error loading backup city data:', backupError);
+                    });
             });
     }
     
@@ -136,6 +159,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Perform search with filters and pagination using Netlify function
     function performSearch() {
         const query = searchInput ? searchInput.value.trim() : '';
+        console.log('Performing search with query:', query);
         
         // Create URLSearchParams object for the query
         const filterParams = new URLSearchParams();
@@ -169,22 +193,89 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         // Fetch search results from the Netlify function
+        console.log('Fetching results from /.netlify/functions/search');
         fetch(`/.netlify/functions/search?${filterParams.toString()}`)
             .then(response => {
+                console.log('Search response status:', response.status);
                 if (!response.ok) {
-                    throw new Error(`Search request failed: ${response.status} ${response.statusText}`);
+                    return response.text().then(text => {
+                        console.error('Server error response:', text);
+                        throw new Error(`Search request failed: ${response.status} ${response.statusText}`);
+                    });
                 }
                 return response.json();
             })
             .then(data => {
+                console.log(`Got ${data.total} search results`);
                 renderSearchResults(data);
             })
             .catch(error => {
-                console.error('Error performing search:', error);
-                if (resultsContainer) {
-                    resultsContainer.innerHTML = '<div class="error">An error occurred while searching. Please try again.</div>';
+                console.error('Detailed search error:', error);
+                // Fallback to client-side search if Netlify function fails
+                console.log('Falling back to client-side search...');
+                
+                if (allCityData.length > 0) {
+                    performClientSideSearch(query);
+                } else {
+                    // Try to load city data for client-side search
+                    fetch('/data/city-index.json')
+                        .then(response => response.json())
+                        .then(data => {
+                            allCityData = data;
+                            performClientSideSearch(query);
+                        })
+                        .catch(err => {
+                            console.error('Failed to load city data for fallback search:', err);
+                            if (resultsContainer) {
+                                resultsContainer.innerHTML = `
+                                    <div class="error">
+                                        <p>An error occurred while searching. Please try again later.</p>
+                                        <p>Error details: ${error.message}</p>
+                                    </div>
+                                `;
+                            }
+                        });
                 }
             });
+    }
+    
+    // Fallback client-side search function
+    function performClientSideSearch(query) {
+        query = query.toLowerCase();
+        
+        // Filter cities based on query
+        let results = [];
+        
+        if (query) {
+            results = allCityData.filter(city => {
+                const cityName = (city.name || '').toLowerCase();
+                const stateName = (city.state || '').toLowerCase();
+                return cityName.includes(query) || stateName.includes(query);
+            });
+        } else {
+            results = allCityData.slice(0, RESULTS_PER_PAGE);
+        }
+        
+        // Apply pagination
+        const total = results.length;
+        const startIndex = (currentPage - 1) * RESULTS_PER_PAGE;
+        const endIndex = startIndex + RESULTS_PER_PAGE;
+        const paginatedResults = results.slice(startIndex, endIndex);
+        
+        // Format for rendering
+        const formattedResults = paginatedResults.map(city => ({
+            ...city,
+            type: 'city',
+            population: city.population || 0,
+            assisted_living_cost: city.assisted_living_cost || 0,
+            memory_care_cost: city.memory_care_cost || 0,
+            facility_count: city.facility_count || 0
+        }));
+        
+        renderSearchResults({
+            total: total,
+            results: formattedResults
+        });
     }
     
     // Render search results with pagination
