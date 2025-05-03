@@ -80,7 +80,7 @@ def generate_search_page(combined_data_path, template_dir, output_dir):
     output_path = os.path.join(output_dir, 'search.html')
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
     
-    with open(output_path, 'w') as f:
+    with open(output_path, 'w', encoding='utf-8') as f:
         f.write(output)
     
     logger.info(f"Search page generated at {output_path}")
