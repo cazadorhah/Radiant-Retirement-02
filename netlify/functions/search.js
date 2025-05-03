@@ -10,43 +10,53 @@ exports.handler = async function(event, context) {
     const page = parseInt(params.page) || 1;
     const limit = parseInt(params.limit) || 50;
     const stateFilter = params.state || '';
+    const careTypeFilter = params.type || '';
+    const costFilter = params.cost || '';
     
     console.log(`Processing search: query="${query}", page=${page}, limit=${limit}, state=${stateFilter}`);
     
-    // Determine the path to the city index data
-    // Note: In Netlify Functions, the published site is in a different location
-    const dataPath = path.join(__dirname, '../../public/data/city-index.json');
+    // In Netlify Functions, we need to use a different path to access our data
+    let cityData = [];
+    let facilityData = [];
     
-    // Check if the file exists
-    if (!fs.existsSync(dataPath)) {
-      console.error(`City index file not found at: ${dataPath}`);
-      // Try alternate path for Netlify production environment
-      const altPath = path.join(__dirname, '../city-index.json');
-      
-      if (fs.existsSync(altPath)) {
-        console.log(`Found city index at alternate path: ${altPath}`);
-        dataPath = altPath;
+    try {
+      // First try to access from the published directory (for production)
+      const dataPath = path.join(__dirname, '../../public/js/search-data.json');
+      if (fs.existsSync(dataPath)) {
+        const searchData = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
+        cityData = searchData.cities || [];
+        facilityData = searchData.facilities || [];
+        console.log(`Loaded ${cityData.length} cities and ${facilityData.length} facilities from ${dataPath}`);
       } else {
-        return {
-          statusCode: 500,
-          body: JSON.stringify({ 
-            error: 'Search data not found',
-            message: 'Could not locate the city index file' 
-          })
-        };
+        // If that fails, try the city-index.json
+        const cityIndexPath = path.join(__dirname, '../../public/data/city-index.json');
+        if (fs.existsSync(cityIndexPath)) {
+          cityData = JSON.parse(fs.readFileSync(cityIndexPath, 'utf8'));
+          console.log(`Loaded ${cityData.length} cities from ${cityIndexPath}`);
+        } else {
+          throw new Error('Search data files not found');
+        }
       }
+    } catch (fileError) {
+      console.error('Error loading search data:', fileError);
+      return {
+        statusCode: 500,
+        body: JSON.stringify({ 
+          error: 'Failed to load search data',
+          message: fileError.message
+        })
+      };
     }
     
-    // Read and parse the city data
-    const cityData = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
-    console.log(`Loaded ${cityData.length} cities for search`);
+    // Define our results array
+    let results = [];
     
-    // Filter results based on search query
-    let results = cityData;
+    // Filter city results
+    let filteredCities = cityData;
     
     // Apply text search if query exists
     if (query) {
-      results = results.filter(city => {
+      filteredCities = filteredCities.filter(city => {
         const cityName = (city.name || '').toLowerCase();
         const stateName = (city.state || '').toLowerCase();
         return cityName.includes(query) || stateName.includes(query);
@@ -55,10 +65,68 @@ exports.handler = async function(event, context) {
     
     // Apply state filter if it exists
     if (stateFilter) {
-      results = results.filter(city => {
-        const stateName = (city.state || '').toLowerCase();
-        return stateName === stateFilter.toLowerCase();
+      filteredCities = filteredCities.filter(city => {
+        const stateAbbr = (city.state_abbr || '').toLowerCase();
+        return stateAbbr === stateFilter.toLowerCase();
       });
+    }
+    
+    // Add filtered cities to results
+    results = filteredCities.map(city => ({
+      type: 'city',
+      slug: city.slug,
+      name: city.name,
+      state: city.state,
+      url: city.url || `/city/${city.slug}/`,
+      population: city.population || 0,
+      assisted_living_cost: city.assisted_living_cost || 0,
+      memory_care_cost: city.memory_care_cost || 0,
+      facility_count: city.facility_count || 0
+    }));
+    
+    // Filter facility results and add to results if we have facility data
+    if (facilityData.length > 0) {
+      let filteredFacilities = facilityData;
+      
+      // Apply text search if query exists
+      if (query) {
+        filteredFacilities = filteredFacilities.filter(facility => {
+          const facilityName = (facility.name || '').toLowerCase();
+          const cityName = (facility.city || '').toLowerCase();
+          const stateName = (facility.state || '').toLowerCase();
+          return facilityName.includes(query) || cityName.includes(query) || stateName.includes(query);
+        });
+      }
+      
+      // Apply state filter if it exists
+      if (stateFilter) {
+        filteredFacilities = filteredFacilities.filter(facility => {
+          const state = (facility.state || '').toLowerCase();
+          return state === stateFilter.toLowerCase();
+        });
+      }
+      
+      // Apply care type filter if it exists
+      if (careTypeFilter) {
+        filteredFacilities = filteredFacilities.filter(facility => {
+          const careTypes = facility.care_types || [];
+          return careTypes.some(type => type.toLowerCase().includes(careTypeFilter.toLowerCase()));
+        });
+      }
+      
+      // Add filtered facilities to results
+      results = results.concat(filteredFacilities.map(facility => ({
+        type: 'facility',
+        id: facility.id,
+        name: facility.name,
+        city: facility.city,
+        state: facility.state,
+        city_slug: facility.city_slug,
+        address: facility.address,
+        rating: facility.rating || 0,
+        care_types: facility.care_types || [],
+        url: `/city/${facility.city_slug}/#facility-${facility.id}`
+      })));
     }
     
     // Get total count before pagination
@@ -70,32 +138,6 @@ exports.handler = async function(event, context) {
     const endIndex = startIndex + limit;
     const paginatedResults = results.slice(startIndex, endIndex);
     
-    // Format results for the frontend
-    const formattedResults = paginatedResults.map(city => {
-      // Extract cost data if available
-      let assistedLivingCost = 0;
-      let memoryCareCost = 0;
-      let facilityCount = 0;
-      
-      // Note: This assumes a simple data structure - adjust if your data has more details
-      if (city.costs) {
-        assistedLivingCost = city.costs.assisted_living || 0;
-        memoryCareCost = city.costs.memory_care || 0;
-      }
-      
-      return {
-        type: 'city',
-        slug: city.slug,
-        name: city.name,
-        state: city.state,
-        url: city.url,
-        population: city.population || 0,
-        assisted_living_cost: assistedLivingCost,
-        memory_care_cost: memoryCareCost,
-        facility_count: facilityCount
-      };
-    });
-    
     // Return the results
     return {
       statusCode: 200,
@@ -106,7 +148,7 @@ exports.handler = async function(event, context) {
         total: total,
         page: page,
         limit: limit,
-        results: formattedResults
+        results: paginatedResults
       })
     };
     
