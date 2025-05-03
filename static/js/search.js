@@ -18,9 +18,10 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('Search script initialized');
     
     // Load city data for autocomplete
+    // Updated loadCityData function to add more robust error handling
     function loadCityData() {
         console.log('Attempting to load city data from /data/city-index.json');
-        
+    
         fetch('/data/city-index.json')
             .then(response => {
                 console.log('City data response status:', response.status);
@@ -46,8 +47,13 @@ document.addEventListener('DOMContentLoaded', function() {
                         return response.json();
                     })
                     .then(data => {
-                        console.log(`Successfully loaded ${data.length} cities from backup location`);
-                        allCityData = data;
+                        console.log(`Successfully loaded ${data.length || Object.keys(data).length} entries from backup location`);
+                        // Handle different data structures
+                        if (data.cities) {
+                            allCityData = data.cities;
+                        } else {
+                            allCityData = data;
+                        }
                         initializeAutocomplete();
                     })
                     .catch(backupError => {
