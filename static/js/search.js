@@ -1,97 +1,457 @@
-/**
- * Search page specific JavaScript
- */
+// search.js - Enhanced with autocomplete and pagination for Netlify-based site
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Init tab functionality
-    initTabSwitching();
+    // DOM Elements
+    const searchInput = document.getElementById('search-input');
+    const searchForm = document.getElementById('search-form');
+    const filterForm = document.getElementById('filter-form');
+    const resultsContainer = document.querySelector('.results-container');
+    const resultsMeta = document.querySelector('.results-meta h2');
     
-    // Init filter form handling
-    initFilterForm();
-});
-
-/**
- * Initialize the tab switching functionality
- */
-function initTabSwitching() {
+    // Configuration
+    const RESULTS_PER_PAGE = 50; // Increased from 15 to 50
+    let currentPage = 1;
+    let totalResults = 0;
+    let allCityData = []; // Will store all city data for autocomplete
+    
+    // Load city data for autocomplete
+    function loadCityData() {
+        fetch('/data/city-index.json')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Failed to load city data: ${response.status} ${response.statusText}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                allCityData = data;
+                console.log(`Loaded ${data.length} cities for autocomplete`);
+                initializeAutocomplete();
+            })
+            .catch(error => {
+                console.error('Error loading city data:', error);
+            });
+    }
+    
+    // Initialize autocomplete functionality
+    function initializeAutocomplete() {
+        // Create autocomplete container if it doesn't exist
+        let autocompleteContainer = document.querySelector('.autocomplete-container');
+        
+        if (!autocompleteContainer) {
+            autocompleteContainer = document.createElement('div');
+            autocompleteContainer.className = 'autocomplete-container';
+            searchInput.parentNode.appendChild(autocompleteContainer);
+        }
+        
+        autocompleteContainer.style.display = 'none';
+        
+        // Add event listeners for input changes
+        searchInput.addEventListener('input', function() {
+            const query = this.value.toLowerCase().trim();
+            
+            if (query.length < 2) {
+                autocompleteContainer.style.display = 'none';
+                return;
+            }
+            
+            // Filter cities based on input
+            const matches = allCityData.filter(city => {
+                const cityName = city.name ? city.name.toLowerCase() : '';
+                const stateName = city.state ? city.state.toLowerCase() : '';
+                return cityName.includes(query) || stateName.includes(query);
+            }).slice(0, 10); // Limit to 10 suggestions
+            
+            if (matches.length > 0) {
+                renderAutocomplete(matches, autocompleteContainer);
+                autocompleteContainer.style.display = 'block';
+            } else {
+                autocompleteContainer.style.display = 'none';
+            }
+        });
+        
+        // Hide autocomplete when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!autocompleteContainer.contains(event.target) && event.target !== searchInput) {
+                autocompleteContainer.style.display = 'none';
+            }
+        });
+        
+        // Show autocomplete when focusing on input
+        searchInput.addEventListener('focus', function() {
+            const query = this.value.toLowerCase().trim();
+            if (query.length >= 2) {
+                const matches = allCityData.filter(city => {
+                    const cityName = city.name ? city.name.toLowerCase() : '';
+                    const stateName = city.state ? city.state.toLowerCase() : '';
+                    return cityName.includes(query) || stateName.includes(query);
+                }).slice(0, 10);
+                
+                if (matches.length > 0) {
+                    renderAutocomplete(matches, autocompleteContainer);
+                    autocompleteContainer.style.display = 'block';
+                }
+            }
+        });
+    }
+    
+    // Render autocomplete suggestions
+    function renderAutocomplete(matches, container) {
+        container.innerHTML = '';
+        
+        matches.forEach(city => {
+            const suggestion = document.createElement('div');
+            suggestion.className = 'autocomplete-suggestion';
+            suggestion.textContent = `${city.name}, ${city.state}`;
+            
+            suggestion.addEventListener('click', function() {
+                searchInput.value = `${city.name}, ${city.state}`;
+                container.style.display = 'none';
+                // Optional: Auto-submit the form
+                // searchForm.submit();
+            });
+            
+            container.appendChild(suggestion);
+        });
+    }
+    
+    // Handle search form submission
+    if (searchForm) {
+        searchForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            currentPage = 1; // Reset to first page on new search
+            performSearch();
+        });
+    }
+    
+    // Handle filter form submission
+    if (filterForm) {
+        filterForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            currentPage = 1; // Reset to first page on new filter
+            performSearch();
+        });
+    }
+    
+    // Perform search with filters and pagination using Netlify function
+    function performSearch() {
+        const query = searchInput ? searchInput.value.trim() : '';
+        
+        // Create URLSearchParams object for the query
+        const filterParams = new URLSearchParams();
+        
+        // Add query parameter
+        filterParams.append('q', query);
+        filterParams.append('page', currentPage.toString());
+        filterParams.append('limit', RESULTS_PER_PAGE.toString());
+        
+        // Add form parameters if filterForm exists
+        if (filterForm) {
+            const formData = new FormData(filterForm);
+            for (const [key, value] of formData.entries()) {
+                if (value) filterParams.append(key, value);
+            }
+        }
+        
+        // Update URL with search parameters
+        const searchParams = new URLSearchParams(window.location.search);
+        for (const [key, value] of filterParams.entries()) {
+            if (value) searchParams.set(key, value);
+            else searchParams.delete(key);
+        }
+        
+        const newUrl = `${window.location.pathname}?${searchParams.toString()}`;
+        history.pushState({}, '', newUrl);
+        
+        // Show loading state
+        if (resultsContainer) {
+            resultsContainer.innerHTML = '<div class="loading">Loading results...</div>';
+        }
+        
+        // Fetch search results from the Netlify function
+        fetch(`/.netlify/functions/search?${filterParams.toString()}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Search request failed: ${response.status} ${response.statusText}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                renderSearchResults(data);
+            })
+            .catch(error => {
+                console.error('Error performing search:', error);
+                if (resultsContainer) {
+                    resultsContainer.innerHTML = '<div class="error">An error occurred while searching. Please try again.</div>';
+                }
+            });
+    }
+    
+    // Render search results with pagination
+    function renderSearchResults(data) {
+        if (!resultsContainer) return;
+        
+        totalResults = data.total || 0;
+        const results = data.results || [];
+        
+        // Update results meta
+        if (resultsMeta) {
+            resultsMeta.textContent = `${totalResults} Results`;
+        }
+        
+        // Clear previous results
+        const tabContents = document.querySelectorAll('.tab-content');
+        tabContents.forEach(tab => {
+            tab.innerHTML = '';
+        });
+        
+        // Group results by type
+        const cityResults = results.filter(result => result.type === 'city');
+        const facilityResults = results.filter(result => result.type === 'facility');
+        
+        // Render all results tab
+        const allTab = document.getElementById('all');
+        if (allTab) {
+            results.forEach(result => {
+                const resultCard = createResultCard(result);
+                allTab.appendChild(resultCard);
+            });
+        }
+        
+        // Render cities tab
+        const citiesTab = document.getElementById('cities');
+        if (citiesTab) {
+            cityResults.forEach(result => {
+                const resultCard = createResultCard(result);
+                citiesTab.appendChild(resultCard);
+            });
+        }
+        
+        // Render facilities tab
+        const facilitiesTab = document.getElementById('facilities');
+        if (facilitiesTab) {
+            facilityResults.forEach(result => {
+                const resultCard = createResultCard(result);
+                facilitiesTab.appendChild(resultCard);
+            });
+        }
+        
+        // Add pagination if needed
+        if (totalResults > RESULTS_PER_PAGE) {
+            const totalPages = Math.ceil(totalResults / RESULTS_PER_PAGE);
+            renderPagination(totalPages);
+        }
+        
+        // Restore tab state
+        const activeTab = document.querySelector('.tab-button.active');
+        if (activeTab) {
+            const tabName = activeTab.dataset.tab;
+            showTab(tabName);
+        }
+    }
+    
+    // Create a result card element
+    function createResultCard(result) {
+        const card = document.createElement('div');
+        card.className = `result-card ${result.type}-result`;
+        
+        let html = '';
+        
+        if (result.type === 'city') {
+            const population = result.population ? result.population.toLocaleString() : '0';
+            const assistedLivingCost = result.assisted_living_cost ? result.assisted_living_cost.toLocaleString() : '0';
+            const memoryCareCost = result.memory_care_cost ? result.memory_care_cost.toLocaleString() : '0';
+            
+            html = `
+                <div class="result-content">
+                    <h3 class="result-title">
+                        <a href="${result.url}">${result.name}, ${result.state}</a>
+                    </h3>
+                    <div class="result-meta">
+                        <span class="result-type">City</span>
+                        <span class="result-population">Population: ${population}</span>
+                    </div>
+                    <div class="result-details">
+                        <div class="result-costs">
+                            <span>Assisted Living: $${assistedLivingCost}/month</span>
+                            <span>Memory Care: $${memoryCareCost}/month</span>
+                        </div>
+                        <div class="result-facilities">
+                            <span>${result.facility_count || 0} senior living facilities</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="result-action">
+                    <a href="${result.url}" class="view-details">View Details</a>
+                </div>
+            `;
+        } else {
+            // Facility result
+            const rating = result.rating || 0;
+            const stars = '★'.repeat(Math.round(rating));
+            
+            html = `
+                <div class="result-content">
+                    <h3 class="result-title">
+                        <a href="${result.url}">${result.name}</a>
+                    </h3>
+                    <div class="result-meta">
+                        <span class="result-type">Facility</span>
+                        <span class="result-location">${result.city || ''}, ${result.state || ''}</span>
+                        <span class="result-rating">
+                            Rating: ${rating}/5
+                            <span class="rating-stars">
+                                ${stars}
+                            </span>
+                        </span>
+                    </div>
+                    <div class="result-details">
+                        <div class="result-care-types">
+                            <span>Care Types: ${(result.care_types || []).join(', ')}</span>
+                        </div>
+                        <div class="result-address">
+                            <span>${result.address || ''}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="result-action">
+                    <a href="${result.url}" class="view-details">View Details</a>
+                </div>
+            `;
+        }
+        
+        card.innerHTML = html;
+        return card;
+    }
+    
+    // Render pagination controls
+    function renderPagination(totalPages) {
+        const paginationContainer = document.createElement('div');
+        paginationContainer.className = 'pagination';
+        
+        // Previous button
+        const prevButton = document.createElement('button');
+        prevButton.className = 'pagination-button prev';
+        prevButton.textContent = 'Previous';
+        prevButton.disabled = currentPage === 1;
+        prevButton.addEventListener('click', () => {
+            if (currentPage > 1) {
+                currentPage--;
+                performSearch();
+                window.scrollTo(0, 0);
+            }
+        });
+        
+        // Next button
+        const nextButton = document.createElement('button');
+        nextButton.className = 'pagination-button next';
+        nextButton.textContent = 'Next';
+        nextButton.disabled = currentPage === totalPages;
+        nextButton.addEventListener('click', () => {
+            if (currentPage < totalPages) {
+                currentPage++;
+                performSearch();
+                window.scrollTo(0, 0);
+            }
+        });
+        
+        // Page info
+        const pageInfo = document.createElement('span');
+        pageInfo.className = 'pagination-info';
+        pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
+        
+        // Add page number buttons (up to 5)
+        const pageButtons = document.createElement('div');
+        pageButtons.className = 'pagination-numbers';
+        
+        // Calculate range of page numbers to show
+        let startPage = Math.max(1, currentPage - 2);
+        let endPage = Math.min(totalPages, startPage + 4);
+        
+        // Adjust if we're near the end
+        if (endPage - startPage < 4) {
+            startPage = Math.max(1, endPage - 4);
+        }
+        
+        for (let i = startPage; i <= endPage; i++) {
+            const pageButton = document.createElement('button');
+            pageButton.className = `pagination-number ${i === currentPage ? 'active' : ''}`;
+            pageButton.textContent = i;
+            
+            pageButton.addEventListener('click', () => {
+                if (i !== currentPage) {
+                    currentPage = i;
+                    performSearch();
+                    window.scrollTo(0, 0);
+                }
+            });
+            
+            pageButtons.appendChild(pageButton);
+        }
+        
+        // Assemble pagination
+        paginationContainer.appendChild(prevButton);
+        paginationContainer.appendChild(pageButtons);
+        paginationContainer.appendChild(pageInfo);
+        paginationContainer.appendChild(nextButton);
+        
+        // Add to results container
+        resultsContainer.appendChild(paginationContainer);
+    }
+    
+    // Tab switching functionality
     const tabButtons = document.querySelectorAll('.tab-button');
-    const tabContents = document.querySelectorAll('.tab-content');
     
     tabButtons.forEach(button => {
         button.addEventListener('click', function() {
-            // Get the tab ID to show
-            const tabToShow = this.getAttribute('data-tab');
+            const tabName = this.dataset.tab;
             
-            // Reset all buttons and hide all tabs
+            // Update active button
             tabButtons.forEach(btn => btn.classList.remove('active'));
-            tabContents.forEach(content => content.classList.add('hidden'));
-            
-            // Activate the clicked button and show the corresponding tab
             this.classList.add('active');
-            document.getElementById(tabToShow).classList.remove('hidden');
+            
+            // Show selected tab
+            showTab(tabName);
         });
     });
-}
-
-/**
- * Initialize the filter form handling
- */
-function initFilterForm() {
-    const filterForm = document.getElementById('filter-form');
-    if (!filterForm) return;
     
-    // Handle form submission
-    filterForm.addEventListener('submit', function(e) {
-        e.preventDefault();
+    function showTab(tabName) {
+        const tabs = document.querySelectorAll('.tab-content');
+        tabs.forEach(tab => {
+            tab.classList.add('hidden');
+        });
         
-        // Get the current search query
-        const urlParams = new URLSearchParams(window.location.search);
-        const query = urlParams.get('q') || '';
-        
-        // Build new URL with filters
-        const careType = document.getElementById('care-type').value;
-        const state = document.getElementById('state').value;
-        const costRange = document.getElementById('cost-range').value;
-        
-        const newParams = new URLSearchParams();
-        
-        if (query) {
-            newParams.append('q', query);
+        const selectedTab = document.getElementById(tabName);
+        if (selectedTab) {
+            selectedTab.classList.remove('hidden');
         }
-        
-        if (careType) {
-            newParams.append('type', careType);
-        }
-        
-        if (state) {
-            newParams.append('state', state);
-        }
-        
-        if (costRange) {
-            newParams.append('cost', costRange);
-        }
-        
-        // Redirect to the filtered search
-        window.location.href = `/search.html?${newParams.toString()}`;
-    });
-}
-
-/**
- * Helper function to update URL parameters
- * @param {string} key - Parameter name
- * @param {string} value - Parameter value
- * @returns {string} - URL with updated parameter
- */
-function updateUrlParameter(key, value) {
-    const url = new URL(window.location.href);
-    const params = new URLSearchParams(url.search);
-    
-    if (value) {
-        params.set(key, value);
-    } else {
-        params.delete(key);
     }
     
-    url.search = params.toString();
-    return url.toString();
-}
+    // Check if we need to perform a search on page load (if there are search params)
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('q') || urlParams.has('state') || urlParams.has('type') || urlParams.has('cost')) {
+        // Set form values from URL params
+        if (urlParams.has('q') && searchInput) {
+            searchInput.value = urlParams.get('q');
+        }
+        
+        if (filterForm) {
+            for (const [key, value] of urlParams.entries()) {
+                const input = filterForm.querySelector(`[name="${key}"]`);
+                if (input) {
+                    input.value = value;
+                }
+            }
+        }
+        
+        if (urlParams.has('page')) {
+            currentPage = parseInt(urlParams.get('page')) || 1;
+        }
+        
+        // Perform search based on URL params
+        performSearch();
+    } else {
+        // Otherwise load city data for autocomplete
+        loadCityData();
+    }
+});
