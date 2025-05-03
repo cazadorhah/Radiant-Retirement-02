@@ -149,7 +149,7 @@ def generate_city_page(city_slug, city_data, all_cities, env, output_dir):
         
         # Write the rendered HTML to file
         output_path = os.path.join(city_output_dir, 'index.html')
-        with open(output_path, 'w') as f:
+        with open(output_path, 'w', encoding='utf-8') as f:
             f.write(output)
         
         logger.info(f"Generated city page for {city_data['city_info']['name']} at {output_path}")
