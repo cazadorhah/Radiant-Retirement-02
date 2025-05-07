@@ -173,17 +173,12 @@
         }
     }
 
-    .city-pagination-container {
-    position: relative;
-    padding: 0 var(--spacing-8);
-}
-
-.city-page {
-    display: none;
-}
-
-.city-page.active {
-    display: block;
+.pagination-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: var(--spacing-4);
+    gap: var(--spacing-4);
 }
 
 .pagination-circles {
@@ -204,6 +199,32 @@
 
 .page-circle.active {
     background-color: var(--primary-blue);
+}
+
+.pagination-button {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: var(--primary-blue);
+    color: white;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+    font-size: var(--font-lg);
+}
+
+.pagination-button:hover {
+    background-color: #0056b3;
+    transform: scale(1.1);
+}
+
+.pagination-button:disabled {
+    background-color: var(--border-medium);
+    cursor: not-allowed;
+    transform: none;
 }
 
 .city-page .city-card-small:not(:last-child) {
@@ -12820,8 +12841,9 @@
                 
                 const prevButton = document.createElement('button');
                 prevButton.className = 'pagination-button prev-button';
-                prevButton.innerHTML = '&lt;';  // Changed to just "<"
+                prevButton.innerHTML = '&lt;';
                 prevButton.disabled = true;
+                prevButton.setAttribute('aria-label', 'Previous page');
                 
                 // Create circles instead of text indicator
                 const circlesContainer = document.createElement('div');
@@ -12832,6 +12854,7 @@
                     const circle = document.createElement('div');
                     circle.className = 'page-circle';
                     if (i === 0) circle.classList.add('active');
+                    circle.setAttribute('aria-label', `Page ${i+1}`);
                     
                     // Add click event to jump to this page
                     circle.addEventListener('click', function() {
@@ -12856,7 +12879,8 @@
                 
                 const nextButton = document.createElement('button');
                 nextButton.className = 'pagination-button next-button';
-                nextButton.innerHTML = '&gt;';  // Changed to just ">"
+                nextButton.innerHTML = '&gt;';
+                nextButton.setAttribute('aria-label', 'Next page');
                 if (pageCount <= 1) nextButton.disabled = true;
                 
                 navControls.appendChild(prevButton);
@@ -12912,5 +12936,6 @@
         });
     });
 </script>
+
 </body>
 </html>
