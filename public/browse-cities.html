@@ -187,16 +187,11 @@
     flex: 0 0 auto;
 }
 
-.scroll-buttons {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 100%;
-    pointer-events: none;
+.scroll-controls {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 2;
+    justify-content: center;
+    gap: var(--spacing-4);
+    margin-top: var(--spacing-4);
 }
 
 .scroll-button {
@@ -211,48 +206,25 @@
     justify-content: center;
     font-size: var(--font-xl);
     cursor: pointer;
-    opacity: 0;
-    transition: opacity 0.3s, background-color 0.2s;
-    pointer-events: auto;
-    box-shadow: var(--shadow-md);
+    transition: background-color 0.2s, opacity 0.3s;
+    box-shadow: var(--shadow);
 }
 
 .scroll-button:hover {
     background-color: #0056b3;
 }
 
-.scroll-button.visible {
-    opacity: 0.8;
+.scroll-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
-.scroll-button.visible:hover {
-    opacity: 1;
+.city-count {
+    display: flex;
+    align-items: center;
+    color: var(--text-secondary);
+    font-size: var(--font-sm);
 }
-
-.scroll-prev {
-    margin-left: -20px;
-}
-
-.scroll-next {
-    margin-right: -20px;
-}
-
-@media (max-width: 768px) {
-    .scroll-button {
-        width: 32px;
-        height: 32px;
-        font-size: var(--font-lg);
-    }
-    
-    .scroll-prev {
-        margin-left: -16px;
-    }
-    
-    .scroll-next {
-        margin-right: -16px;
-    }
-}
-    
 </style>
 
 </head>
@@ -12827,74 +12799,98 @@
             // Get all city cards in this state
             const cityCards = stateCities.querySelectorAll('.city-card-small');
             
-            // Only add scroll buttons if there are more than 3 cities
+            // Only add scroll functionality if there are more than 3 cities
             if (cityCards.length > 3) {
-                // Create scroll buttons container
-                const scrollButtons = document.createElement('div');
-                scrollButtons.className = 'scroll-buttons';
+                // Create scroll controls container
+                const scrollControls = document.createElement('div');
+                scrollControls.className = 'scroll-controls';
                 
                 // Create prev button
                 const prevButton = document.createElement('button');
-                prevButton.className = 'scroll-button scroll-prev';
+                prevButton.className = 'scroll-button';
                 prevButton.innerHTML = '&lt;';
-                prevButton.setAttribute('aria-label', 'Scroll left');
+                prevButton.setAttribute('aria-label', 'Previous cities');
+                prevButton.disabled = true; // Initially disabled
+                
+                // Create city count indicator
+                const cityCount = document.createElement('div');
+                cityCount.className = 'city-count';
+                cityCount.textContent = `1-3 of ${cityCards.length}`;
                 
                 // Create next button
                 const nextButton = document.createElement('button');
-                nextButton.className = 'scroll-button scroll-next visible';
+                nextButton.className = 'scroll-button';
                 nextButton.innerHTML = '&gt;';
-                nextButton.setAttribute('aria-label', 'Scroll right');
+                nextButton.setAttribute('aria-label', 'Next cities');
                 
-                // Add buttons to container
-                scrollButtons.appendChild(prevButton);
-                scrollButtons.appendChild(nextButton);
+                // Add elements to controls
+                scrollControls.appendChild(prevButton);
+                scrollControls.appendChild(cityCount);
+                scrollControls.appendChild(nextButton);
                 
-                // Add scroll buttons to state-cities
-                stateCities.appendChild(scrollButtons);
+                // Add scroll controls after state-cities
+                stateCities.after(scrollControls);
                 
-                // Set scroll amount (based on card width plus gap)
-                const scrollAmount = 270; // Approximate width of card (250px) + gap (20px)
+                // Set card width (including gap)
+                const cardWidth = cityCards[0].offsetWidth + parseInt(getComputedStyle(stateCities).gap);
+                const visibleCards = 3;
+                
+                // Track current page
+                let currentPage = 0;
+                const maxPage = Math.ceil(cityCards.length / visibleCards) - 1;
+                
+                // Update the city count indicator
+                function updateCityCount() {
+                    const start = currentPage * visibleCards + 1;
+                    const end = Math.min((currentPage + 1) * visibleCards, cityCards.length);
+                    cityCount.textContent = `${start}-${end} of ${cityCards.length}`;
+                }
                 
                 // Add click event to prev button
                 prevButton.addEventListener('click', function() {
-                    stateCities.scrollBy({
-                        left: -scrollAmount,
-                        behavior: 'smooth'
-                    });
+                    if (currentPage > 0) {
+                        currentPage--;
+                        stateCities.scrollTo({
+                            left: currentPage * visibleCards * cardWidth,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Update button states
+                        nextButton.disabled = false;
+                        if (currentPage === 0) {
+                            prevButton.disabled = true;
+                        }
+                        
+                        updateCityCount();
+                    }
                 });
                 
                 // Add click event to next button
                 nextButton.addEventListener('click', function() {
-                    stateCities.scrollBy({
-                        left: scrollAmount,
-                        behavior: 'smooth'
-                    });
-                });
-                
-                // Update button visibility based on scroll position
-                stateCities.addEventListener('scroll', function() {
-                    // Show/hide prev button based on scroll position
-                    if (stateCities.scrollLeft > 0) {
-                        prevButton.classList.add('visible');
-                    } else {
-                        prevButton.classList.remove('visible');
-                    }
-                    
-                    // Show/hide next button based on scroll position
-                    const maxScrollLeft = stateCities.scrollWidth - stateCities.clientWidth;
-                    if (stateCities.scrollLeft >= maxScrollLeft - 5) { // 5px threshold for rounding errors
-                        nextButton.classList.remove('visible');
-                    } else {
-                        nextButton.classList.add('visible');
+                    if (currentPage < maxPage) {
+                        currentPage++;
+                        stateCities.scrollTo({
+                            left: currentPage * visibleCards * cardWidth,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Update button states
+                        prevButton.disabled = false;
+                        if (currentPage === maxPage) {
+                            nextButton.disabled = true;
+                        }
+                        
+                        updateCityCount();
                     }
                 });
                 
-                // Initialize button visibility
-                prevButton.classList.remove('visible'); // Initially hide prev button
+                // Initialize next button state
+                if (maxPage === 0) {
+                    nextButton.disabled = true;
+                }
             }
         });
     });
-</script>
 </script>
 
 </body>
