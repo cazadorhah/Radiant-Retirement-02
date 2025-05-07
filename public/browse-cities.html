@@ -176,26 +176,23 @@
     .state-cities-container {
     position: relative;
     overflow: hidden;
+    /* Set explicit width to match the content of one page */
+    width: 250px; /* The width of a single city card column */
+    margin: 0 auto; /* Center the container */
 }
 
 .state-cities {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: var(--spacing-4);
-    transition: transform 0.3s ease;
-}
-
-.state-cities.paginated {
     display: flex;
     flex-wrap: nowrap;
     gap: var(--spacing-8);
+    transition: transform 0.3s ease;
 }
 
 .cities-page {
     display: grid;
     grid-template-rows: repeat(3, 1fr);
     gap: var(--spacing-4);
-    min-width: 250px;
+    width: 250px; /* Explicit width to match container */
     flex: 0 0 auto;
 }
 
@@ -12805,9 +12802,6 @@
         const stateContainers = document.querySelectorAll('.state-container');
         
         stateContainers.forEach(container => {
-            // Get the state name for logging
-            const stateName = container.querySelector('.state-name').textContent;
-            
             // Get the state-cities container
             const stateCities = container.querySelector('.state-cities');
             
@@ -12816,16 +12810,20 @@
             
             // Only add pagination if there are more than 3 cities
             if (cityCards.length > 3) {
+                // Get the width of a single city card for proper sizing
+                const cardWidth = cityCards[0].offsetWidth;
+                
                 // Create wrapper for state-cities
                 const stateWrapper = document.createElement('div');
                 stateWrapper.className = 'state-cities-container';
+                stateWrapper.style.width = cardWidth + 'px'; // Set exact width
                 
                 // Replace original state-cities with the wrapper
                 stateCities.parentNode.insertBefore(stateWrapper, stateCities);
                 stateWrapper.appendChild(stateCities);
                 
-                // Mark the cities container as paginated
-                stateCities.classList.add('paginated');
+                // Clear original classes and set new ones
+                stateCities.className = 'state-cities';
                 
                 // Remove all city cards from the original container
                 cityCards.forEach(card => stateCities.removeChild(card));
@@ -12838,6 +12836,7 @@
                 for (let i = 0; i < pageCount; i++) {
                     const pageDiv = document.createElement('div');
                     pageDiv.className = 'cities-page';
+                    pageDiv.style.width = cardWidth + 'px'; // Set exact width
                     
                     // Add up to 3 cities to this page
                     for (let j = 0; j < citiesPerPage; j++) {
@@ -12871,6 +12870,11 @@
                 nextButton.className = 'page-button';
                 nextButton.innerHTML = '&gt;';
                 
+                // Disable next if only one page
+                if (pageCount <= 1) {
+                    nextButton.disabled = true;
+                }
+                
                 // Add elements to pagination controls
                 paginationControls.appendChild(prevButton);
                 paginationControls.appendChild(pageIndicator);
@@ -12881,11 +12885,6 @@
                 
                 // Track current page
                 let currentPage = 0;
-                
-                // Hide next button if only 1 page
-                if (pageCount <= 1) {
-                    nextButton.disabled = true;
-                }
                 
                 // Add click event to prev button
                 prevButton.addEventListener('click', function() {
@@ -12912,10 +12911,9 @@
                     prevButton.disabled = currentPage === 0;
                     nextButton.disabled = currentPage === pageCount - 1;
                     
-                    // Scroll to the current page
-                    const pageWidth = stateCities.querySelector('.cities-page').offsetWidth;
-                    const gap = parseInt(window.getComputedStyle(stateCities).gap);
-                    stateCities.style.transform = `translateX(-${currentPage * (pageWidth + gap)}px)`;
+                    // Calculate the exact position to scroll to
+                    const exactPageWidth = cardWidth + parseInt(window.getComputedStyle(stateCities).gap);
+                    stateCities.style.transform = `translateX(-${currentPage * exactPageWidth}px)`;
                 }
             }
         });
