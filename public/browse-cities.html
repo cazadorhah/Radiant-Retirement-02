@@ -186,36 +186,28 @@
     display: block;
 }
 
-.pagination-nav {
+.pagination-circles {
     display: flex;
-    justify-content: space-between;
-    margin-top: var(--spacing-4);
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-2);
 }
 
-.pagination-button {
-    background-color: var(--primary-blue);
-    color: white;
-    border: none;
-    border-radius: var(--radius-md);
-    padding: var(--spacing-2) var(--spacing-4);
+.page-circle {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--border-medium);
     cursor: pointer;
     transition: background-color 0.2s;
 }
 
-.pagination-button:hover {
-    background-color: #0056b3;
+.page-circle.active {
+    background-color: var(--primary-blue);
 }
 
-.pagination-button:disabled {
-    background-color: var(--border-medium);
-    cursor: not-allowed;
-}
-
-.pagination-indicator {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--text-secondary);
+.city-page .city-card-small:not(:last-child) {
+    margin-bottom: var(--spacing-6);
 }
 </style>
 
@@ -12831,9 +12823,36 @@
                 prevButton.innerHTML = '&lt; Previous';
                 prevButton.disabled = true;
                 
-                const pageIndicator = document.createElement('div');
-                pageIndicator.className = 'pagination-indicator';
-                pageIndicator.textContent = `Page 1 of ${pageCount}`;
+                // Create circles instead of text indicator
+                const circlesContainer = document.createElement('div');
+                circlesContainer.className = 'pagination-circles';
+                
+                // Create a circle for each page
+                for (let i = 0; i < pageCount; i++) {
+                    const circle = document.createElement('div');
+                    circle.className = 'page-circle';
+                    if (i === 0) circle.classList.add('active');
+                    
+                    // Add click event to jump to this page
+                    circle.addEventListener('click', function() {
+                        // Remove active class from current page and circle
+                        pages[currentPage].classList.remove('active');
+                        circlesContainer.children[currentPage].classList.remove('active');
+                        
+                        // Update current page
+                        currentPage = i;
+                        
+                        // Add active class to new page and circle
+                        pages[currentPage].classList.add('active');
+                        circlesContainer.children[currentPage].classList.add('active');
+                        
+                        // Update button states
+                        prevButton.disabled = (currentPage === 0);
+                        nextButton.disabled = (currentPage === pageCount - 1);
+                    });
+                    
+                    circlesContainer.appendChild(circle);
+                }
                 
                 const nextButton = document.createElement('button');
                 nextButton.className = 'pagination-button next-button';
@@ -12841,7 +12860,7 @@
                 if (pageCount <= 1) nextButton.disabled = true;
                 
                 navControls.appendChild(prevButton);
-                navControls.appendChild(pageIndicator);
+                navControls.appendChild(circlesContainer);
                 navControls.appendChild(nextButton);
                 
                 paginationContainer.appendChild(navControls);
@@ -12851,35 +12870,39 @@
                 
                 prevButton.addEventListener('click', function() {
                     if (currentPage > 0) {
+                        // Update page display
                         pages[currentPage].classList.remove('active');
                         currentPage--;
                         pages[currentPage].classList.add('active');
+                        
+                        // Update active circle
+                        circlesContainer.children[currentPage + 1].classList.remove('active');
+                        circlesContainer.children[currentPage].classList.add('active');
                         
                         // Update button states
                         nextButton.disabled = false;
                         if (currentPage === 0) {
                             prevButton.disabled = true;
                         }
-                        
-                        // Update page indicator
-                        pageIndicator.textContent = `Page ${currentPage + 1} of ${pageCount}`;
                     }
                 });
                 
                 nextButton.addEventListener('click', function() {
                     if (currentPage < pageCount - 1) {
+                        // Update page display
                         pages[currentPage].classList.remove('active');
                         currentPage++;
                         pages[currentPage].classList.add('active');
+                        
+                        // Update active circle
+                        circlesContainer.children[currentPage - 1].classList.remove('active');
+                        circlesContainer.children[currentPage].classList.add('active');
                         
                         // Update button states
                         prevButton.disabled = false;
                         if (currentPage === pageCount - 1) {
                             nextButton.disabled = true;
                         }
-                        
-                        // Update page indicator
-                        pageIndicator.textContent = `Page ${currentPage + 1} of ${pageCount}`;
                     }
                 });
                 
