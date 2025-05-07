@@ -12735,5 +12735,57 @@
     });
 </script>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Find all state containers
+        const stateContainers = document.querySelectorAll('.state-container');
+        
+        stateContainers.forEach(container => {
+            // Get the state-cities container
+            const stateCities = container.querySelector('.state-cities');
+            // Get all city cards in this state
+            const cityCards = stateCities.querySelectorAll('.city-card-small');
+            
+            // Only process states with more than 3 cities
+            if (cityCards.length > 3) {
+                // Hide cities beyond the first 3
+                for (let i = 3; i < cityCards.length; i++) {
+                    cityCards[i].classList.add('city-hidden');
+                }
+                
+                // Create the "See More" button
+                const showMoreButton = document.createElement('button');
+                showMoreButton.className = 'show-more-button';
+                showMoreButton.textContent = 'See More Cities';
+                showMoreButton.setAttribute('data-expanded', 'false');
+                
+                // Add click event to toggle visibility
+                showMoreButton.addEventListener('click', function() {
+                    const isExpanded = this.getAttribute('data-expanded') === 'true';
+                    
+                    if (!isExpanded) {
+                        // Show all cities
+                        for (let i = 3; i < cityCards.length; i++) {
+                            cityCards[i].classList.remove('city-hidden');
+                        }
+                        this.textContent = 'See Less';
+                        this.setAttribute('data-expanded', 'true');
+                    } else {
+                        // Hide cities beyond the first 3
+                        for (let i = 3; i < cityCards.length; i++) {
+                            cityCards[i].classList.add('city-hidden');
+                        }
+                        this.textContent = 'See More Cities';
+                        this.setAttribute('data-expanded', 'false');
+                    }
+                });
+                
+                // Append the button after the city cards
+                stateCities.after(showMoreButton);
+            }
+        });
+    });
+</script>
+
 </body>
 </html>
