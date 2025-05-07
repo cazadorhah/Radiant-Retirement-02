@@ -173,11 +173,18 @@
         }
     }
 
-    .state-cities-container {
+.state-cities-container {
     position: relative;
     overflow: hidden;
     /* Set explicit width to match the content of one page */
     width: 250px; /* The width of a single city card column */
+    margin: 0 auto; /* Center the container */
+}
+
+.state-cities-container {
+    position: relative;
+    overflow: hidden;
+    /* Width will be set dynamically in JavaScript */
     margin: 0 auto; /* Center the container */
 }
 
@@ -192,7 +199,7 @@
     display: grid;
     grid-template-rows: repeat(3, 1fr);
     gap: var(--spacing-4);
-    width: 250px; /* Explicit width to match container */
+    /* Width will be set dynamically in JavaScript */
     flex: 0 0 auto;
 }
 
@@ -12805,18 +12812,31 @@
             // Get the state-cities container
             const stateCities = container.querySelector('.state-cities');
             
+            // Save the original state-cities styling
+            const originalStyle = window.getComputedStyle(stateCities);
+            const originalGridTemplateColumns = originalStyle.gridTemplateColumns;
+            
             // Get all city cards in this state
             const cityCards = Array.from(stateCities.querySelectorAll('.city-card-small'));
             
             // Only add pagination if there are more than 3 cities
             if (cityCards.length > 3) {
-                // Get the width of a single city card for proper sizing
-                const cardWidth = cityCards[0].offsetWidth;
+                // Calculate the original column width from the grid
+                // First, get the width of the state-cities container
+                const stateWidth = stateCities.offsetWidth;
+                
+                // Clone one city card to measure its actual width
+                const cardClone = cityCards[0].cloneNode(true);
+                cardClone.style.position = 'absolute';
+                cardClone.style.visibility = 'hidden';
+                document.body.appendChild(cardClone);
+                const cardWidth = cardClone.offsetWidth;
+                document.body.removeChild(cardClone);
                 
                 // Create wrapper for state-cities
                 const stateWrapper = document.createElement('div');
                 stateWrapper.className = 'state-cities-container';
-                stateWrapper.style.width = cardWidth + 'px'; // Set exact width
+                stateWrapper.style.width = cardWidth + 'px'; // Set to match original card width
                 
                 // Replace original state-cities with the wrapper
                 stateCities.parentNode.insertBefore(stateWrapper, stateCities);
@@ -12836,7 +12856,7 @@
                 for (let i = 0; i < pageCount; i++) {
                     const pageDiv = document.createElement('div');
                     pageDiv.className = 'cities-page';
-                    pageDiv.style.width = cardWidth + 'px'; // Set exact width
+                    pageDiv.style.width = cardWidth + 'px'; // Set width to match original
                     
                     // Add up to 3 cities to this page
                     for (let j = 0; j < citiesPerPage; j++) {
@@ -12859,6 +12879,7 @@
                 prevButton.className = 'page-button';
                 prevButton.innerHTML = '&lt;';
                 prevButton.disabled = true; // Initially disabled
+                prevButton.setAttribute('aria-label', 'Previous cities');
                 
                 // Create page indicator
                 const pageIndicator = document.createElement('span');
@@ -12869,6 +12890,7 @@
                 const nextButton = document.createElement('button');
                 nextButton.className = 'page-button';
                 nextButton.innerHTML = '&gt;';
+                nextButton.setAttribute('aria-label', 'Next cities');
                 
                 // Disable next if only one page
                 if (pageCount <= 1) {
