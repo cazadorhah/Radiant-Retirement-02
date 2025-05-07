@@ -173,72 +173,49 @@
         }
     }
 
-.state-cities-container {
+    .city-pagination-container {
     position: relative;
-    overflow: hidden;
-    /* Set explicit width to match the content of one page */
-    width: 250px; /* The width of a single city card column */
-    margin: 0 auto; /* Center the container */
+    padding: 0 var(--spacing-8);
 }
 
-.state-cities-container {
-    position: relative;
-    overflow: hidden;
-    /* Width will be set dynamically in JavaScript */
-    margin: 0 auto; /* Center the container */
+.city-page {
+    display: none;
 }
 
-.state-cities {
+.city-page.active {
+    display: block;
+}
+
+.pagination-nav {
     display: flex;
-    flex-wrap: nowrap;
-    gap: var(--spacing-8);
-    transition: transform 0.3s ease;
-}
-
-.cities-page {
-    display: grid;
-    grid-template-rows: repeat(3, 1fr);
-    gap: var(--spacing-4);
-    /* Width will be set dynamically in JavaScript */
-    flex: 0 0 auto;
-}
-
-.pagination-controls {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: var(--spacing-4);
+    justify-content: space-between;
     margin-top: var(--spacing-4);
 }
 
-.page-button {
+.pagination-button {
     background-color: var(--primary-blue);
     color: white;
     border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: var(--font-lg);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-2) var(--spacing-4);
     cursor: pointer;
     transition: background-color 0.2s;
-    box-shadow: var(--shadow);
 }
 
-.page-button:hover {
+.pagination-button:hover {
     background-color: #0056b3;
 }
 
-.page-button:disabled {
-    opacity: 0.5;
+.pagination-button:disabled {
+    background-color: var(--border-medium);
     cursor: not-allowed;
 }
 
-.page-indicator {
+.pagination-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: var(--text-secondary);
-    font-size: var(--font-sm);
 }
 </style>
 
@@ -12811,132 +12788,103 @@
         stateContainers.forEach(container => {
             // Get the state-cities container
             const stateCities = container.querySelector('.state-cities');
-            
-            // Save the original state-cities styling
-            const originalStyle = window.getComputedStyle(stateCities);
-            const originalGridTemplateColumns = originalStyle.gridTemplateColumns;
-            
             // Get all city cards in this state
             const cityCards = Array.from(stateCities.querySelectorAll('.city-card-small'));
             
-            // Only add pagination if there are more than 3 cities
+            // Only process states with more than 3 cities
             if (cityCards.length > 3) {
-                // Calculate the original column width from the grid
-                // First, get the width of the state-cities container
-                const stateWidth = stateCities.offsetWidth;
+                // Create a container for the pagination
+                const paginationContainer = document.createElement('div');
+                paginationContainer.className = 'city-pagination-container';
                 
-                // Clone one city card to measure its actual width
-                const cardClone = cityCards[0].cloneNode(true);
-                cardClone.style.position = 'absolute';
-                cardClone.style.visibility = 'hidden';
-                document.body.appendChild(cardClone);
-                const cardWidth = cardClone.offsetWidth;
-                document.body.removeChild(cardClone);
+                // Calculate number of pages
+                const cardsPerPage = 3;
+                const pageCount = Math.ceil(cityCards.length / cardsPerPage);
                 
-                // Create wrapper for state-cities
-                const stateWrapper = document.createElement('div');
-                stateWrapper.className = 'state-cities-container';
-                stateWrapper.style.width = cardWidth + 'px'; // Set to match original card width
-                
-                // Replace original state-cities with the wrapper
-                stateCities.parentNode.insertBefore(stateWrapper, stateCities);
-                stateWrapper.appendChild(stateCities);
-                
-                // Clear original classes and set new ones
-                stateCities.className = 'state-cities';
-                
-                // Remove all city cards from the original container
-                cityCards.forEach(card => stateCities.removeChild(card));
-                
-                // Calculate number of pages (each page has 3 cities)
-                const citiesPerPage = 3;
-                const pageCount = Math.ceil(cityCards.length / citiesPerPage);
-                
-                // Create pages and add cities to them
+                // Create page elements
+                const pages = [];
                 for (let i = 0; i < pageCount; i++) {
-                    const pageDiv = document.createElement('div');
-                    pageDiv.className = 'cities-page';
-                    pageDiv.style.width = cardWidth + 'px'; // Set width to match original
+                    const page = document.createElement('div');
+                    page.className = 'city-page';
+                    if (i === 0) page.classList.add('active');
                     
-                    // Add up to 3 cities to this page
-                    for (let j = 0; j < citiesPerPage; j++) {
-                        const cardIndex = i * citiesPerPage + j;
-                        if (cardIndex < cityCards.length) {
-                            pageDiv.appendChild(cityCards[cardIndex]);
-                        }
-                    }
+                    // Get cards for this page
+                    const startIdx = i * cardsPerPage;
+                    const endIdx = Math.min(startIdx + cardsPerPage, cityCards.length);
+                    const pageCards = cityCards.slice(startIdx, endIdx);
                     
-                    // Add the page to the container
-                    stateCities.appendChild(pageDiv);
+                    // Append cards to the page
+                    pageCards.forEach(card => {
+                        page.appendChild(card);
+                    });
+                    
+                    pages.push(page);
+                    paginationContainer.appendChild(page);
                 }
                 
-                // Create pagination controls
-                const paginationControls = document.createElement('div');
-                paginationControls.className = 'pagination-controls';
+                // Create navigation controls
+                const navControls = document.createElement('div');
+                navControls.className = 'pagination-nav';
                 
-                // Create previous button
                 const prevButton = document.createElement('button');
-                prevButton.className = 'page-button';
-                prevButton.innerHTML = '&lt;';
-                prevButton.disabled = true; // Initially disabled
-                prevButton.setAttribute('aria-label', 'Previous cities');
+                prevButton.className = 'pagination-button prev-button';
+                prevButton.innerHTML = '&lt; Previous';
+                prevButton.disabled = true;
                 
-                // Create page indicator
-                const pageIndicator = document.createElement('span');
-                pageIndicator.className = 'page-indicator';
+                const pageIndicator = document.createElement('div');
+                pageIndicator.className = 'pagination-indicator';
                 pageIndicator.textContent = `Page 1 of ${pageCount}`;
                 
-                // Create next button
                 const nextButton = document.createElement('button');
-                nextButton.className = 'page-button';
-                nextButton.innerHTML = '&gt;';
-                nextButton.setAttribute('aria-label', 'Next cities');
+                nextButton.className = 'pagination-button next-button';
+                nextButton.innerHTML = 'Next &gt;';
+                if (pageCount <= 1) nextButton.disabled = true;
                 
-                // Disable next if only one page
-                if (pageCount <= 1) {
-                    nextButton.disabled = true;
-                }
+                navControls.appendChild(prevButton);
+                navControls.appendChild(pageIndicator);
+                navControls.appendChild(nextButton);
                 
-                // Add elements to pagination controls
-                paginationControls.appendChild(prevButton);
-                paginationControls.appendChild(pageIndicator);
-                paginationControls.appendChild(nextButton);
+                paginationContainer.appendChild(navControls);
                 
-                // Add pagination controls after the cities container
-                stateWrapper.appendChild(paginationControls);
-                
-                // Track current page
+                // Set up event handlers
                 let currentPage = 0;
                 
-                // Add click event to prev button
                 prevButton.addEventListener('click', function() {
                     if (currentPage > 0) {
+                        pages[currentPage].classList.remove('active');
                         currentPage--;
-                        updatePagination();
+                        pages[currentPage].classList.add('active');
+                        
+                        // Update button states
+                        nextButton.disabled = false;
+                        if (currentPage === 0) {
+                            prevButton.disabled = true;
+                        }
+                        
+                        // Update page indicator
+                        pageIndicator.textContent = `Page ${currentPage + 1} of ${pageCount}`;
                     }
                 });
                 
-                // Add click event to next button
                 nextButton.addEventListener('click', function() {
                     if (currentPage < pageCount - 1) {
+                        pages[currentPage].classList.remove('active');
                         currentPage++;
-                        updatePagination();
+                        pages[currentPage].classList.add('active');
+                        
+                        // Update button states
+                        prevButton.disabled = false;
+                        if (currentPage === pageCount - 1) {
+                            nextButton.disabled = true;
+                        }
+                        
+                        // Update page indicator
+                        pageIndicator.textContent = `Page ${currentPage + 1} of ${pageCount}`;
                     }
                 });
                 
-                // Function to update pagination state
-                function updatePagination() {
-                    // Update page indicator
-                    pageIndicator.textContent = `Page ${currentPage + 1} of ${pageCount}`;
-                    
-                    // Update button states
-                    prevButton.disabled = currentPage === 0;
-                    nextButton.disabled = currentPage === pageCount - 1;
-                    
-                    // Calculate the exact position to scroll to
-                    const exactPageWidth = cardWidth + parseInt(window.getComputedStyle(stateCities).gap);
-                    stateCities.style.transform = `translateX(-${currentPage * exactPageWidth}px)`;
-                }
+                // Replace the original state-cities with our pagination container
+                stateCities.replaceWith(paginationContainer);
             }
         });
     });
