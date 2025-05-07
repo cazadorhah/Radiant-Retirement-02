@@ -173,24 +173,84 @@
         }
     }
 
-    .city-hidden {
-    display: none;
+    .state-cities {
+    position: relative;
+    display: flex;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    gap: var(--spacing-4);
+    padding: var(--spacing-2) 0;
 }
 
-.show-more-button {
+.city-card-small {
+    min-width: 250px; /* Set min-width instead of using grid */
+    flex: 0 0 auto;
+}
+
+.scroll-buttons {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    pointer-events: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 2;
+}
+
+.scroll-button {
     background-color: var(--primary-blue);
     color: white;
     border: none;
-    border-radius: var(--radius-md);
-    padding: var(--spacing-2) var(--spacing-4);
-    margin: var(--spacing-4) auto;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-xl);
     cursor: pointer;
-    display: block;
-    transition: background-color 0.2s;
+    opacity: 0;
+    transition: opacity 0.3s, background-color 0.2s;
+    pointer-events: auto;
+    box-shadow: var(--shadow-md);
 }
 
-.show-more-button:hover {
+.scroll-button:hover {
     background-color: #0056b3;
+}
+
+.scroll-button.visible {
+    opacity: 0.8;
+}
+
+.scroll-button.visible:hover {
+    opacity: 1;
+}
+
+.scroll-prev {
+    margin-left: -20px;
+}
+
+.scroll-next {
+    margin-right: -20px;
+}
+
+@media (max-width: 768px) {
+    .scroll-button {
+        width: 32px;
+        height: 32px;
+        font-size: var(--font-lg);
+    }
+    
+    .scroll-prev {
+        margin-left: -16px;
+    }
+    
+    .scroll-next {
+        margin-right: -16px;
+    }
 }
     
 </style>
@@ -12767,45 +12827,74 @@
             // Get all city cards in this state
             const cityCards = stateCities.querySelectorAll('.city-card-small');
             
-            // Only process states with more than 3 cities
+            // Only add scroll buttons if there are more than 3 cities
             if (cityCards.length > 3) {
-                // Hide cities beyond the first 3
-                for (let i = 3; i < cityCards.length; i++) {
-                    cityCards[i].classList.add('city-hidden');
-                }
+                // Create scroll buttons container
+                const scrollButtons = document.createElement('div');
+                scrollButtons.className = 'scroll-buttons';
                 
-                // Create the "See More" button
-                const showMoreButton = document.createElement('button');
-                showMoreButton.className = 'show-more-button';
-                showMoreButton.textContent = 'See More Cities';
-                showMoreButton.setAttribute('data-expanded', 'false');
+                // Create prev button
+                const prevButton = document.createElement('button');
+                prevButton.className = 'scroll-button scroll-prev';
+                prevButton.innerHTML = '&lt;';
+                prevButton.setAttribute('aria-label', 'Scroll left');
                 
-                // Add click event to toggle visibility
-                showMoreButton.addEventListener('click', function() {
-                    const isExpanded = this.getAttribute('data-expanded') === 'true';
-                    
-                    if (!isExpanded) {
-                        // Show all cities
-                        for (let i = 3; i < cityCards.length; i++) {
-                            cityCards[i].classList.remove('city-hidden');
-                        }
-                        this.textContent = 'See Less';
-                        this.setAttribute('data-expanded', 'true');
+                // Create next button
+                const nextButton = document.createElement('button');
+                nextButton.className = 'scroll-button scroll-next visible';
+                nextButton.innerHTML = '&gt;';
+                nextButton.setAttribute('aria-label', 'Scroll right');
+                
+                // Add buttons to container
+                scrollButtons.appendChild(prevButton);
+                scrollButtons.appendChild(nextButton);
+                
+                // Add scroll buttons to state-cities
+                stateCities.appendChild(scrollButtons);
+                
+                // Set scroll amount (based on card width plus gap)
+                const scrollAmount = 270; // Approximate width of card (250px) + gap (20px)
+                
+                // Add click event to prev button
+                prevButton.addEventListener('click', function() {
+                    stateCities.scrollBy({
+                        left: -scrollAmount,
+                        behavior: 'smooth'
+                    });
+                });
+                
+                // Add click event to next button
+                nextButton.addEventListener('click', function() {
+                    stateCities.scrollBy({
+                        left: scrollAmount,
+                        behavior: 'smooth'
+                    });
+                });
+                
+                // Update button visibility based on scroll position
+                stateCities.addEventListener('scroll', function() {
+                    // Show/hide prev button based on scroll position
+                    if (stateCities.scrollLeft > 0) {
+                        prevButton.classList.add('visible');
                     } else {
-                        // Hide cities beyond the first 3
-                        for (let i = 3; i < cityCards.length; i++) {
-                            cityCards[i].classList.add('city-hidden');
-                        }
-                        this.textContent = 'See More Cities';
-                        this.setAttribute('data-expanded', 'false');
+                        prevButton.classList.remove('visible');
+                    }
+                    
+                    // Show/hide next button based on scroll position
+                    const maxScrollLeft = stateCities.scrollWidth - stateCities.clientWidth;
+                    if (stateCities.scrollLeft >= maxScrollLeft - 5) { // 5px threshold for rounding errors
+                        nextButton.classList.remove('visible');
+                    } else {
+                        nextButton.classList.add('visible');
                     }
                 });
                 
-                // Append the button after the city cards
-                stateCities.after(showMoreButton);
+                // Initialize button visibility
+                prevButton.classList.remove('visible'); // Initially hide prev button
             }
         });
     });
+</script>
 </script>
 
 </body>
