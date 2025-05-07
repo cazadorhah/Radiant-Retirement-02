@@ -173,6 +173,14 @@
         }
     }
 
+.city-pagination-container {
+    margin-bottom: var(--spacing-4);
+}
+
+.city-page .city-card-small:not(:last-child) {
+    margin-bottom: var(--spacing-6);
+}
+
 .pagination-nav {
     display: flex;
     justify-content: center;
@@ -225,10 +233,6 @@
     background-color: var(--border-medium);
     cursor: not-allowed;
     transform: none;
-}
-
-.city-page .city-card-small:not(:last-child) {
-    margin-bottom: var(--spacing-6);
 }
 </style>
 
@@ -12799,139 +12803,143 @@
         const stateContainers = document.querySelectorAll('.state-container');
         
         stateContainers.forEach(container => {
-            // Get the state-cities container
-            const stateCities = container.querySelector('.state-cities');
             // Get all city cards in this state
-            const cityCards = Array.from(stateCities.querySelectorAll('.city-card-small'));
+            const cityCards = Array.from(container.querySelectorAll('.city-card-small'));
             
             // Only process states with more than 3 cities
             if (cityCards.length > 3) {
-                // Create a container for the pagination
+                // Remove all cards from their current container
+                const stateSection = container.querySelector('.state-cities');
+                cityCards.forEach(card => card.remove());
+                
+                // Create paginated container
                 const paginationContainer = document.createElement('div');
                 paginationContainer.className = 'city-pagination-container';
                 
-                // Calculate number of pages
-                const cardsPerPage = 3;
-                const pageCount = Math.ceil(cityCards.length / cardsPerPage);
+                // Create first page and add first 3 cards
+                const firstPage = document.createElement('div');
+                firstPage.className = 'city-page active';
                 
-                // Create page elements
-                const pages = [];
-                for (let i = 0; i < pageCount; i++) {
+                // Add first 3 cards to the first page
+                for (let i = 0; i < Math.min(3, cityCards.length); i++) {
+                    firstPage.appendChild(cityCards[i]);
+                }
+                
+                paginationContainer.appendChild(firstPage);
+                
+                // Create additional pages as needed
+                const pageCount = Math.ceil(cityCards.length / 3);
+                const pages = [firstPage];
+                
+                for (let p = 1; p < pageCount; p++) {
                     const page = document.createElement('div');
                     page.className = 'city-page';
-                    if (i === 0) page.classList.add('active');
+                    page.style.display = 'none'; // Hide explicitly
                     
-                    // Get cards for this page
-                    const startIdx = i * cardsPerPage;
-                    const endIdx = Math.min(startIdx + cardsPerPage, cityCards.length);
-                    const pageCards = cityCards.slice(startIdx, endIdx);
-                    
-                    // Append cards to the page
-                    pageCards.forEach(card => {
-                        page.appendChild(card);
-                    });
+                    // Add cards to this page
+                    for (let i = p * 3; i < Math.min((p + 1) * 3, cityCards.length); i++) {
+                        page.appendChild(cityCards[i]);
+                    }
                     
                     pages.push(page);
                     paginationContainer.appendChild(page);
                 }
                 
-                // Create navigation controls
+                // Create navigation
                 const navControls = document.createElement('div');
                 navControls.className = 'pagination-nav';
                 
+                // Create previous button
                 const prevButton = document.createElement('button');
                 prevButton.className = 'pagination-button prev-button';
                 prevButton.innerHTML = '&lt;';
                 prevButton.disabled = true;
-                prevButton.setAttribute('aria-label', 'Previous page');
                 
-                // Create circles instead of text indicator
-                const circlesContainer = document.createElement('div');
-                circlesContainer.className = 'pagination-circles';
+                // Create dots container
+                const dotsContainer = document.createElement('div');
+                dotsContainer.className = 'pagination-circles';
                 
-                // Create a circle for each page
+                // Add dots for each page
                 for (let i = 0; i < pageCount; i++) {
-                    const circle = document.createElement('div');
-                    circle.className = 'page-circle';
-                    if (i === 0) circle.classList.add('active');
-                    circle.setAttribute('aria-label', `Page ${i+1}`);
-                    
-                    // Add click event to jump to this page
-                    circle.addEventListener('click', function() {
-                        // Remove active class from current page and circle
-                        pages[currentPage].classList.remove('active');
-                        circlesContainer.children[currentPage].classList.remove('active');
-                        
-                        // Update current page
-                        currentPage = i;
-                        
-                        // Add active class to new page and circle
-                        pages[currentPage].classList.add('active');
-                        circlesContainer.children[currentPage].classList.add('active');
-                        
-                        // Update button states
-                        prevButton.disabled = (currentPage === 0);
-                        nextButton.disabled = (currentPage === pageCount - 1);
-                    });
-                    
-                    circlesContainer.appendChild(circle);
+                    const dot = document.createElement('div');
+                    dot.className = i === 0 ? 'page-circle active' : 'page-circle';
+                    dotsContainer.appendChild(dot);
                 }
                 
+                // Create next button
                 const nextButton = document.createElement('button');
                 nextButton.className = 'pagination-button next-button';
                 nextButton.innerHTML = '&gt;';
-                nextButton.setAttribute('aria-label', 'Next page');
-                if (pageCount <= 1) nextButton.disabled = true;
+                nextButton.disabled = pageCount <= 1;
                 
+                // Add everything to the nav
                 navControls.appendChild(prevButton);
-                navControls.appendChild(circlesContainer);
+                navControls.appendChild(dotsContainer);
                 navControls.appendChild(nextButton);
                 
+                // Add nav to pagination container
                 paginationContainer.appendChild(navControls);
                 
-                // Set up event handlers
+                // Replace original container with pagination
+                stateSection.innerHTML = '';
+                stateSection.appendChild(paginationContainer);
+                
+                // Set up navigation
                 let currentPage = 0;
                 
                 prevButton.addEventListener('click', function() {
                     if (currentPage > 0) {
-                        // Update page display
-                        pages[currentPage].classList.remove('active');
+                        // Hide current page
+                        pages[currentPage].style.display = 'none';
+                        dotsContainer.children[currentPage].classList.remove('active');
+                        
+                        // Show previous page
                         currentPage--;
-                        pages[currentPage].classList.add('active');
+                        pages[currentPage].style.display = 'block';
+                        dotsContainer.children[currentPage].classList.add('active');
                         
-                        // Update active circle
-                        circlesContainer.children[currentPage + 1].classList.remove('active');
-                        circlesContainer.children[currentPage].classList.add('active');
-                        
-                        // Update button states
+                        // Update buttons
                         nextButton.disabled = false;
-                        if (currentPage === 0) {
-                            prevButton.disabled = true;
-                        }
+                        prevButton.disabled = currentPage === 0;
                     }
                 });
                 
                 nextButton.addEventListener('click', function() {
                     if (currentPage < pageCount - 1) {
-                        // Update page display
-                        pages[currentPage].classList.remove('active');
+                        // Hide current page
+                        pages[currentPage].style.display = 'none';
+                        dotsContainer.children[currentPage].classList.remove('active');
+                        
+                        // Show next page
                         currentPage++;
-                        pages[currentPage].classList.add('active');
+                        pages[currentPage].style.display = 'block';
+                        dotsContainer.children[currentPage].classList.add('active');
                         
-                        // Update active circle
-                        circlesContainer.children[currentPage - 1].classList.remove('active');
-                        circlesContainer.children[currentPage].classList.add('active');
-                        
-                        // Update button states
+                        // Update buttons
                         prevButton.disabled = false;
-                        if (currentPage === pageCount - 1) {
-                            nextButton.disabled = true;
-                        }
+                        nextButton.disabled = currentPage === pageCount - 1;
                     }
                 });
                 
-                // Replace the original state-cities with our pagination container
-                stateCities.replaceWith(paginationContainer);
+                // Add dot click handlers
+                Array.from(dotsContainer.children).forEach((dot, index) => {
+                    dot.addEventListener('click', function() {
+                        if (index !== currentPage) {
+                            // Hide current page
+                            pages[currentPage].style.display = 'none';
+                            dotsContainer.children[currentPage].classList.remove('active');
+                            
+                            // Show selected page
+                            currentPage = index;
+                            pages[currentPage].style.display = 'block';
+                            dotsContainer.children[currentPage].classList.add('active');
+                            
+                            // Update buttons
+                            prevButton.disabled = currentPage === 0;
+                            nextButton.disabled = currentPage === pageCount - 1;
+                        }
+                    });
+                });
             }
         });
     });
