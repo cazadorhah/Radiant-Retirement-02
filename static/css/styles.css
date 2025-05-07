@@ -291,6 +291,26 @@ ul, ol {
     margin-bottom: var(--spacing-2);
 }
 
+.city-hidden {
+    display: none;
+}
+
+.show-more-button {
+    background-color: var(--primary-blue);
+    color: white;
+    border: none;
+    border-radius: var(--radius-md);
+    padding: var(--spacing-2) var(--spacing-4);
+    margin: var(--spacing-4) auto;
+    cursor: pointer;
+    display: block;
+    transition: background-color 0.2s;
+}
+
+.show-more-button:hover {
+    background-color: #0056b3;
+}
+
 /* Info Section */
 .info-section {
     background-color: var(--background);
