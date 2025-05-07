@@ -173,28 +173,41 @@
         }
     }
 
-    .state-cities {
+    .state-cities-container {
     position: relative;
-    display: flex;
-    overflow-x: hidden;
-    scroll-behavior: smooth;
-    gap: var(--spacing-4);
-    padding: var(--spacing-2) 0;
+    overflow: hidden;
 }
 
-.city-card-small {
-    min-width: 250px; /* Set min-width instead of using grid */
+.state-cities {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: var(--spacing-4);
+    transition: transform 0.3s ease;
+}
+
+.state-cities.paginated {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: var(--spacing-8);
+}
+
+.cities-page {
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    gap: var(--spacing-4);
+    min-width: 250px;
     flex: 0 0 auto;
 }
 
-.scroll-controls {
+.pagination-controls {
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: var(--spacing-4);
     margin-top: var(--spacing-4);
 }
 
-.scroll-button {
+.page-button {
     background-color: var(--primary-blue);
     color: white;
     border: none;
@@ -204,24 +217,22 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: var(--font-xl);
+    font-size: var(--font-lg);
     cursor: pointer;
-    transition: background-color 0.2s, opacity 0.3s;
+    transition: background-color 0.2s;
     box-shadow: var(--shadow);
 }
 
-.scroll-button:hover {
+.page-button:hover {
     background-color: #0056b3;
 }
 
-.scroll-button:disabled {
+.page-button:disabled {
     opacity: 0.5;
     cursor: not-allowed;
 }
 
-.city-count {
-    display: flex;
-    align-items: center;
+.page-indicator {
     color: var(--text-secondary);
     font-size: var(--font-sm);
 }
@@ -12794,99 +12805,117 @@
         const stateContainers = document.querySelectorAll('.state-container');
         
         stateContainers.forEach(container => {
+            // Get the state name for logging
+            const stateName = container.querySelector('.state-name').textContent;
+            
             // Get the state-cities container
             const stateCities = container.querySelector('.state-cities');
-            // Get all city cards in this state
-            const cityCards = stateCities.querySelectorAll('.city-card-small');
             
-            // Only add scroll functionality if there are more than 3 cities
+            // Get all city cards in this state
+            const cityCards = Array.from(stateCities.querySelectorAll('.city-card-small'));
+            
+            // Only add pagination if there are more than 3 cities
             if (cityCards.length > 3) {
-                // Create scroll controls container
-                const scrollControls = document.createElement('div');
-                scrollControls.className = 'scroll-controls';
+                // Create wrapper for state-cities
+                const stateWrapper = document.createElement('div');
+                stateWrapper.className = 'state-cities-container';
                 
-                // Create prev button
+                // Replace original state-cities with the wrapper
+                stateCities.parentNode.insertBefore(stateWrapper, stateCities);
+                stateWrapper.appendChild(stateCities);
+                
+                // Mark the cities container as paginated
+                stateCities.classList.add('paginated');
+                
+                // Remove all city cards from the original container
+                cityCards.forEach(card => stateCities.removeChild(card));
+                
+                // Calculate number of pages (each page has 3 cities)
+                const citiesPerPage = 3;
+                const pageCount = Math.ceil(cityCards.length / citiesPerPage);
+                
+                // Create pages and add cities to them
+                for (let i = 0; i < pageCount; i++) {
+                    const pageDiv = document.createElement('div');
+                    pageDiv.className = 'cities-page';
+                    
+                    // Add up to 3 cities to this page
+                    for (let j = 0; j < citiesPerPage; j++) {
+                        const cardIndex = i * citiesPerPage + j;
+                        if (cardIndex < cityCards.length) {
+                            pageDiv.appendChild(cityCards[cardIndex]);
+                        }
+                    }
+                    
+                    // Add the page to the container
+                    stateCities.appendChild(pageDiv);
+                }
+                
+                // Create pagination controls
+                const paginationControls = document.createElement('div');
+                paginationControls.className = 'pagination-controls';
+                
+                // Create previous button
                 const prevButton = document.createElement('button');
-                prevButton.className = 'scroll-button';
+                prevButton.className = 'page-button';
                 prevButton.innerHTML = '&lt;';
-                prevButton.setAttribute('aria-label', 'Previous cities');
                 prevButton.disabled = true; // Initially disabled
                 
-                // Create city count indicator
-                const cityCount = document.createElement('div');
-                cityCount.className = 'city-count';
-                cityCount.textContent = `1-3 of ${cityCards.length}`;
+                // Create page indicator
+                const pageIndicator = document.createElement('span');
+                pageIndicator.className = 'page-indicator';
+                pageIndicator.textContent = `Page 1 of ${pageCount}`;
                 
                 // Create next button
                 const nextButton = document.createElement('button');
-                nextButton.className = 'scroll-button';
+                nextButton.className = 'page-button';
                 nextButton.innerHTML = '&gt;';
-                nextButton.setAttribute('aria-label', 'Next cities');
                 
-                // Add elements to controls
-                scrollControls.appendChild(prevButton);
-                scrollControls.appendChild(cityCount);
-                scrollControls.appendChild(nextButton);
+                // Add elements to pagination controls
+                paginationControls.appendChild(prevButton);
+                paginationControls.appendChild(pageIndicator);
+                paginationControls.appendChild(nextButton);
                 
-                // Add scroll controls after state-cities
-                stateCities.after(scrollControls);
-                
-                // Set card width (including gap)
-                const cardWidth = cityCards[0].offsetWidth + parseInt(getComputedStyle(stateCities).gap);
-                const visibleCards = 3;
+                // Add pagination controls after the cities container
+                stateWrapper.appendChild(paginationControls);
                 
                 // Track current page
                 let currentPage = 0;
-                const maxPage = Math.ceil(cityCards.length / visibleCards) - 1;
                 
-                // Update the city count indicator
-                function updateCityCount() {
-                    const start = currentPage * visibleCards + 1;
-                    const end = Math.min((currentPage + 1) * visibleCards, cityCards.length);
-                    cityCount.textContent = `${start}-${end} of ${cityCards.length}`;
+                // Hide next button if only 1 page
+                if (pageCount <= 1) {
+                    nextButton.disabled = true;
                 }
                 
                 // Add click event to prev button
                 prevButton.addEventListener('click', function() {
                     if (currentPage > 0) {
                         currentPage--;
-                        stateCities.scrollTo({
-                            left: currentPage * visibleCards * cardWidth,
-                            behavior: 'smooth'
-                        });
-                        
-                        // Update button states
-                        nextButton.disabled = false;
-                        if (currentPage === 0) {
-                            prevButton.disabled = true;
-                        }
-                        
-                        updateCityCount();
+                        updatePagination();
                     }
                 });
                 
                 // Add click event to next button
                 nextButton.addEventListener('click', function() {
-                    if (currentPage < maxPage) {
+                    if (currentPage < pageCount - 1) {
                         currentPage++;
-                        stateCities.scrollTo({
-                            left: currentPage * visibleCards * cardWidth,
-                            behavior: 'smooth'
-                        });
-                        
-                        // Update button states
-                        prevButton.disabled = false;
-                        if (currentPage === maxPage) {
-                            nextButton.disabled = true;
-                        }
-                        
-                        updateCityCount();
+                        updatePagination();
                     }
                 });
                 
-                // Initialize next button state
-                if (maxPage === 0) {
-                    nextButton.disabled = true;
+                // Function to update pagination state
+                function updatePagination() {
+                    // Update page indicator
+                    pageIndicator.textContent = `Page ${currentPage + 1} of ${pageCount}`;
+                    
+                    // Update button states
+                    prevButton.disabled = currentPage === 0;
+                    nextButton.disabled = currentPage === pageCount - 1;
+                    
+                    // Scroll to the current page
+                    const pageWidth = stateCities.querySelector('.cities-page').offsetWidth;
+                    const gap = parseInt(window.getComputedStyle(stateCities).gap);
+                    stateCities.style.transform = `translateX(-${currentPage * (pageWidth + gap)}px)`;
                 }
             }
         });
