@@ -12820,7 +12820,7 @@
                 
                 const prevButton = document.createElement('button');
                 prevButton.className = 'pagination-button prev-button';
-                prevButton.innerHTML = '&lt; Previous';
+                prevButton.innerHTML = '&lt;';  // Changed to just "<"
                 prevButton.disabled = true;
                 
                 // Create circles instead of text indicator
@@ -12856,7 +12856,7 @@
                 
                 const nextButton = document.createElement('button');
                 nextButton.className = 'pagination-button next-button';
-                nextButton.innerHTML = 'Next &gt;';
+                nextButton.innerHTML = '&gt;';  // Changed to just ">"
                 if (pageCount <= 1) nextButton.disabled = true;
                 
                 navControls.appendChild(prevButton);
@@ -12912,6 +12912,5 @@
         });
     });
 </script>
-
 </body>
 </html>
