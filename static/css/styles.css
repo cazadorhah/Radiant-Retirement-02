@@ -750,6 +750,46 @@ ul, ol {
     margin-bottom: var(--spacing-4);
 }
 
+/* Amenities multi-select styling */
+select[multiple] {
+    height: auto;
+    min-height: 120px;
+    padding: 8px;
+}
+
+/* Distance slider */
+.distance-label {
+    display: block;
+}
+
+#distance {
+    width: 100%;
+    margin: 5px 0;
+}
+
+#distance-value {
+    display: block;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.location-button {
+    display: block;
+    width: 100%;
+    padding: 6px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.location-button.location-active {
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    color: #3c763d;
+}
+
 .active-filters {
     display: flex;
     flex-wrap: wrap;
