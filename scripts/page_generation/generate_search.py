@@ -149,17 +149,20 @@ def generate_search_data(cities_data, output_dir):
         # Extract searchable facility data
         for facility in city_data['facilities']:
             search_data['facilities'].append({
-                'id': facility['id'],
-                'name': facility['name'],
-                'city': facility['city'],
-                'state': facility['state'],
-                'address': facility['address'],
-                'city_slug': city_slug,
-                'rating': facility['ratings']['overall'],
-                'care_types': facility['facility_type'],
-                'features': facility['features']
-            })
-    
+                            'id': facility['id'],
+                            'name': facility['name'],
+                            'city': facility['city'],
+                            'state': facility['state'],
+                            'address': facility['address'],
+                            'city_slug': city_slug,
+                            'rating': facility['ratings']['overall'],
+                            'care_types': facility['facility_type'],
+                            'features': facility['features'],
+                            'amenities': facility.get('amenities', []),  # Add this line
+                            'coordinates': facility.get('coordinates', {'lat': 0, 'lng': 0})  # Add this line for geolocation
+                        })
+
+  
     # Save to JSON file
     output_path = os.path.join(output_dir, 'js', 'search-data.json')
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
