@@ -80,6 +80,96 @@ document.addEventListener('DOMContentLoaded', function() {
             container.appendChild(suggestion);
         });
     }
+
+    // Initialize autocomplete functionality
+function initializeAutocomplete() {
+    console.log('Initializing autocomplete with', allCityData.length, 'cities');
+    
+    // Create autocomplete container if it doesn't exist
+    let autocompleteContainer = document.getElementById('autocomplete-container');
+    if (!autocompleteContainer) {
+        autocompleteContainer = document.createElement('div');
+        autocompleteContainer.id = 'autocomplete-container';
+        autocompleteContainer.className = 'autocomplete-items';
+        searchInput.parentElement.appendChild(autocompleteContainer);
+    }
+    
+    // Current focused item
+    let currentFocus = -1;
+    
+    // Input event to show suggestions
+    searchInput.addEventListener('input', function() {
+        const value = this.value.toLowerCase().trim();
+        autocompleteContainer.style.display = 'none';
+        autocompleteContainer.innerHTML = '';
+        
+        if (!value || value.length < 2) return;
+        
+        // Filter matching cities
+        const matches = allCityData
+            .filter(city => {
+                const cityName = (city.name || '').toLowerCase();
+                const stateName = (city.state || '').toLowerCase();
+                return cityName.includes(value) || stateName.includes(value);
+            })
+            .slice(0, 10); // Limit to 10 suggestions for performance
+        
+        if (matches.length > 0) {
+            autocompleteContainer.style.display = 'block';
+            renderAutocomplete(matches, autocompleteContainer);
+            currentFocus = -1;
+        }
+    });
+    
+    // Handle keyboard navigation
+    searchInput.addEventListener('keydown', function(e) {
+        const suggestions = autocompleteContainer.querySelectorAll('.autocomplete-suggestion');
+        if (!suggestions.length) return;
+        
+        // Down arrow
+        if (e.keyCode === 40) {
+            currentFocus++;
+            if (currentFocus >= suggestions.length) currentFocus = 0;
+            setActiveSuggestion(suggestions, currentFocus);
+        } 
+        // Up arrow
+        else if (e.keyCode === 38) {
+            currentFocus--;
+            if (currentFocus < 0) currentFocus = suggestions.length - 1;
+            setActiveSuggestion(suggestions, currentFocus);
+        } 
+        // Enter key - prevent default only if autocomplete is active
+        else if (e.keyCode === 13 && autocompleteContainer.style.display === 'block') {
+            e.preventDefault();
+            if (currentFocus > -1 && suggestions[currentFocus]) {
+                suggestions[currentFocus].click();
+            }
+        }
+        // Escape key - close autocomplete
+        else if (e.keyCode === 27) {
+            autocompleteContainer.style.display = 'none';
+        }
+    });
+    
+    // Hide autocomplete when clicking outside
+    document.addEventListener('click', function(e) {
+        if (e.target !== searchInput) {
+            autocompleteContainer.style.display = 'none';
+        }
+    });
+    
+    console.log('Autocomplete initialization complete');
+}
+
+// Set active suggestion
+function setActiveSuggestion(suggestions, index) {
+    for (let i = 0; i < suggestions.length; i++) {
+        suggestions[i].classList.remove('active');
+    }
+    if (index >= 0 && index < suggestions.length) {
+        suggestions[index].classList.add('active');
+    }
+}
     
     // Handle search form submission
     if (searchForm) {
