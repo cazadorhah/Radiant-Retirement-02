@@ -61,29 +61,9 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     }
     
-    // Render autocomplete suggestions
-    function renderAutocomplete(matches, container) {
-        container.innerHTML = '';
-        
-        matches.forEach(city => {
-            const suggestion = document.createElement('div');
-            suggestion.className = 'autocomplete-suggestion';
-            suggestion.textContent = `${city.name}, ${city.state}`;
-            
-            suggestion.addEventListener('click', function() {
-                searchInput.value = `${city.name}, ${city.state}`;
-                container.style.display = 'none';
-                // Optional: Auto-submit the form
-                // searchForm.submit();
-            });
-            
-            container.appendChild(suggestion);
-        });
-    }
-
-    // Initialize autocomplete functionality
+// Initialize autocomplete functionality
 function initializeAutocomplete() {
-    console.log('Initializing autocomplete with', allCityData.length, 'cities');
+    console.log('Initializing enhanced autocomplete with', allCityData.length, 'cities');
     
     // Create autocomplete container if it doesn't exist
     let autocompleteContainer = document.getElementById('autocomplete-container');
@@ -94,31 +74,38 @@ function initializeAutocomplete() {
         searchInput.parentElement.appendChild(autocompleteContainer);
     }
     
-    // Current focused item
     let currentFocus = -1;
     
-    // Input event to show suggestions
-    searchInput.addEventListener('input', function() {
-        const value = this.value.toLowerCase().trim();
+    // Debounce function to prevent excessive searches
+    function debounce(func, wait) {
+        let timeout;
+        return function(...args) {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => func.apply(this, args), wait);
+        };
+    }
+    
+    // Process input with debounce
+    const processInput = debounce(function(value) {
         autocompleteContainer.style.display = 'none';
         autocompleteContainer.innerHTML = '';
         
         if (!value || value.length < 2) return;
         
-        // Filter matching cities
-        const matches = allCityData
-            .filter(city => {
-                const cityName = (city.name || '').toLowerCase();
-                const stateName = (city.state || '').toLowerCase();
-                return cityName.includes(value) || stateName.includes(value);
-            })
-            .slice(0, 10); // Limit to 10 suggestions for performance
+        // Find and rank matches
+        const matches = findMatches(value);
         
         if (matches.length > 0) {
             autocompleteContainer.style.display = 'block';
-            renderAutocomplete(matches, autocompleteContainer);
+            renderAutocomplete(matches, autocompleteContainer, value);
             currentFocus = -1;
         }
+    }, 200); // 200ms debounce
+    
+    // Input event to show suggestions
+    searchInput.addEventListener('input', function() {
+        const value = this.value.toLowerCase().trim();
+        processInput(value);
     });
     
     // Handle keyboard navigation
@@ -158,17 +145,180 @@ function initializeAutocomplete() {
         }
     });
     
-    console.log('Autocomplete initialization complete');
+    console.log('Enhanced autocomplete initialization complete');
 }
 
-// Set active suggestion
-function setActiveSuggestion(suggestions, index) {
-    for (let i = 0; i < suggestions.length; i++) {
-        suggestions[i].classList.remove('active');
+// Find and rank matches with advanced matching algorithm
+function findMatches(query) {
+    query = query.toLowerCase().trim();
+    
+    // Create an array to hold matches with their score
+    const scoredMatches = [];
+    
+    // Process each city
+    allCityData.forEach(city => {
+        const cityName = (city.name || '').toLowerCase();
+        const stateName = (city.state || '').toLowerCase();
+        const stateAbbr = (city.state_abbr || '').toLowerCase();
+        
+        // Calculate match score (higher is better)
+        let score = 0;
+        let matched = false;
+        
+        // Exact matches get high scores
+        if (cityName === query) {
+            score += 100;
+            matched = true;
+        }
+        
+        // Starts with matches get good scores
+        if (cityName.startsWith(query)) {
+            score += 50;
+            matched = true;
+        }
+        
+        // Contains matches get medium scores
+        if (cityName.includes(query)) {
+            score += 25;
+            matched = true;
+        }
+        
+        // State name/abbreviation matches
+        if (stateName.includes(query)) {
+            score += 15;
+            matched = true;
+        }
+        
+        if (stateAbbr === query) {
+            score += 10;
+            matched = true;
+        }
+        
+        // Check search tokens if available
+        if (city.search_tokens) {
+            for (const token of city.search_tokens) {
+                if (token === query) {
+                    score += 30;
+                    matched = true;
+                } else if (token.startsWith(query)) {
+                    score += 20;
+                    matched = true;
+                } else if (token.includes(query)) {
+                    score += 10;
+                    matched = true;
+                }
+            }
+        }
+        
+        // Word boundary matching (e.g. "york" matching "New York")
+        const words = cityName.split(/\s+/);
+        for (const word of words) {
+            if (word === query) {
+                score += 40;
+                matched = true;
+            } else if (word.startsWith(query)) {
+                score += 30;
+                matched = true;
+            }
+        }
+        
+        // Simple fuzzy matching for typos (edit distance check)
+        if (!matched && query.length > 3) {
+            // Check if city name is close to query with simple edit distance
+            if (getEditDistance(cityName, query) <= 2) {
+                score += 5;
+                matched = true;
+            }
+        }
+        
+        // Boost score for cities with higher population or facility count
+        if (matched) {
+            if (city.population > 1000000) score += 5;
+            if (city.facility_count > 50) score += 3;
+            
+            scoredMatches.push({
+                city: city,
+                score: score
+            });
+        }
+    });
+    
+    // Sort by score (highest first) and take top 10
+    return scoredMatches
+        .sort((a, b) => b.score - a.score)
+        .slice(0, 10)
+        .map(item => item.city);
+}
+
+// Simple edit distance for fuzzy matching
+function getEditDistance(a, b) {
+    if (a.length === 0) return b.length;
+    if (b.length === 0) return a.length;
+
+    const matrix = [];
+
+    // Initialize matrix
+    for (let i = 0; i <= b.length; i++) {
+        matrix[i] = [i];
     }
-    if (index >= 0 && index < suggestions.length) {
-        suggestions[index].classList.add('active');
+
+    for (let i = 0; i <= a.length; i++) {
+        matrix[0][i] = i;
     }
+
+    // Fill matrix
+    for (let i = 1; i <= b.length; i++) {
+        for (let j = 1; j <= a.length; j++) {
+            if (b.charAt(i-1) === a.charAt(j-1)) {
+                matrix[i][j] = matrix[i-1][j-1];
+            } else {
+                matrix[i][j] = Math.min(
+                    matrix[i-1][j-1] + 1, // Substitution
+                    matrix[i][j-1] + 1,   // Insertion
+                    matrix[i-1][j] + 1    // Deletion
+                );
+            }
+        }
+    }
+
+    return matrix[b.length][a.length];
+}
+
+// Render autocomplete with highlighting
+function renderAutocomplete(matches, container, query) {
+    container.innerHTML = '';
+    
+    matches.forEach(city => {
+        const suggestion = document.createElement('div');
+        suggestion.className = 'autocomplete-suggestion';
+        
+        // Highlight matching parts in city name
+        const cityName = city.name;
+        const stateName = city.state;
+        const highlightedName = highlightMatch(cityName, query);
+        
+        suggestion.innerHTML = `${highlightedName}, ${stateName}`;
+        
+        suggestion.addEventListener('click', function() {
+            searchInput.value = `${cityName}, ${stateName}`;
+            container.style.display = 'none';
+            // Optional: Auto-submit the form
+            // searchForm.submit();
+        });
+        
+        container.appendChild(suggestion);
+    });
+}
+
+// Highlight matching text
+function highlightMatch(text, query) {
+    if (!query || query.length < 2) return text;
+    
+    // Escape special regex characters
+    const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const regex = new RegExp(`(${escapedQuery})`, 'gi');
+    
+    return text.replace(regex, '<strong>$1</strong>');
 }
     
     // Handle search form submission
