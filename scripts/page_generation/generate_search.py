@@ -90,35 +90,55 @@ def generate_search_page(combined_data_path, template_dir, output_dir):
     generate_city_index(data['cities'], output_dir)
 
 def generate_city_index(cities_data, output_dir):
-    """
-    Generate a simplified JSON file for autocomplete in the /data directory.
-    
-    Args:
-        cities_data: Dictionary of city data
-        output_dir: Directory where the JSON file will be saved
-    """
+    """Generate an enhanced JSON file for autocomplete."""
     city_index = []
     
-    # Extract city data for autocomplete
+    # Extract city data for autocomplete with enhanced searchability
     for city_slug, city_data in cities_data.items():
+        city_name = city_data['city_info']['name']
+        state_name = city_data['city_info']['state']
+        state_abbr = get_state_abbreviation(state_name)
+        
+        # Create searchable tokens
+        search_tokens = [
+            city_name.lower(),                       # Full city name
+            f"{city_name} {state_name}".lower(),     # City and state
+            f"{city_name} {state_abbr}".lower(),     # City and state abbreviation
+        ]
+        
+        # Add common nicknames for major cities
+        if city_name == "New York":
+            search_tokens.append("nyc")
+        elif city_name == "Los Angeles":
+            search_tokens.append("la")
+        # Add more nickname mappings as needed
+        
+        # Add population-based ranking
+        population = city_data['city_info'].get('population', 0)
+        
         city_index.append({
             'slug': city_slug,
-            'name': city_data['city_info']['name'],
-            'state': city_data['city_info']['state'],
-            'url': f"/city/{city_slug}/"
+            'name': city_name,
+            'state': state_name,
+            'state_abbr': state_abbr,
+            'url': f"/city/{city_slug}/",
+            'search_tokens': search_tokens,
+            'population': population,  # For ranking by population
+            'facility_count': city_data['meta'].get('facility_count', 0)  # For ranking by relevance
         })
     
-    # Create data directory
+    # Sort by population (optional - helps with ranking)
+    city_index.sort(key=lambda x: x.get('population', 0), reverse=True)
+    
+    # Create data directory and save
     data_dir = os.path.join(output_dir, 'data')
     os.makedirs(data_dir, exist_ok=True)
-    
-    # Save to JSON file
     output_path = os.path.join(data_dir, 'city-index.json')
     
     with open(output_path, 'w') as f:
         json.dump(city_index, f)
     
-    logger.info(f"City index for autocomplete generated at {output_path} with {len(city_index)} cities")
+    logger.info(f"Enhanced city index for autocomplete generated at {output_path} with {len(city_index)} cities")
 
 def generate_search_data(cities_data, output_dir):
     """
