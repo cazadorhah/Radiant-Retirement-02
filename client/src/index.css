@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* New Color Palette */
+  /* Radiant Blue #2C4BFF */
+  --primary: 229 100% 59%;
+  --primary-foreground: 0 0% 100%;
+  
+  /* Sunrise Gold #FFA726 */
+  --accent: 36 100% 57%;
+  --accent-foreground: 0 0% 10%;
+  
+  /* Cream White #FFFDF8 */
+  --background: 48 100% 99%;
+  --foreground: 0 0% 20%;
+  
+  /* Charcoal Gray #333333 */
+  --card-foreground: 0 0% 20%;
+  --popover-foreground: 0 0% 20%;
+  
+  /* Soft Teal #4C9A9A */
+  --secondary: 180 35% 45%;
+  --secondary-foreground: 0 0% 100%;
+  
+  /* Warm Sand #F4EDE4 */
+  --muted: 33 40% 93%;
+  --muted-foreground: 0 0% 40%;
+  
+  /* Other system colors */
+  --popover: var(--background);
+  --card: 0 0% 100%;
+  --border: 33 20% 90%;
+  --input: 33 20% 90%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 60 9.1% 97.8%;
+  --ring: var(--primary);
+  --radius: 0.5rem;
+}
+
+.dark {
+  /* Darker version of the color palette for dark mode */
+  --background: 220 20% 12%;
+  --foreground: 48 100% 98%;
+  
+  /* Darker Radiant Blue */
+  --primary: 229 80% 45%;
+  --primary-foreground: 0 0% 100%;
+  
+  /* Darker Sunrise Gold */
+  --accent: 36 90% 50%;
+  --accent-foreground: 0 0% 10%;
+  
+  /* Darker UI elements */
+  --muted: 220 10% 20%;
+  --muted-foreground: 33 20% 70%;
+  --popover: 220 20% 12%;
+  --popover-foreground: 48 100% 98%;
+  --card: 220 20% 15%;
+  --card-foreground: 48 100% 98%;
+  --border: 220 15% 25%;
+  --input: 220 15% 25%;
+  
+  /* Darker Soft Teal */
+  --secondary: 180 30% 35%;
+  --secondary-foreground: 0 0% 100%;
+  
+  /* System colors for dark mode */
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --ring: var(--primary);
+  --radius: 0.5rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-gray-50 text-foreground;
+  }
+
+  .star-rating .fas {
+    @apply text-accent;
+  }
+
+  .star-rating .far {
+    @apply text-gray-300;
+  }
+}
+
+.hero-gradient {
+  background-color: hsl(var(--accent));
+}
+
+/* Custom animations for loading components */
+@keyframes orbit {
+  from {
+    transform: rotate(0deg) translateX(calc(var(--orbitSize, 50px) * 0.8)) rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg) translateX(calc(var(--orbitSize, 50px) * 0.8)) rotate(-360deg);
+  }
+}
+
+.animate-orbit {
+  animation: orbit 12s linear infinite;
+  --orbitSize: 100%;
+}
+
+/* Slow down animations for senior-friendliness */
+.animate-pulse {
+  animation-duration: 3s;
+}
+
+.animate-bounce {
+  animation-duration: 1.5s;
+}
+
+.animate-spin {
+  animation-duration: 3s;
+}
