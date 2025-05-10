@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Find senior living facilities in Texas. Browse cities and explore senior communities.">
+  <title>Senior Living in Texas | Radiant Retirement</title>
+  
+  <!-- Open Graph Tags for Social Media -->
+  <meta property="og:title" content="Senior Living in Texas | Radiant Retirement">
+  <meta property="og:description" content="Find senior living facilities in Texas. Browse cities and explore senior communities.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://radiantretirement.netlify.app">
+  
+  <!-- Schema.org markup for Google -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Radiant Retirement",
+    "url": "https://radiantretirement.netlify.app",
+    "logo": "https://radiantretirement.netlify.app/img/logo.svg",
+    "description": "Find senior living facilities across the United States",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+1-800-555-0000",
+      "contactType": "customer service"
+    }
+  }
+  </script>
+  
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  
+  <!-- Custom CSS -->
+  <link href="/css/styles.css" rel="stylesheet">
+</head>
+<body>
+  <!-- Skip to content link for accessibility -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="/">
+        <img src="/img/logo.svg" alt="Radiant Retirement Logo" width="40" height="40" class="d-inline-block align-text-top me-2">
+        Radiant Retirement
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/browse/index.html">Browse by State</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about.html">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/resources.html">Resources</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/contact.html">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main-content">
+
+  <!-- State Hero Section -->
+  <section class="state-hero py-5">
+    <div class="container">
+      <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/">Home</a></li>
+          <li class="breadcrumb-item"><a href="/browse/index.html">Browse Cities</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Texas</li>
+        </ol>
+      </nav>
+      
+      <h1 class="display-5 fw-bold mb-3">Senior Living in Texas</h1>
+      <p class="lead mb-5">Explore assisted living, independent living, memory care, and nursing homes in Texas. Find the perfect senior community for your needs.</p>
+      
+      <div class="row">
+        <div class="col-lg-8">
+          <div class="state-stats d-flex flex-wrap gap-4 mb-4">
+            <div class="stat-item">
+              <div class="stat-value">50</div>
+              <div class="stat-label">Cities</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">250</div>
+              <div class="stat-label">Senior Living Facilities</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="search-sidebar p-4 bg-white rounded shadow">
+            <h3 class="h5 mb-3">Find Cities in Texas</h3>
+            <form>
+              <div class="mb-3">
+                <label for="city-search" class="form-label">City Name</label>
+                <input type="text" class="form-control" id="city-search" placeholder="Enter city name">
+              </div>
+              <div class="mb-3">
+                <label for="population-filter" class="form-label">Population</label>
+                <select class="form-select" id="population-filter">
+                  <option value="0">Any Population</option>
+                  <option value="50000">50,000+</option>
+                  <option value="100000">100,000+</option>
+                  <option value="500000">500,000+</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn-primary w-100">Filter Cities</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cities Section -->
+  <section class="cities-section py-5 bg-light">
+    <div class="container">
+      <h2 class="section-title mb-4">Cities in Texas</h2>
+      
+      <div class="cities-grid">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+          
+          <div class="col">
+            <div class="city-card card h-100 shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title h5">Houston, TX</h3>
+                <p class="text-muted mb-2">Population: 2,195,914</p>
+                <div class="d-flex gap-3 small text-muted mb-3">
+                  <div><i class="fas fa-building me-1"></i> 5+ Facilities</div>
+                  <div><i class="fas fa-star me-1"></i> NaN Rating</div>
+                </div>
+                <a href="/city/houston-tx.html" class="btn btn-outline-primary stretched-link">View Facilities</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="city-card card h-100 shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title h5">San Antonio, TX</h3>
+                <p class="text-muted mb-2">Population: 1,409,019</p>
+                <div class="d-flex gap-3 small text-muted mb-3">
+                  <div><i class="fas fa-building me-1"></i> 5+ Facilities</div>
+                  <div><i class="fas fa-star me-1"></i> NaN Rating</div>
+                </div>
+                <a href="/city/san-antonio-tx.html" class="btn btn-outline-primary stretched-link">View Facilities</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="city-card card h-100 shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title h5">Dallas, TX</h3>
+                <p class="text-muted mb-2">Population: 1,257,676</p>
+                <div class="d-flex gap-3 small text-muted mb-3">
+                  <div><i class="fas fa-building me-1"></i> 5+ Facilities</div>
+                  <div><i class="fas fa-star me-1"></i> NaN Rating</div>
+                </div>
+                <a href="/city/dallas-tx.html" class="btn btn-outline-primary stretched-link">View Facilities</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="city-card card h-100 shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title h5">Austin, TX</h3>
+                <p class="text-muted mb-2">Population: 885,400</p>
+                <div class="d-flex gap-3 small text-muted mb-3">
+                  <div><i class="fas fa-building me-1"></i> 5+ Facilities</div>
+                  <div><i class="fas fa-star me-1"></i> NaN Rating</div>
+                </div>
+                <a href="/city/austin-tx.html" class="btn btn-outline-primary stretched-link">View Facilities</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="city-card card h-100 shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title h5">Fort Worth, TX</h3>
+                <p class="text-muted mb-2">Population: 792,727</p>
+                <div class="d-flex gap-3 small text-muted mb-3">
+                  <div><i class="fas fa-building me-1"></i> 5+ Facilities</div>
+                  <div><i class="fas fa-star me-1"></i> NaN Rating</div>
+                </div>
+                <a href="/city/fort-worth-tx.html" class="btn btn-outline-primary stretched-link">View Facilities</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="city-card card h-100 shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title h5">El Paso, TX</h3>
+                <p class="text-muted mb-2">Population: 674,433</p>
+                <div class="d-flex gap-3 small text-muted mb-3">
+                  <div><i class="fas fa-building me-1"></i> 5+ Facilities</div>
+                  <div><i class="fas fa-star me-1"></i> NaN Rating</div>
+                </div>
+                <a href="/city/el-paso-tx.html" class="btn btn-outline-primary stretched-link">View Facilities</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="city-card card h-100 shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title h5">Arlington, TX</h3>
+                <p class="text-muted mb-2">Population: 379,577</p>
+                <div class="d-flex gap-3 small text-muted mb-3">
+                  <div><i class="fas fa-building me-1"></i> 5+ Facilities</div>
+                  <div><i class="fas fa-star me-1"></i> NaN Rating</div>
+                </div>
+                <a href="/city/arlington-tx.html" class="btn btn-outline-primary stretched-link">View Facilities</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="city-card card h-100 shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title h5">Corpus Christi, TX</h3>
+                <p class="text-muted mb-2">Population: 316,381</p>
+                <div class="d-flex gap-3 small text-muted mb-3">
+                  <div><i class="fas fa-building me-1"></i> 5+ Facilities</div>
+                  <div><i class="fas fa-star me-1"></i> NaN Rating</div>
+                </div>
+                <a href="/city/corpus-christi-tx.html" class="btn btn-outline-primary stretched-link">View Facilities</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="city-card card h-100 shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title h5">Plano, TX</h3>
+                <p class="text-muted mb-2">Population: 274,409</p>
+                <div class="d-flex gap-3 small text-muted mb-3">
+                  <div><i class="fas fa-building me-1"></i> 5+ Facilities</div>
+                  <div><i class="fas fa-star me-1"></i> NaN Rating</div>
+                </div>
+                <a href="/city/plano-tx.html" class="btn btn-outline-primary stretched-link">View Facilities</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="city-card card h-100 shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title h5">Laredo, TX</h3>
+                <p class="text-muted mb-2">Population: 248,142</p>
+                <div class="d-flex gap-3 small text-muted mb-3">
+                  <div><i class="fas fa-building me-1"></i> 5+ Facilities</div>
+                  <div><i class="fas fa-star me-1"></i> NaN Rating</div>
+                </div>
+                <a href="/city/laredo-tx.html" class="btn btn-outline-primary stretched-link">View Facilities</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="city-card card h-100 shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title h5">Lubbock, TX</h3>
+                <p class="text-muted mb-2">Population: 239,538</p>
+                <div class="d-flex gap-3 small text-muted mb-3">
+                  <div><i class="fas fa-building me-1"></i> 5+ Facilities</div>
+                  <div><i class="fas fa-star me-1"></i> NaN Rating</div>
+                </div>
+                <a href="/city/lubbock-tx.html" class="btn btn-outline-primary stretched-link">View Facilities</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="city-card card h-100 shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title h5">Garland, TX</h3>
+                <p class="text-muted mb-2">Population: 234,566</p>
+                <div class="d-flex gap-3 small text-muted mb-3">
+                  <div><i class="fas fa-building me-1"></i> 5+ Facilities</div>
+                  <div><i class="fas fa-star me-1"></i> NaN Rating</div>
+                </div>
+                <a href="/city/garland-tx.html" class="btn btn-outline-primary stretched-link">View Facilities</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="city-card card h-100 shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title h5">Irving, TX</h3>
+                <p class="text-muted mb-2">Population: 228,653</p>
+                <div class="d-flex gap-3 small text-muted mb-3">
+                  <div><i class="fas fa-building me-1"></i> 5+ Facilities</div>
+                  <div><i class="fas fa-star me-1"></i> NaN Rating</div>
+                </div>
+                <a href="/city/irving-tx.html" class="btn btn-outline-primary stretched-link">View Facilities</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="city-card card h-100 shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title h5">Amarillo, TX</h3>
+                <p class="text-muted mb-2">Population: 196,429</p>
+                <div class="d-flex gap-3 small text-muted mb-3">
+                  <div><i class="fas fa-building me-1"></i> 5+ Facilities</div>
+                  <div><i class="fas fa-star me-1"></i> NaN Rating</div>
+                </div>
+                <a href="/city/amarillo-tx.html" class="btn btn-outline-primary stretched-link">View Facilities</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="city-card card h-100 shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title h5">Grand Prairie, TX</h3>
+                <p class="text-muted mb-2">Population: 183,372</p>
+                <div class="d-flex gap-3 small text-muted mb-3">
+                  <div><i class="fas fa-building me-1"></i> 5+ Facilities</div>
+                  <div><i class="fas fa-star me-1"></i> NaN Rating</div>
+                </div>
+                <a href="/city/grand-prairie-tx.html" class="btn btn-outline-primary stretched-link">View Facilities</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="city-card card h-100 shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title h5">Brownsville, TX</h3>
+                <p class="text-muted mb-2">Population: 181,860</p>
+                <div class="d-flex gap-3 small text-muted mb-3">
+                  <div><i class="fas fa-building me-1"></i> 5+ Facilities</div>
+                  <div><i class="fas fa-star me-1"></i> NaN Rating</div>
+                </div>
+                <a href="/city/brownsville-tx.html" class="btn btn-outline-primary stretched-link">View Facilities</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="city-card card h-100 shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title h5">Pasadena, TX</h3>
+                <p class="text-muted mb-2">Population: 152,735</p>
+                <div class="d-flex gap-3 small text-muted mb-3">
+                  <div><i class="fas fa-building me-1"></i> 5+ Facilities</div>
+                  <div><i class="fas fa-star me-1"></i> NaN Rating</div>
+                </div>
+                <a href="/city/pasadena-tx.html" class="btn btn-outline-primary stretched-link">View Facilities</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="city-card card h-100 shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title h5">McKinney, TX</h3>
+                <p class="text-muted mb-2">Population: 148,559</p>
+                <div class="d-flex gap-3 small text-muted mb-3">
+                  <div><i class="fas fa-building me-1"></i> 5+ Facilities</div>
+                  <div><i class="fas fa-star me-1"></i> NaN Rating</div>
+                </div>
+                <a href="/city/mckinney-tx.html" class="btn btn-outline-primary stretched-link">View Facilities</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="city-card card h-100 shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title h5">Mesquite, TX</h3>
+                <p class="text-muted mb-2">Population: 143,484</p>
+                <div class="d-flex gap-3 small text-muted mb-3">
+                  <div><i class="fas fa-building me-1"></i> 5+ Facilities</div>
+                  <div><i class="fas fa-star me-1"></i> NaN Rating</div>
+                </div>
+                <a href="/city/mesquite-tx.html" class="btn btn-outline-primary stretched-link">View Facilities</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="city-card card h-100 shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title h5">Killeen, TX</h3>
+                <p class="text-muted mb-2">Population: 137,147</p>
+                <div class="d-flex gap-3 small text-muted mb-3">
+                  <div><i class="fas fa-building me-1"></i> 5+ Facilities</div>
+                  <div><i class="fas fa-star me-1"></i> NaN Rating</div>
+                </div>
+                <a href="/city/killeen-tx.html" class="btn btn-outline-primary stretched-link">View Facilities</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="city-card card h-100 shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title h5">Frisco, TX</h3>
+                <p class="text-muted mb-2">Population: 136,791</p>
+                <div class="d-flex gap-3 small text-muted mb-3">
+                  <div><i class="fas fa-building me-1"></i> 5+ Facilities</div>
+                  <div><i class="fas fa-star me-1"></i> NaN Rating</div>
+                </div>
+                <a href="/city/frisco-tx.html" class="btn btn-outline-primary stretched-link">View Facilities</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="city-card card h-100 shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title h5">McAllen, TX</h3>
+                <p class="text-muted mb-2">Population: 136,639</p>
+                <div class="d-flex gap-3 small text-muted mb-3">
+                  <div><i class="fas fa-building me-1"></i> 5+ Facilities</div>
+                  <div><i class="fas fa-star me-1"></i> NaN Rating</div>
+                </div>
+                <a href="/city/mcallen-tx.html" class="btn btn-outline-primary stretched-link">View Facilities</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="city-card card h-100 shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title h5">Waco, TX</h3>
+                <p class="text-muted mb-2">Population: 129,030</p>
+                <div class="d-flex gap-3 small text-muted mb-3">
+                  <div><i class="fas fa-building me-1"></i> 5+ Facilities</div>
+                  <div><i class="fas fa-star me-1"></i> NaN Rating</div>
+                </div>
+                <a href="/city/waco-tx.html" class="btn btn-outline-primary stretched-link">View Facilities</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="city-card card h-100 shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title h5">Carrollton, TX</h3>
+                <p class="text-muted mb-2">Population: 126,700</p>
+                <div class="d-flex gap-3 small text-muted mb-3">
+                  <div><i class="fas fa-building me-1"></i> 5+ Facilities</div>
+                  <div><i class="fas fa-star me-1"></i> NaN Rating</div>
+                </div>
+                <a href="/city/carrollton-tx.html" class="btn btn-outline-primary stretched-link">View Facilities</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="city-card card h-100 shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title h5">Midland, TX</h3>
+                <p class="text-muted mb-2">Population: 123,933</p>
+                <div class="d-flex gap-3 small text-muted mb-3">
+                  <div><i class="fas fa-building me-1"></i> 5+ Facilities</div>
+                  <div><i class="fas fa-star me-1"></i> NaN Rating</div>
+                </div>
+                <a href="/city/midland-tx.html" class="btn btn-outline-primary stretched-link">View Facilities</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="city-card card h-100 shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title h5">Denton, TX</h3>
+                <p class="text-muted mb-2">Population: 123,099</p>
+                <div class="d-flex gap-3 small text-muted mb-3">
+                  <div><i class="fas fa-building me-1"></i> 5+ Facilities</div>
+                  <div><i class="fas fa-star me-1"></i> NaN Rating</div>
+                </div>
+                <a href="/city/denton-tx.html" class="btn btn-outline-primary stretched-link">View Facilities</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="city-card card h-100 shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title h5">Abilene, TX</h3>
+                <p class="text-muted mb-2">Population: 120,099</p>
+                <div class="d-flex gap-3 small text-muted mb-3">
+                  <div><i class="fas fa-building me-1"></i> 5+ Facilities</div>
+                  <div><i class="fas fa-star me-1"></i> NaN Rating</div>
+                </div>
+                <a href="/city/abilene-tx.html" class="btn btn-outline-primary stretched-link">View Facilities</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="city-card card h-100 shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title h5">Beaumont, TX</h3>
+                <p class="text-muted mb-2">Population: 117,796</p>
+                <div class="d-flex gap-3 small text-muted mb-3">
+                  <div><i class="fas fa-building me-1"></i> 5+ Facilities</div>
+                  <div><i class="fas fa-star me-1"></i> NaN Rating</div>
+                </div>
+                <a href="/city/beaumont-tx.html" class="btn btn-outline-primary stretched-link">View Facilities</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="city-card card h-100 shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title h5">Odessa, TX</h3>
+                <p class="text-muted mb-2">Population: 110,720</p>
+                <div class="d-flex gap-3 small text-muted mb-3">
+                  <div><i class="fas fa-building me-1"></i> 5+ Facilities</div>
+                  <div><i class="fas fa-star me-1"></i> NaN Rating</div>
+                </div>
+                <a href="/city/odessa-tx.html" class="btn btn-outline-primary stretched-link">View Facilities</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="city-card card h-100 shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title h5">Round Rock, TX</h3>
+                <p class="text-muted mb-2">Population: 109,821</p>
+                <div class="d-flex gap-3 small text-muted mb-3">
+                  <div><i class="fas fa-building me-1"></i> 5+ Facilities</div>
+                  <div><i class="fas fa-star me-1"></i> NaN Rating</div>
+                </div>
+                <a href="/city/round-rock-tx.html" class="btn btn-outline-primary stretched-link">View Facilities</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="city-card card h-100 shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title h5">Wichita Falls, TX</h3>
+                <p class="text-muted mb-2">Population: 104,898</p>
+                <div class="d-flex gap-3 small text-muted mb-3">
+                  <div><i class="fas fa-building me-1"></i> 5+ Facilities</div>
+                  <div><i class="fas fa-star me-1"></i> NaN Rating</div>
+                </div>
+                <a href="/city/wichita-falls-tx.html" class="btn btn-outline-primary stretched-link">View Facilities</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="city-card card h-100 shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title h5">Richardson, TX</h3>
+                <p class="text-muted mb-2">Population: 104,475</p>
+                <div class="d-flex gap-3 small text-muted mb-3">
+                  <div><i class="fas fa-building me-1"></i> 5+ Facilities</div>
+                  <div><i class="fas fa-star me-1"></i> NaN Rating</div>
+                </div>
+                <a href="/city/richardson-tx.html" class="btn btn-outline-primary stretched-link">View Facilities</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="city-card card h-100 shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title h5">Lewisville, TX</h3>
+                <p class="text-muted mb-2">Population: 101,074</p>
+                <div class="d-flex gap-3 small text-muted mb-3">
+                  <div><i class="fas fa-building me-1"></i> 5+ Facilities</div>
+                  <div><i class="fas fa-star me-1"></i> NaN Rating</div>
+                </div>
+                <a href="/city/lewisville-tx.html" class="btn btn-outline-primary stretched-link">View Facilities</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="city-card card h-100 shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title h5">Tyler, TX</h3>
+                <p class="text-muted mb-2">Population: 100,223</p>
+                <div class="d-flex gap-3 small text-muted mb-3">
+                  <div><i class="fas fa-building me-1"></i> 5+ Facilities</div>
+                  <div><i class="fas fa-star me-1"></i> NaN Rating</div>
+                </div>
+                <a href="/city/tyler-tx.html" class="btn btn-outline-primary stretched-link">View Facilities</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="city-card card h-100 shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title h5">Pearland, TX</h3>
+                <p class="text-muted mb-2">Population: 100,065</p>
+                <div class="d-flex gap-3 small text-muted mb-3">
+                  <div><i class="fas fa-building me-1"></i> 5+ Facilities</div>
+                  <div><i class="fas fa-star me-1"></i> NaN Rating</div>
+                </div>
+                <a href="/city/pearland-tx.html" class="btn btn-outline-primary stretched-link">View Facilities</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="city-card card h-100 shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title h5">College Station, TX</h3>
+                <p class="text-muted mb-2">Population: 100,050</p>
+                <div class="d-flex gap-3 small text-muted mb-3">
+                  <div><i class="fas fa-building me-1"></i> 5+ Facilities</div>
+                  <div><i class="fas fa-star me-1"></i> NaN Rating</div>
+                </div>
+                <a href="/city/college-station-tx.html" class="btn btn-outline-primary stretched-link">View Facilities</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="city-card card h-100 shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title h5">San Angelo, TX</h3>
+                <p class="text-muted mb-2">Population: 97,492</p>
+                <div class="d-flex gap-3 small text-muted mb-3">
+                  <div><i class="fas fa-building me-1"></i> 5+ Facilities</div>
+                  <div><i class="fas fa-star me-1"></i> NaN Rating</div>
+                </div>
+                <a href="/city/san-angelo-tx.html" class="btn btn-outline-primary stretched-link">View Facilities</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="city-card card h-100 shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title h5">Allen, TX</h3>
+                <p class="text-muted mb-2">Population: 92,020</p>
+                <div class="d-flex gap-3 small text-muted mb-3">
+                  <div><i class="fas fa-building me-1"></i> 5+ Facilities</div>
+                  <div><i class="fas fa-star me-1"></i> NaN Rating</div>
+                </div>
+                <a href="/city/allen-tx.html" class="btn btn-outline-primary stretched-link">View Facilities</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="city-card card h-100 shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title h5">League City, TX</h3>
+                <p class="text-muted mb-2">Population: 90,983</p>
+                <div class="d-flex gap-3 small text-muted mb-3">
+                  <div><i class="fas fa-building me-1"></i> 5+ Facilities</div>
+                  <div><i class="fas fa-star me-1"></i> NaN Rating</div>
+                </div>
+                <a href="/city/league-city-tx.html" class="btn btn-outline-primary stretched-link">View Facilities</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="city-card card h-100 shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title h5">Sugar Land, TX</h3>
+                <p class="text-muted mb-2">Population: 83,860</p>
+                <div class="d-flex gap-3 small text-muted mb-3">
+                  <div><i class="fas fa-building me-1"></i> 5+ Facilities</div>
+                  <div><i class="fas fa-star me-1"></i> NaN Rating</div>
+                </div>
+                <a href="/city/sugar-land-tx.html" class="btn btn-outline-primary stretched-link">View Facilities</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="city-card card h-100 shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title h5">Longview, TX</h3>
+                <p class="text-muted mb-2">Population: 81,443</p>
+                <div class="d-flex gap-3 small text-muted mb-3">
+                  <div><i class="fas fa-building me-1"></i> 5+ Facilities</div>
+                  <div><i class="fas fa-star me-1"></i> NaN Rating</div>
+                </div>
+                <a href="/city/longview-tx.html" class="btn btn-outline-primary stretched-link">View Facilities</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="city-card card h-100 shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title h5">Mission, TX</h3>
+                <p class="text-muted mb-2">Population: 81,050</p>
+                <div class="d-flex gap-3 small text-muted mb-3">
+                  <div><i class="fas fa-building me-1"></i> 5+ Facilities</div>
+                  <div><i class="fas fa-star me-1"></i> NaN Rating</div>
+                </div>
+                <a href="/city/mission-tx.html" class="btn btn-outline-primary stretched-link">View Facilities</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="city-card card h-100 shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title h5">Edinburg, TX</h3>
+                <p class="text-muted mb-2">Population: 80,836</p>
+                <div class="d-flex gap-3 small text-muted mb-3">
+                  <div><i class="fas fa-building me-1"></i> 5+ Facilities</div>
+                  <div><i class="fas fa-star me-1"></i> NaN Rating</div>
+                </div>
+                <a href="/city/edinburg-tx.html" class="btn btn-outline-primary stretched-link">View Facilities</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="city-card card h-100 shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title h5">Bryan, TX</h3>
+                <p class="text-muted mb-2">Population: 78,709</p>
+                <div class="d-flex gap-3 small text-muted mb-3">
+                  <div><i class="fas fa-building me-1"></i> 5+ Facilities</div>
+                  <div><i class="fas fa-star me-1"></i> NaN Rating</div>
+                </div>
+                <a href="/city/bryan-tx.html" class="btn btn-outline-primary stretched-link">View Facilities</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="city-card card h-100 shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title h5">Baytown, TX</h3>
+                <p class="text-muted mb-2">Population: 75,418</p>
+                <div class="d-flex gap-3 small text-muted mb-3">
+                  <div><i class="fas fa-building me-1"></i> 5+ Facilities</div>
+                  <div><i class="fas fa-star me-1"></i> NaN Rating</div>
+                </div>
+                <a href="/city/baytown-tx.html" class="btn btn-outline-primary stretched-link">View Facilities</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="city-card card h-100 shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title h5">Pharr, TX</h3>
+                <p class="text-muted mb-2">Population: 73,790</p>
+                <div class="d-flex gap-3 small text-muted mb-3">
+                  <div><i class="fas fa-building me-1"></i> 5+ Facilities</div>
+                  <div><i class="fas fa-star me-1"></i> NaN Rating</div>
+                </div>
+                <a href="/city/pharr-tx.html" class="btn btn-outline-primary stretched-link">View Facilities</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="city-card card h-100 shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title h5">Temple, TX</h3>
+                <p class="text-muted mb-2">Population: 70,190</p>
+                <div class="d-flex gap-3 small text-muted mb-3">
+                  <div><i class="fas fa-building me-1"></i> 5+ Facilities</div>
+                  <div><i class="fas fa-star me-1"></i> NaN Rating</div>
+                </div>
+                <a href="/city/temple-tx.html" class="btn btn-outline-primary stretched-link">View Facilities</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="city-card card h-100 shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title h5">Missouri City, TX</h3>
+                <p class="text-muted mb-2">Population: 70,185</p>
+                <div class="d-flex gap-3 small text-muted mb-3">
+                  <div><i class="fas fa-building me-1"></i> 5+ Facilities</div>
+                  <div><i class="fas fa-star me-1"></i> NaN Rating</div>
+                </div>
+                <a href="/city/missouri-city-tx.html" class="btn btn-outline-primary stretched-link">View Facilities</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="city-card card h-100 shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title h5">Flower Mound, TX</h3>
+                <p class="text-muted mb-2">Population: 68,609</p>
+                <div class="d-flex gap-3 small text-muted mb-3">
+                  <div><i class="fas fa-building me-1"></i> 5+ Facilities</div>
+                  <div><i class="fas fa-star me-1"></i> NaN Rating</div>
+                </div>
+                <a href="/city/flower-mound-tx.html" class="btn btn-outline-primary stretched-link">View Facilities</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="city-card card h-100 shadow-sm">
+              <div class="card-body">
+                <h3 class="card-title h5">North Richland Hills, TX</h3>
+                <p class="text-muted mb-2">Population: 67,317</p>
+                <div class="d-flex gap-3 small text-muted mb-3">
+                  <div><i class="fas fa-building me-1"></i> 5+ Facilities</div>
+                  <div><i class="fas fa-star me-1"></i> NaN Rating</div>
+                </div>
+                <a href="/city/north-richland-hills-tx.html" class="btn btn-outline-primary stretched-link">View Facilities</a>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- State Guide Section -->
+  <section class="state-guide py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8">
+          <h2 class="section-title mb-4">Senior Living Guide to Texas</h2>
+          <div class="state-content">
+            <h3 class="h5 mb-3">About Senior Living in Texas</h3>
+            <p>Texas offers a variety of senior living options to accommodate different needs and preferences, from independent living communities to full-service nursing care facilities.</p>
+            
+            <h3 class="h5 mb-3 mt-4">Senior Living Options in Texas</h3>
+            <p>Seniors in Texas can choose from multiple care levels:</p>
+            <ul>
+              <li><strong>Independent Living:</strong> For active seniors who want a maintenance-free lifestyle with amenities and social activities.</li>
+              <li><strong>Assisted Living:</strong> Provides help with daily activities while promoting independence.</li>
+              <li><strong>Memory Care:</strong> Specialized programs for those with Alzheimer's disease and other forms of dementia.</li>
+              <li><strong>Skilled Nursing:</strong> 24-hour medical care for those with complex health needs.</li>
+            </ul>
+            
+            <h3 class="h5 mb-3 mt-4">Cost of Senior Living in Texas</h3>
+            <p>The cost of senior living in Texas varies based on the level of care, amenities, and location. On average, monthly costs range from:</p>
+            <ul>
+              <li>Independent Living: $1,500 - $4,500</li>
+              <li>Assisted Living: $3,000 - $6,500</li>
+              <li>Memory Care: $4,000 - $7,500</li>
+              <li>Skilled Nursing: $6,000 - $12,500</li>
+            </ul>
+            <p>Many facilities accept long-term care insurance, VA benefits, and other payment options to help manage costs.</p>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="contact-sidebar mt-5 mt-lg-0">
+            <!-- Contact Form -->
+            
+  <!-- Contact Form Component -->
+  <div class="contact-form-container p-4 bg-white rounded shadow">
+    <h3 class="mb-3">Contact Us About Senior Living Options</h3>
+    <form id="contact-form" class="needs-validation" novalidate>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label for="firstName" class="form-label">First Name*</label>
+          <input type="text" class="form-control" id="firstName" name="firstName" required>
+          <div class="invalid-feedback">
+            Please provide your first name.
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="lastName" class="form-label">Last Name</label>
+          <input type="text" class="form-control" id="lastName" name="lastName">
+        </div>
+      </div>
+      <div class="row g-3 mt-1">
+        <div class="col-md-6">
+          <label for="email" class="form-label">Email Address*</label>
+          <input type="email" class="form-control" id="email" name="email" required>
+          <div class="invalid-feedback">
+            Please provide a valid email address.
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="phone" class="form-label">Phone Number</label>
+          <input type="tel" class="form-control" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+          <small class="form-text text-muted">Format: 123-456-7890</small>
+        </div>
+      </div>
+      <div class="mt-3">
+        <label for="message" class="form-label">Message*</label>
+        <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
+        <div class="invalid-feedback">
+          Please provide a message.
+        </div>
+      </div>
+      <div class="mt-3">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="consent" name="consent" required>
+          <label class="form-check-label" for="consent">
+            I consent to having this website store my submitted information so they can respond to my inquiry.
+          </label>
+          <div class="invalid-feedback">
+            You must consent to proceed.
+          </div>
+        </div>
+      </div>
+      <div class="mt-4">
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <div class="mt-3 alert alert-success d-none" id="form-success">
+          Thank you for contacting us! We'll be in touch with you shortly.
+        </div>
+        <div class="mt-3 alert alert-danger d-none" id="form-error">
+          There was a problem submitting your form. Please try again.
+        </div>
+      </div>
+    </form>
+  </div>
+  
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 mb-4 mb-lg-0">
+          <h5>Radiant Retirement</h5>
+          <p>Helping seniors and families find the perfect retirement community with comprehensive information and personalized guidance.</p>
+          <div class="social-icons">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+          <h5>Explore</h5>
+          <ul class="list-unstyled">
+            <li><a href="/">Home</a></li>
+            <li><a href="/browse/index.html">Browse by State</a></li>
+            <li><a href="/about.html">About Us</a></li>
+            <li><a href="/resources.html">Resources</a></li>
+            <li><a href="/contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+          <h5>Resources</h5>
+          <ul class="list-unstyled">
+            <li><a href="/resources.html">Senior Housing Guide</a></li>
+            <li><a href="/resources.html">Financing Options</a></li>
+            <li><a href="/resources.html">Types of Care</a></li>
+            <li><a href="/resources.html">FAQs</a></li>
+            <li><a href="/resources.html">Blog</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-md-4">
+          <h5>Contact Us</h5>
+          <address>
+            <p><i class="fas fa-map-marker-alt me-2"></i> 123 Retirement Ave, Suite 100<br>Phoenix, AZ 85001</p>
+            <p><i class="fas fa-phone me-2"></i> (800) 555-0000</p>
+            <p><i class="fas fa-envelope me-2"></i> info@radiantretirement.com</p>
+          </address>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-md-6 mb-3 mb-md-0">
+          <p class="small mb-0">&copy; 2023 Radiant Retirement. All rights reserved.</p>
+        </div>
+        <div class="col-md-6 text-md-end">
+          <p class="small mb-0">
+            <a href="/about.html">Privacy Policy</a> |
+            <a href="/about.html">Terms of Service</a> |
+            <a href="/sitemap.xml">Sitemap</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Custom JavaScript -->
+  <script src="/js/scripts.js"></script>
+</body>
+</html>
