@@ -1,0 +1,1001 @@
+city,state,population,state_name,slug
+New York,NY,8405837,New York,new-york-ny
+Los Angeles,CA,3884307,California,los-angeles-ca
+Chicago,IL,2718782,Illinois,chicago-il
+Houston,TX,2195914,Texas,houston-tx
+Philadelphia,PA,1553165,Pennsylvania,philadelphia-pa
+Phoenix,AZ,1513367,Arizona,phoenix-az
+San Antonio,TX,1409019,Texas,san-antonio-tx
+San Diego,CA,1355896,California,san-diego-ca
+Dallas,TX,1257676,Texas,dallas-tx
+San Jose,CA,998537,California,san-jose-ca
+Austin,TX,885400,Texas,austin-tx
+Indianapolis,IN,843393,Indiana,indianapolis-in
+Jacksonville,FL,842583,Florida,jacksonville-fl
+San Francisco,CA,837442,California,san-francisco-ca
+Columbus,OH,822553,Ohio,columbus-oh
+Charlotte,NC,792862,North Carolina,charlotte-nc
+Fort Worth,TX,792727,Texas,fort-worth-tx
+Detroit,MI,688701,Michigan,detroit-mi
+El Paso,TX,674433,Texas,el-paso-tx
+Memphis,TN,653450,Tennessee,memphis-tn
+Seattle,WA,652405,Washington,seattle-wa
+Denver,CO,649495,Colorado,denver-co
+Washington,DC,646449,District of Columbia,washington-dc
+Boston,MA,645966,Massachusetts,boston-ma
+Nashville-Davidson,TN,634464,Tennessee,nashville-davidson-tn
+Baltimore,MD,622104,Maryland,baltimore-md
+Oklahoma City,OK,610613,Oklahoma,oklahoma-city-ok
+Louisville/Jefferson County,KY,609893,Kentucky,louisville-jefferson-county-ky
+Portland,OR,609456,Oregon,portland-or
+Las Vegas,NV,603488,Nevada,las-vegas-nv
+Milwaukee,WI,599164,Wisconsin,milwaukee-wi
+Albuquerque,NM,556495,New Mexico,albuquerque-nm
+Tucson,AZ,526116,Arizona,tucson-az
+Fresno,CA,509924,California,fresno-ca
+Sacramento,CA,479686,California,sacramento-ca
+Long Beach,CA,469428,California,long-beach-ca
+Kansas City,MO,467007,Missouri,kansas-city-mo
+Mesa,AZ,457587,Arizona,mesa-az
+Virginia Beach,VA,448479,Virginia,virginia-beach-va
+Atlanta,GA,447841,Georgia,atlanta-ga
+Colorado Springs,CO,439886,Colorado,colorado-springs-co
+Omaha,NE,434353,Nebraska,omaha-ne
+Raleigh,NC,431746,North Carolina,raleigh-nc
+Miami,FL,417650,Florida,miami-fl
+Oakland,CA,406253,California,oakland-ca
+Minneapolis,MN,400070,Minnesota,minneapolis-mn
+Tulsa,OK,398121,Oklahoma,tulsa-ok
+Cleveland,OH,390113,Ohio,cleveland-oh
+Wichita,KS,386552,Kansas,wichita-ks
+Arlington,TX,379577,Texas,arlington-tx
+New Orleans,LA,378715,Louisiana,new-orleans-la
+Bakersfield,CA,363630,California,bakersfield-ca
+Tampa,FL,352957,Florida,tampa-fl
+Honolulu,HI,347884,Hawaii,honolulu-hi
+Aurora,CO,345803,Colorado,aurora-co
+Anaheim,CA,345012,California,anaheim-ca
+Santa Ana,CA,334227,California,santa-ana-ca
+St. Louis,MO,318416,Missouri,st-louis-mo
+Riverside,CA,316619,California,riverside-ca
+Corpus Christi,TX,316381,Texas,corpus-christi-tx
+Lexington-Fayette,KY,308428,Kentucky,lexington-fayette-ky
+Pittsburgh,PA,305841,Pennsylvania,pittsburgh-pa
+Anchorage,AK,300950,Alaska,anchorage-ak
+Stockton,CA,298118,California,stockton-ca
+Cincinnati,OH,297517,Ohio,cincinnati-oh
+St. Paul,MN,294873,Minnesota,st-paul-mn
+Toledo,OH,282313,Ohio,toledo-oh
+Greensboro,NC,279639,North Carolina,greensboro-nc
+Newark,NJ,278427,New Jersey,newark-nj
+Plano,TX,274409,Texas,plano-tx
+Henderson,NV,270811,Nevada,henderson-nv
+Lincoln,NE,268738,Nebraska,lincoln-ne
+Buffalo,NY,258959,New York,buffalo-ny
+Jersey City,NJ,257342,New Jersey,jersey-city-nj
+Chula Vista,CA,256780,California,chula-vista-ca
+Fort Wayne,IN,256496,Indiana,fort-wayne-in
+Orlando,FL,255483,Florida,orlando-fl
+St. Petersburg,FL,249688,Florida,st-petersburg-fl
+Chandler,AZ,249146,Arizona,chandler-az
+Laredo,TX,248142,Texas,laredo-tx
+Norfolk,VA,246139,Virginia,norfolk-va
+Durham,NC,245475,North Carolina,durham-nc
+Madison,WI,243344,Wisconsin,madison-wi
+Lubbock,TX,239538,Texas,lubbock-tx
+Irvine,CA,236716,California,irvine-ca
+Winston-Salem,NC,236441,North Carolina,winston-salem-nc
+Glendale,AZ,234632,Arizona,glendale-az
+Garland,TX,234566,Texas,garland-tx
+Hialeah,FL,233394,Florida,hialeah-fl
+Reno,NV,233294,Nevada,reno-nv
+Chesapeake,VA,230571,Virginia,chesapeake-va
+Gilbert,AZ,229972,Arizona,gilbert-az
+Baton Rouge,LA,229426,Louisiana,baton-rouge-la
+Irving,TX,228653,Texas,irving-tx
+Scottsdale,AZ,226918,Arizona,scottsdale-az
+North Las Vegas,NV,226877,Nevada,north-las-vegas-nv
+Fremont,CA,224922,California,fremont-ca
+Boise City,ID,214237,Idaho,boise-city-id
+Richmond,VA,214114,Virginia,richmond-va
+San Bernardino,CA,213708,California,san-bernardino-ca
+Birmingham,AL,212113,Alabama,birmingham-al
+Spokane,WA,210721,Washington,spokane-wa
+Rochester,NY,210358,New York,rochester-ny
+Des Moines,IA,207510,Iowa,des-moines-ia
+Modesto,CA,204933,California,modesto-ca
+Fayetteville,NC,204408,North Carolina,fayetteville-nc
+Tacoma,WA,203446,Washington,tacoma-wa
+Oxnard,CA,203007,California,oxnard-ca
+Fontana,CA,203003,California,fontana-ca
+Columbus,GA,202824,Georgia,columbus-ga
+Montgomery,AL,201332,Alabama,montgomery-al
+Moreno Valley,CA,201175,California,moreno-valley-ca
+Shreveport,LA,200327,Louisiana,shreveport-la
+Aurora,IL,199963,Illinois,aurora-il
+Yonkers,NY,199766,New York,yonkers-ny
+Akron,OH,198100,Ohio,akron-oh
+Huntington Beach,CA,197575,California,huntington-beach-ca
+Little Rock,AR,197357,Arkansas,little-rock-ar
+Augusta-Richmond County,GA,197350,Georgia,augusta-richmond-county-ga
+Amarillo,TX,196429,Texas,amarillo-tx
+Glendale,CA,196021,California,glendale-ca
+Mobile,AL,194899,Alabama,mobile-al
+Grand Rapids,MI,192294,Michigan,grand-rapids-mi
+Salt Lake City,UT,191180,Utah,salt-lake-city-ut
+Tallahassee,FL,186411,Florida,tallahassee-fl
+Huntsville,AL,186254,Alabama,huntsville-al
+Grand Prairie,TX,183372,Texas,grand-prairie-tx
+Knoxville,TN,183270,Tennessee,knoxville-tn
+Worcester,MA,182544,Massachusetts,worcester-ma
+Newport News,VA,182020,Virginia,newport-news-va
+Brownsville,TX,181860,Texas,brownsville-tx
+Overland Park,KS,181260,Kansas,overland-park-ks
+Santa Clarita,CA,179590,California,santa-clarita-ca
+Providence,RI,177994,Rhode Island,providence-ri
+Garden Grove,CA,175140,California,garden-grove-ca
+Chattanooga,TN,173366,Tennessee,chattanooga-tn
+Oceanside,CA,172794,California,oceanside-ca
+Jackson,MS,172638,Mississippi,jackson-ms
+Fort Lauderdale,FL,172389,Florida,fort-lauderdale-fl
+Santa Rosa,CA,171990,California,santa-rosa-ca
+Rancho Cucamonga,CA,171386,California,rancho-cucamonga-ca
+Port St. Lucie,FL,171016,Florida,port-st-lucie-fl
+Tempe,AZ,168228,Arizona,tempe-az
+Ontario,CA,167500,California,ontario-ca
+Vancouver,WA,167405,Washington,vancouver-wa
+Cape Coral,FL,165831,Florida,cape-coral-fl
+Sioux Falls,SD,164676,South Dakota,sioux-falls-sd
+Springfield,MO,164122,Missouri,springfield-mo
+Peoria,AZ,162592,Arizona,peoria-az
+Pembroke Pines,FL,162329,Florida,pembroke-pines-fl
+Elk Grove,CA,161007,California,elk-grove-ca
+Salem,OR,160614,Oregon,salem-or
+Lancaster,CA,159523,California,lancaster-ca
+Corona,CA,159503,California,corona-ca
+Eugene,OR,159190,Oregon,eugene-or
+Palmdale,CA,157161,California,palmdale-ca
+Salinas,CA,155662,California,salinas-ca
+Springfield,MA,153703,Massachusetts,springfield-ma
+Pasadena,TX,152735,Texas,pasadena-tx
+Fort Collins,CO,152061,Colorado,fort-collins-co
+Hayward,CA,151574,California,hayward-ca
+Pomona,CA,151348,California,pomona-ca
+Cary,NC,151088,North Carolina,cary-nc
+Rockford,IL,150251,Illinois,rockford-il
+Alexandria,VA,148892,Virginia,alexandria-va
+Escondido,CA,148738,California,escondido-ca
+McKinney,TX,148559,Texas,mckinney-tx
+Kansas City,KS,148483,Kansas,kansas-city-ks
+Joliet,IL,147806,Illinois,joliet-il
+Sunnyvale,CA,147559,California,sunnyvale-ca
+Torrance,CA,147478,California,torrance-ca
+Bridgeport,CT,147216,Connecticut,bridgeport-ct
+Lakewood,CO,147214,Colorado,lakewood-co
+Hollywood,FL,146526,Florida,hollywood-fl
+Paterson,NJ,145948,New Jersey,paterson-nj
+Naperville,IL,144864,Illinois,naperville-il
+Syracuse,NY,144669,New York,syracuse-ny
+Mesquite,TX,143484,Texas,mesquite-tx
+Dayton,OH,143355,Ohio,dayton-oh
+Savannah,GA,142772,Georgia,savannah-ga
+Clarksville,TN,142357,Tennessee,clarksville-tn
+Orange,CA,139969,California,orange-ca
+Pasadena,CA,139731,California,pasadena-ca
+Fullerton,CA,138981,California,fullerton-ca
+Killeen,TX,137147,Texas,killeen-tx
+Frisco,TX,136791,Texas,frisco-tx
+Hampton,VA,136699,Virginia,hampton-va
+McAllen,TX,136639,Texas,mcallen-tx
+Warren,MI,134873,Michigan,warren-mi
+Bellevue,WA,133992,Washington,bellevue-wa
+West Valley City,UT,133579,Utah,west-valley-city-ut
+Columbia,SC,133358,South Carolina,columbia-sc
+Olathe,KS,131885,Kansas,olathe-ks
+Sterling Heights,MI,131224,Michigan,sterling-heights-mi
+New Haven,CT,130660,Connecticut,new-haven-ct
+Miramar,FL,130288,Florida,miramar-fl
+Waco,TX,129030,Texas,waco-tx
+Thousand Oaks,CA,128731,California,thousand-oaks-ca
+Cedar Rapids,IA,128429,Iowa,cedar-rapids-ia
+Charleston,SC,127999,South Carolina,charleston-sc
+Visalia,CA,127763,California,visalia-ca
+Topeka,KS,127679,Kansas,topeka-ks
+Elizabeth,NJ,127558,New Jersey,elizabeth-nj
+Gainesville,FL,127488,Florida,gainesville-fl
+Thornton,CO,127359,Colorado,thornton-co
+Roseville,CA,127035,California,roseville-ca
+Carrollton,TX,126700,Texas,carrollton-tx
+Coral Springs,FL,126604,Florida,coral-springs-fl
+Stamford,CT,126456,Connecticut,stamford-ct
+Simi Valley,CA,126181,California,simi-valley-ca
+Concord,CA,125880,California,concord-ca
+Hartford,CT,125017,Connecticut,hartford-ct
+Kent,WA,124435,Washington,kent-wa
+Lafayette,LA,124276,Louisiana,lafayette-la
+Midland,TX,123933,Texas,midland-tx
+Surprise,AZ,123546,Arizona,surprise-az
+Denton,TX,123099,Texas,denton-tx
+Victorville,CA,121096,California,victorville-ca
+Evansville,IN,120310,Indiana,evansville-in
+Santa Clara,CA,120245,California,santa-clara-ca
+Abilene,TX,120099,Texas,abilene-tx
+Athens-Clarke County,GA,119980,Georgia,athens-clarke-county-ga
+Vallejo,CA,118837,California,vallejo-ca
+Allentown,PA,118577,Pennsylvania,allentown-pa
+Norman,OK,118197,Oklahoma,norman-ok
+Beaumont,TX,117796,Texas,beaumont-tx
+Independence,MO,117240,Missouri,independence-mo
+Murfreesboro,TN,117044,Tennessee,murfreesboro-tn
+Ann Arbor,MI,117025,Michigan,ann-arbor-mi
+Springfield,IL,117006,Illinois,springfield-il
+Berkeley,CA,116768,California,berkeley-ca
+Peoria,IL,116513,Illinois,peoria-il
+Provo,UT,116288,Utah,provo-ut
+El Monte,CA,115708,California,el-monte-ca
+Columbia,MO,115276,Missouri,columbia-mo
+Lansing,MI,113972,Michigan,lansing-mi
+Fargo,ND,113658,North Dakota,fargo-nd
+Downey,CA,113242,California,downey-ca
+Costa Mesa,CA,112174,California,costa-mesa-ca
+Wilmington,NC,112067,North Carolina,wilmington-nc
+Arvada,CO,111707,Colorado,arvada-co
+Inglewood,CA,111542,California,inglewood-ca
+Miami Gardens,FL,111378,Florida,miami-gardens-fl
+Carlsbad,CA,110972,California,carlsbad-ca
+Westminster,CO,110945,Colorado,westminster-co
+Rochester,MN,110742,Minnesota,rochester-mn
+Odessa,TX,110720,Texas,odessa-tx
+Manchester,NH,110378,New Hampshire,manchester-nh
+Elgin,IL,110145,Illinois,elgin-il
+West Jordan,UT,110077,Utah,west-jordan-ut
+Round Rock,TX,109821,Texas,round-rock-tx
+Clearwater,FL,109703,Florida,clearwater-fl
+Waterbury,CT,109676,Connecticut,waterbury-ct
+Gresham,OR,109397,Oregon,gresham-or
+Fairfield,CA,109320,California,fairfield-ca
+Billings,MT,109059,Montana,billings-mt
+Lowell,MA,108861,Massachusetts,lowell-ma
+San Buenaventura (Ventura),CA,108817,California,san-buenaventura-ventura-ca
+Pueblo,CO,108249,Colorado,pueblo-co
+High Point,NC,107741,North Carolina,high-point-nc
+West Covina,CA,107740,California,west-covina-ca
+Richmond,CA,107571,California,richmond-ca
+Murrieta,CA,107479,California,murrieta-ca
+Cambridge,MA,107289,Massachusetts,cambridge-ma
+Antioch,CA,107100,California,antioch-ca
+Temecula,CA,106780,California,temecula-ca
+Norwalk,CA,106589,California,norwalk-ca
+Centennial,CO,106114,Colorado,centennial-co
+Everett,WA,105370,Washington,everett-wa
+Palm Bay,FL,104898,Florida,palm-bay-fl
+Wichita Falls,TX,104898,Texas,wichita-falls-tx
+Green Bay,WI,104779,Wisconsin,green-bay-wi
+Daly City,CA,104739,California,daly-city-ca
+Burbank,CA,104709,California,burbank-ca
+Richardson,TX,104475,Texas,richardson-tx
+Pompano Beach,FL,104410,Florida,pompano-beach-fl
+North Charleston,SC,104054,South Carolina,north-charleston-sc
+Broken Arrow,OK,103500,Oklahoma,broken-arrow-ok
+Boulder,CO,103166,Colorado,boulder-co
+West Palm Beach,FL,102436,Florida,west-palm-beach-fl
+Santa Maria,CA,102216,California,santa-maria-ca
+El Cajon,CA,102211,California,el-cajon-ca
+Davenport,IA,102157,Iowa,davenport-ia
+Rialto,CA,101910,California,rialto-ca
+Las Cruces,NM,101324,New Mexico,las-cruces-nm
+San Mateo,CA,101128,California,san-mateo-ca
+Lewisville,TX,101074,Texas,lewisville-tx
+South Bend,IN,100886,Indiana,south-bend-in
+Lakeland,FL,100710,Florida,lakeland-fl
+Erie,PA,100671,Pennsylvania,erie-pa
+Tyler,TX,100223,Texas,tyler-tx
+Pearland,TX,100065,Texas,pearland-tx
+College Station,TX,100050,Texas,college-station-tx
+Kenosha,WI,99889,Wisconsin,kenosha-wi
+Sandy Springs,GA,99770,Georgia,sandy-springs-ga
+Clovis,CA,99769,California,clovis-ca
+Flint,MI,99763,Michigan,flint-mi
+Roanoke,VA,98465,Virginia,roanoke-va
+Albany,NY,98424,New York,albany-ny
+Jurupa Valley,CA,98030,California,jurupa-valley-ca
+Compton,CA,97877,California,compton-ca
+San Angelo,TX,97492,Texas,san-angelo-tx
+Hillsboro,OR,97368,Oregon,hillsboro-or
+Lawton,OK,97151,Oklahoma,lawton-ok
+Renton,WA,97003,Washington,renton-wa
+Vista,CA,96929,California,vista-ca
+Davie,FL,96830,Florida,davie-fl
+Greeley,CO,96539,Colorado,greeley-co
+Mission Viejo,CA,96346,California,mission-viejo-ca
+Portsmouth,VA,96205,Virginia,portsmouth-va
+Dearborn,MI,95884,Michigan,dearborn-mi
+South Gate,CA,95677,California,south-gate-ca
+Tuscaloosa,AL,95334,Alabama,tuscaloosa-al
+Livonia,MI,95208,Michigan,livonia-mi
+New Bedford,MA,95078,Massachusetts,new-bedford-ma
+Vacaville,CA,94275,California,vacaville-ca
+Brockton,MA,94089,Massachusetts,brockton-ma
+Roswell,GA,94034,Georgia,roswell-ga
+Beaverton,OR,93542,Oregon,beaverton-or
+Quincy,MA,93494,Massachusetts,quincy-ma
+Sparks,NV,93282,Nevada,sparks-nv
+Yakima,WA,93257,Washington,yakima-wa
+Lee's Summit,MO,93184,Missouri,lee-s-summit-mo
+Federal Way,WA,92734,Washington,federal-way-wa
+Carson,CA,92599,California,carson-ca
+Santa Monica,CA,92472,California,santa-monica-ca
+Hesperia,CA,92147,California,hesperia-ca
+Allen,TX,92020,Texas,allen-tx
+Rio Rancho,NM,91956,New Mexico,rio-rancho-nm
+Yuma,AZ,91923,Arizona,yuma-az
+Westminster,CA,91739,California,westminster-ca
+Orem,UT,91648,Utah,orem-ut
+Lynn,MA,91589,Massachusetts,lynn-ma
+Redding,CA,91119,California,redding-ca
+Spokane Valley,WA,91113,Washington,spokane-valley-wa
+Miami Beach,FL,91026,Florida,miami-beach-fl
+League City,TX,90983,Texas,league-city-tx
+Lawrence,KS,90811,Kansas,lawrence-ks
+Santa Barbara,CA,90412,California,santa-barbara-ca
+Plantation,FL,90268,Florida,plantation-fl
+Sandy,UT,90231,Utah,sandy-ut
+Sunrise,FL,90116,Florida,sunrise-fl
+Macon,GA,89981,Georgia,macon-ga
+Longmont,CO,89919,Colorado,longmont-co
+Boca Raton,FL,89407,Florida,boca-raton-fl
+San Marcos,CA,89387,California,san-marcos-ca
+Greenville,NC,89130,North Carolina,greenville-nc
+Waukegan,IL,88826,Illinois,waukegan-il
+Fall River,MA,88697,Massachusetts,fall-river-ma
+Chico,CA,88077,California,chico-ca
+Newton,MA,87971,Massachusetts,newton-ma
+San Leandro,CA,87965,California,san-leandro-ca
+Reading,PA,87893,Pennsylvania,reading-pa
+Norwalk,CT,87776,Connecticut,norwalk-ct
+Fort Smith,AR,87650,Arkansas,fort-smith-ar
+Newport Beach,CA,87273,California,newport-beach-ca
+Asheville,NC,87236,North Carolina,asheville-nc
+Nashua,NH,87137,New Hampshire,nashua-nh
+Edmond,OK,87004,Oklahoma,edmond-ok
+Whittier,CA,86635,California,whittier-ca
+Nampa,ID,86518,Idaho,nampa-id
+Bloomington,MN,86319,Minnesota,bloomington-mn
+Deltona,FL,86290,Florida,deltona-fl
+Hawthorne,CA,86199,California,hawthorne-ca
+Duluth,MN,86128,Minnesota,duluth-mn
+Carmel,IN,85927,Indiana,carmel-in
+Suffolk,VA,85728,Virginia,suffolk-va
+Clifton,NJ,85390,New Jersey,clifton-nj
+Citrus Heights,CA,85285,California,citrus-heights-ca
+Livermore,CA,85156,California,livermore-ca
+Tracy,CA,84691,California,tracy-ca
+Alhambra,CA,84577,California,alhambra-ca
+Kirkland,WA,84430,Washington,kirkland-wa
+Trenton,NJ,84349,New Jersey,trenton-nj
+Ogden,UT,84249,Utah,ogden-ut
+Hoover,AL,84126,Alabama,hoover-al
+Cicero,IL,84103,Illinois,cicero-il
+Fishers,IN,83891,Indiana,fishers-in
+Sugar Land,TX,83860,Texas,sugar-land-tx
+Danbury,CT,83684,Connecticut,danbury-ct
+Meridian,ID,83596,Idaho,meridian-id
+Indio,CA,83539,California,indio-ca
+Concord,NC,83506,North Carolina,concord-nc
+Menifee,CA,83447,California,menifee-ca
+Champaign,IL,83424,Illinois,champaign-il
+Buena Park,CA,82882,California,buena-park-ca
+Troy,MI,82821,Michigan,troy-mi
+O'Fallon,MO,82809,Missouri,o-fallon-mo
+Johns Creek,GA,82788,Georgia,johns-creek-ga
+Bellingham,WA,82631,Washington,bellingham-wa
+Westland,MI,82578,Michigan,westland-mi
+Bloomington,IN,82575,Indiana,bloomington-in
+Sioux City,IA,82459,Iowa,sioux-city-ia
+Warwick,RI,81971,Rhode Island,warwick-ri
+Hemet,CA,81750,California,hemet-ca
+Longview,TX,81443,Texas,longview-tx
+Farmington Hills,MI,81295,Michigan,farmington-hills-mi
+Bend,OR,81236,Oregon,bend-or
+Lakewood,CA,81121,California,lakewood-ca
+Merced,CA,81102,California,merced-ca
+Mission,TX,81050,Texas,mission-tx
+Chino,CA,80988,California,chino-ca
+Redwood City,CA,80872,California,redwood-city-ca
+Edinburg,TX,80836,Texas,edinburg-tx
+Cranston,RI,80566,Rhode Island,cranston-ri
+Parma,OH,80429,Ohio,parma-oh
+New Rochelle,NY,79446,New York,new-rochelle-ny
+Lake Forest,CA,79312,California,lake-forest-ca
+Napa,CA,79068,California,napa-ca
+Hammond,IN,78967,Indiana,hammond-in
+Fayetteville,AR,78960,Arkansas,fayetteville-ar
+Bloomington,IL,78902,Illinois,bloomington-il
+Avondale,AZ,78822,Arizona,avondale-az
+Somerville,MA,78804,Massachusetts,somerville-ma
+Palm Coast,FL,78740,Florida,palm-coast-fl
+Bryan,TX,78709,Texas,bryan-tx
+Gary,IN,78450,Indiana,gary-in
+Largo,FL,78409,Florida,largo-fl
+Brooklyn Park,MN,78373,Minnesota,brooklyn-park-mn
+Tustin,CA,78327,California,tustin-ca
+Racine,WI,78199,Wisconsin,racine-wi
+Deerfield Beach,FL,78041,Florida,deerfield-beach-fl
+Lynchburg,VA,78014,Virginia,lynchburg-va
+Mountain View,CA,77846,California,mountain-view-ca
+Medford,OR,77677,Oregon,medford-or
+Lawrence,MA,77657,Massachusetts,lawrence-ma
+Bellflower,CA,77593,California,bellflower-ca
+Melbourne,FL,77508,Florida,melbourne-fl
+St. Joseph,MO,77147,Missouri,st-joseph-mo
+Camden,NJ,76903,New Jersey,camden-nj
+St. George,UT,76817,Utah,st-george-ut
+Kennewick,WA,76762,Washington,kennewick-wa
+Baldwin Park,CA,76635,California,baldwin-park-ca
+Chino Hills,CA,76572,California,chino-hills-ca
+Alameda,CA,76419,California,alameda-ca
+Albany,GA,76185,Georgia,albany-ga
+Arlington Heights,IL,75994,Illinois,arlington-heights-il
+Scranton,PA,75806,Pennsylvania,scranton-pa
+Evanston,IL,75570,Illinois,evanston-il
+Kalamazoo,MI,75548,Michigan,kalamazoo-mi
+Baytown,TX,75418,Texas,baytown-tx
+Upland,CA,75413,California,upland-ca
+Springdale,AR,75229,Arkansas,springdale-ar
+Bethlehem,PA,75018,Pennsylvania,bethlehem-pa
+Schaumburg,IL,74907,Illinois,schaumburg-il
+Mount Pleasant,SC,74885,South Carolina,mount-pleasant-sc
+Auburn,WA,74860,Washington,auburn-wa
+Decatur,IL,74710,Illinois,decatur-il
+San Ramon,CA,74513,California,san-ramon-ca
+Pleasanton,CA,74110,California,pleasanton-ca
+Wyoming,MI,74100,Michigan,wyoming-mi
+Lake Charles,LA,74024,Louisiana,lake-charles-la
+Plymouth,MN,73987,Minnesota,plymouth-mn
+Bolingbrook,IL,73936,Illinois,bolingbrook-il
+Pharr,TX,73790,Texas,pharr-tx
+Appleton,WI,73596,Wisconsin,appleton-wi
+Gastonia,NC,73209,North Carolina,gastonia-nc
+Folsom,CA,73098,California,folsom-ca
+Southfield,MI,73006,Michigan,southfield-mi
+Rochester Hills,MI,72952,Michigan,rochester-hills-mi
+New Britain,CT,72939,Connecticut,new-britain-ct
+Goodyear,AZ,72864,Arizona,goodyear-az
+Canton,OH,72535,Ohio,canton-oh
+Warner Robins,GA,72531,Georgia,warner-robins-ga
+Union City,CA,72528,California,union-city-ca
+Perris,CA,72326,California,perris-ca
+Manteca,CA,71948,California,manteca-ca
+Iowa City,IA,71591,Iowa,iowa-city-ia
+Jonesboro,AR,71551,Arkansas,jonesboro-ar
+Wilmington,DE,71525,Delaware,wilmington-de
+Lynwood,CA,71371,California,lynwood-ca
+Loveland,CO,71334,Colorado,loveland-co
+Pawtucket,RI,71172,Rhode Island,pawtucket-ri
+Boynton Beach,FL,71097,Florida,boynton-beach-fl
+Waukesha,WI,71016,Wisconsin,waukesha-wi
+Gulfport,MS,71012,Mississippi,gulfport-ms
+Apple Valley,CA,70924,California,apple-valley-ca
+Passaic,NJ,70868,New Jersey,passaic-nj
+Rapid City,SD,70812,South Dakota,rapid-city-sd
+Layton,UT,70790,Utah,layton-ut
+Lafayette,IN,70373,Indiana,lafayette-in
+Turlock,CA,70365,California,turlock-ca
+Muncie,IN,70316,Indiana,muncie-in
+Temple,TX,70190,Texas,temple-tx
+Missouri City,TX,70185,Texas,missouri-city-tx
+Redlands,CA,69999,California,redlands-ca
+Santa Fe,NM,69976,New Mexico,santa-fe-nm
+Lauderhill,FL,69813,Florida,lauderhill-fl
+Milpitas,CA,69783,California,milpitas-ca
+Palatine,IL,69350,Illinois,palatine-il
+Missoula,MT,69122,Montana,missoula-mt
+Rock Hill,SC,69103,South Carolina,rock-hill-sc
+Jacksonville,NC,69079,North Carolina,jacksonville-nc
+Franklin,TN,68886,Tennessee,franklin-tn
+Flagstaff,AZ,68667,Arizona,flagstaff-az
+Flower Mound,TX,68609,Texas,flower-mound-tx
+Weston,FL,68388,Florida,weston-fl
+Waterloo,IA,68366,Iowa,waterloo-ia
+Union City,NJ,68247,New Jersey,union-city-nj
+Mount Vernon,NY,68224,New York,mount-vernon-ny
+Fort Myers,FL,68190,Florida,fort-myers-fl
+Dothan,AL,68001,Alabama,dothan-al
+Rancho Cordova,CA,67911,California,rancho-cordova-ca
+Redondo Beach,CA,67815,California,redondo-beach-ca
+Jackson,TN,67685,Tennessee,jackson-tn
+Pasco,WA,67599,Washington,pasco-wa
+St. Charles,MO,67569,Missouri,st-charles-mo
+Eau Claire,WI,67545,Wisconsin,eau-claire-wi
+North Richland Hills,TX,67317,Texas,north-richland-hills-tx
+Bismarck,ND,67034,North Dakota,bismarck-nd
+Yorba Linda,CA,67032,California,yorba-linda-ca
+Kenner,LA,66975,Louisiana,kenner-la
+Walnut Creek,CA,66900,California,walnut-creek-ca
+Frederick,MD,66893,Maryland,frederick-md
+Oshkosh,WI,66778,Wisconsin,oshkosh-wi
+Pittsburg,CA,66695,California,pittsburg-ca
+Palo Alto,CA,66642,California,palo-alto-ca
+Bossier City,LA,66333,Louisiana,bossier-city-la
+Portland,ME,66318,Maine,portland-me
+St. Cloud,MN,66297,Minnesota,st-cloud-mn
+Davis,CA,66205,California,davis-ca
+South San Francisco,CA,66174,California,south-san-francisco-ca
+Camarillo,CA,66086,California,camarillo-ca
+North Little Rock,AR,66075,Arkansas,north-little-rock-ar
+Schenectady,NY,65902,New York,schenectady-ny
+Gaithersburg,MD,65690,Maryland,gaithersburg-md
+Harlingen,TX,65665,Texas,harlingen-tx
+Woodbury,MN,65656,Minnesota,woodbury-mn
+Eagan,MN,65453,Minnesota,eagan-mn
+Yuba City,CA,65416,California,yuba-city-ca
+Maple Grove,MN,65415,Minnesota,maple-grove-mn
+Youngstown,OH,65184,Ohio,youngstown-oh
+Skokie,IL,65176,Illinois,skokie-il
+Kissimmee,FL,65173,Florida,kissimmee-fl
+Johnson City,TN,65123,Tennessee,johnson-city-tn
+Victoria,TX,65098,Texas,victoria-tx
+San Clemente,CA,65040,California,san-clemente-ca
+Bayonne,NJ,65028,New Jersey,bayonne-nj
+Laguna Niguel,CA,64652,California,laguna-niguel-ca
+East Orange,NJ,64544,New Jersey,east-orange-nj
+Shawnee,KS,64323,Kansas,shawnee-ks
+Homestead,FL,64079,Florida,homestead-fl
+Rockville,MD,64072,Maryland,rockville-md
+Delray Beach,FL,64072,Florida,delray-beach-fl
+Janesville,WI,63820,Wisconsin,janesville-wi
+Conway,AR,63816,Arkansas,conway-ar
+Pico Rivera,CA,63771,California,pico-rivera-ca
+Lorain,OH,63710,Ohio,lorain-oh
+Montebello,CA,63495,California,montebello-ca
+Lodi,CA,63338,California,lodi-ca
+New Braunfels,TX,63279,Texas,new-braunfels-tx
+Marysville,WA,63269,Washington,marysville-wa
+Tamarac,FL,63155,Florida,tamarac-fl
+Madera,CA,63105,California,madera-ca
+Conroe,TX,63032,Texas,conroe-tx
+Santa Cruz,CA,62864,California,santa-cruz-ca
+Eden Prairie,MN,62603,Minnesota,eden-prairie-mn
+Cheyenne,WY,62448,Wyoming,cheyenne-wy
+Daytona Beach,FL,62316,Florida,daytona-beach-fl
+Alpharetta,GA,62298,Georgia,alpharetta-ga
+Hamilton,OH,62258,Ohio,hamilton-oh
+Waltham,MA,62227,Massachusetts,waltham-ma
+Coon Rapids,MN,62103,Minnesota,coon-rapids-mn
+Haverhill,MA,62088,Massachusetts,haverhill-ma
+Council Bluffs,IA,61969,Iowa,council-bluffs-ia
+Taylor,MI,61817,Michigan,taylor-mi
+Utica,NY,61808,New York,utica-ny
+Ames,IA,61792,Iowa,ames-ia
+La Habra,CA,61653,California,la-habra-ca
+Encinitas,CA,61588,California,encinitas-ca
+Bowling Green,KY,61488,Kentucky,bowling-green-ky
+Burnsville,MN,61434,Minnesota,burnsville-mn
+Greenville,SC,61397,South Carolina,greenville-sc
+West Des Moines,IA,61255,Iowa,west-des-moines-ia
+Cedar Park,TX,61238,Texas,cedar-park-tx
+Tulare,CA,61170,California,tulare-ca
+Monterey Park,CA,61085,California,monterey-park-ca
+Vineland,NJ,61050,New Jersey,vineland-nj
+Terre Haute,IN,61025,Indiana,terre-haute-in
+North Miami,FL,61007,Florida,north-miami-fl
+Mansfield,TX,60872,Texas,mansfield-tx
+West Allis,WI,60697,Wisconsin,west-allis-wi
+Bristol,CT,60568,Connecticut,bristol-ct
+Taylorsville,UT,60519,Utah,taylorsville-ut
+Malden,MA,60509,Massachusetts,malden-ma
+Meriden,CT,60456,Connecticut,meriden-ct
+Blaine,MN,60407,Minnesota,blaine-mn
+Wellington,FL,60202,Florida,wellington-fl
+Cupertino,CA,60189,California,cupertino-ca
+Springfield,OR,60177,Oregon,springfield-or
+Rogers,AR,60112,Arkansas,rogers-ar
+St. Clair Shores,MI,60070,Michigan,st-clair-shores-mi
+Gardena,CA,59957,California,gardena-ca
+Pontiac,MI,59887,Michigan,pontiac-mi
+National City,CA,59834,California,national-city-ca
+Grand Junction,CO,59778,Colorado,grand-junction-co
+Rocklin,CA,59738,California,rocklin-ca
+Chapel Hill,NC,59635,North Carolina,chapel-hill-nc
+Casper,WY,59628,Wyoming,casper-wy
+Broomfield,CO,59471,Colorado,broomfield-co
+Petaluma,CA,59440,California,petaluma-ca
+South Jordan,UT,59366,Utah,south-jordan-ut
+Springfield,OH,59357,Ohio,springfield-oh
+Great Falls,MT,59351,Montana,great-falls-mt
+Lancaster,PA,59325,Pennsylvania,lancaster-pa
+North Port,FL,59212,Florida,north-port-fl
+Lakewood,WA,59097,Washington,lakewood-wa
+Marietta,GA,59089,Georgia,marietta-ga
+San Rafael,CA,58994,California,san-rafael-ca
+Royal Oak,MI,58946,Michigan,royal-oak-mi
+Des Plaines,IL,58918,Illinois,des-plaines-il
+Huntington Park,CA,58879,California,huntington-park-ca
+La Mesa,CA,58642,California,la-mesa-ca
+Orland Park,IL,58590,Illinois,orland-park-il
+Auburn,AL,58582,Alabama,auburn-al
+Lakeville,MN,58562,Minnesota,lakeville-mn
+Owensboro,KY,58416,Kentucky,owensboro-ky
+Moore,OK,58414,Oklahoma,moore-ok
+Jupiter,FL,58298,Florida,jupiter-fl
+Idaho Falls,ID,58292,Idaho,idaho-falls-id
+Dubuque,IA,58253,Iowa,dubuque-ia
+Bartlett,TN,58226,Tennessee,bartlett-tn
+Rowlett,TX,58043,Texas,rowlett-tx
+Novi,MI,57960,Michigan,novi-mi
+White Plains,NY,57866,New York,white-plains-ny
+Arcadia,CA,57639,California,arcadia-ca
+Redmond,WA,57530,Washington,redmond-wa
+Lake Elsinore,CA,57525,California,lake-elsinore-ca
+Ocala,FL,57468,Florida,ocala-fl
+Tinley Park,IL,57282,Illinois,tinley-park-il
+Port Orange,FL,57203,Florida,port-orange-fl
+Medford,MA,57170,Massachusetts,medford-ma
+Oak Lawn,IL,57073,Illinois,oak-lawn-il
+Rocky Mount,NC,56954,North Carolina,rocky-mount-nc
+Kokomo,IN,56895,Indiana,kokomo-in
+Coconut Creek,FL,56792,Florida,coconut-creek-fl
+Bowie,MD,56759,Maryland,bowie-md
+Berwyn,IL,56758,Illinois,berwyn-il
+Midwest City,OK,56756,Oklahoma,midwest-city-ok
+Fountain Valley,CA,56707,California,fountain-valley-ca
+Buckeye,AZ,56683,Arizona,buckeye-az
+Dearborn Heights,MI,56620,Michigan,dearborn-heights-mi
+Woodland,CA,56590,California,woodland-ca
+Noblesville,IN,56540,Indiana,noblesville-in
+Valdosta,GA,56481,Georgia,valdosta-ga
+Diamond Bar,CA,56449,California,diamond-bar-ca
+Manhattan,KS,56143,Kansas,manhattan-ks
+Santee,CA,56105,California,santee-ca
+Taunton,MA,56069,Massachusetts,taunton-ma
+Sanford,FL,56002,Florida,sanford-fl
+Kettering,OH,55870,Ohio,kettering-oh
+New Brunswick,NJ,55831,New Jersey,new-brunswick-nj
+Decatur,AL,55816,Alabama,decatur-al
+Chicopee,MA,55717,Massachusetts,chicopee-ma
+Anderson,IN,55670,Indiana,anderson-in
+Margate,FL,55456,Florida,margate-fl
+Weymouth Town,MA,55419,Massachusetts,weymouth-town-ma
+Hempstead,NY,55361,New York,hempstead-ny
+Corvallis,OR,55298,Oregon,corvallis-or
+Eastvale,CA,55191,California,eastvale-ca
+Porterville,CA,55174,California,porterville-ca
+West Haven,CT,55046,Connecticut,west-haven-ct
+Brentwood,CA,55000,California,brentwood-ca
+Paramount,CA,54980,California,paramount-ca
+Grand Forks,ND,54932,North Dakota,grand-forks-nd
+Georgetown,TX,54898,Texas,georgetown-tx
+St. Peters,MO,54842,Missouri,st-peters-mo
+Shoreline,WA,54790,Washington,shoreline-wa
+Mount Prospect,IL,54771,Illinois,mount-prospect-il
+Hanford,CA,54686,California,hanford-ca
+Normal,IL,54664,Illinois,normal-il
+Rosemead,CA,54561,California,rosemead-ca
+Lehi,UT,54382,Utah,lehi-ut
+Pocatello,ID,54350,Idaho,pocatello-id
+Highland,CA,54291,California,highland-ca
+Novato,CA,54194,California,novato-ca
+Port Arthur,TX,54135,Texas,port-arthur-tx
+Carson City,NV,54080,Nevada,carson-city-nv
+San Marcos,TX,54076,Texas,san-marcos-tx
+Hendersonville,TN,54068,Tennessee,hendersonville-tn
+Elyria,OH,53956,Ohio,elyria-oh
+Revere,MA,53756,Massachusetts,revere-ma
+Pflugerville,TX,53752,Texas,pflugerville-tx
+Greenwood,IN,53665,Indiana,greenwood-in
+Bellevue,NE,53663,Nebraska,bellevue-ne
+Wheaton,IL,53648,Illinois,wheaton-il
+Smyrna,GA,53438,Georgia,smyrna-ga
+Sarasota,FL,53326,Florida,sarasota-fl
+Blue Springs,MO,53294,Missouri,blue-springs-mo
+Colton,CA,53243,California,colton-ca
+Euless,TX,53224,Texas,euless-tx
+Castle Rock,CO,53063,Colorado,castle-rock-co
+Cathedral City,CA,52977,California,cathedral-city-ca
+Kingsport,TN,52962,Tennessee,kingsport-tn
+Lake Havasu City,AZ,52844,Arizona,lake-havasu-city-az
+Pensacola,FL,52703,Florida,pensacola-fl
+Hoboken,NJ,52575,New Jersey,hoboken-nj
+Yucaipa,CA,52536,California,yucaipa-ca
+Watsonville,CA,52477,California,watsonville-ca
+Richland,WA,52413,Washington,richland-wa
+Delano,CA,52403,California,delano-ca
+Hoffman Estates,IL,52398,Illinois,hoffman-estates-il
+Florissant,MO,52363,Missouri,florissant-mo
+Placentia,CA,52206,California,placentia-ca
+West New York,NJ,52122,New Jersey,west-new-york-nj
+Dublin,CA,52105,California,dublin-ca
+Oak Park,IL,52066,Illinois,oak-park-il
+Peabody,MA,52044,Massachusetts,peabody-ma
+Perth Amboy,NJ,51982,New Jersey,perth-amboy-nj
+Battle Creek,MI,51848,Michigan,battle-creek-mi
+Bradenton,FL,51763,Florida,bradenton-fl
+Gilroy,CA,51701,California,gilroy-ca
+Milford,CT,51644,Connecticut,milford-ct
+Albany,OR,51583,Oregon,albany-or
+Ankeny,IA,51567,Iowa,ankeny-ia
+La Crosse,WI,51522,Wisconsin,la-crosse-wi
+Burlington,NC,51510,North Carolina,burlington-nc
+DeSoto,TX,51483,Texas,desoto-tx
+Harrisonburg,VA,51395,Virginia,harrisonburg-va
+Minnetonka,MN,51368,Minnesota,minnetonka-mn
+Elkhart,IN,51265,Indiana,elkhart-in
+Lakewood,OH,51143,Ohio,lakewood-oh
+Glendora,CA,51074,California,glendora-ca
+Southaven,MS,50997,Mississippi,southaven-ms
+Charleston,WV,50821,West Virginia,charleston-wv
+Joplin,MO,50789,Missouri,joplin-mo
+Enid,OK,50725,Oklahoma,enid-ok
+Palm Beach Gardens,FL,50699,Florida,palm-beach-gardens-fl
+Brookhaven,GA,50603,Georgia,brookhaven-ga
+Plainfield,NJ,50588,New Jersey,plainfield-nj
+Grand Island,NE,50550,Nebraska,grand-island-ne
+Palm Desert,CA,50508,California,palm-desert-ca
+Huntersville,NC,50458,North Carolina,huntersville-nc
+Tigard,OR,50444,Oregon,tigard-or
+Lenexa,KS,50344,Kansas,lenexa-ks
+Saginaw,MI,50303,Michigan,saginaw-mi
+Kentwood,MI,50233,Michigan,kentwood-mi
+Doral,FL,50213,Florida,doral-fl
+Apple Valley,MN,50201,Minnesota,apple-valley-mn
+Grapevine,TX,50195,Texas,grapevine-tx
+Aliso Viejo,CA,50175,California,aliso-viejo-ca
+Sammamish,WA,50169,Washington,sammamish-wa
+Casa Grande,AZ,50111,Arizona,casa-grande-az
+Pinellas Park,FL,49998,Florida,pinellas-park-fl
+Troy,NY,49974,New York,troy-ny
+West Sacramento,CA,49891,California,west-sacramento-ca
+Burien,WA,49858,Washington,burien-wa
+Commerce City,CO,49799,Colorado,commerce-city-co
+Monroe,LA,49761,Louisiana,monroe-la
+Cerritos,CA,49707,California,cerritos-ca
+Downers Grove,IL,49670,Illinois,downers-grove-il
+Coral Gables,FL,49631,Florida,coral-gables-fl
+Wilson,NC,49628,North Carolina,wilson-nc
+Niagara Falls,NY,49468,New York,niagara-falls-ny
+Poway,CA,49417,California,poway-ca
+Edina,MN,49376,Minnesota,edina-mn
+Cuyahoga Falls,OH,49267,Ohio,cuyahoga-falls-oh
+Rancho Santa Margarita,CA,49228,California,rancho-santa-margarita-ca
+Harrisburg,PA,49188,Pennsylvania,harrisburg-pa
+Huntington,WV,49177,West Virginia,huntington-wv
+La Mirada,CA,49133,California,la-mirada-ca
+Cypress,CA,49087,California,cypress-ca
+Caldwell,ID,48957,Idaho,caldwell-id
+Logan,UT,48913,Utah,logan-ut
+Galveston,TX,48733,Texas,galveston-tx
+Sheboygan,WI,48725,Wisconsin,sheboygan-wi
+Middletown,OH,48630,Ohio,middletown-oh
+Murray,UT,48612,Utah,murray-ut
+Roswell,NM,48611,New Mexico,roswell-nm
+Parker,CO,48608,Colorado,parker-co
+Bedford,TX,48592,Texas,bedford-tx
+East Lansing,MI,48554,Michigan,east-lansing-mi
+Methuen,MA,48514,Massachusetts,methuen-ma
+Covina,CA,48508,California,covina-ca
+Alexandria,LA,48426,Louisiana,alexandria-la
+Olympia,WA,48338,Washington,olympia-wa
+Euclid,OH,48139,Ohio,euclid-oh
+Mishawaka,IN,47989,Indiana,mishawaka-in
+Salina,KS,47846,Kansas,salina-ks
+Azusa,CA,47842,California,azusa-ca
+Newark,OH,47777,Ohio,newark-oh
+Chesterfield,MO,47749,Missouri,chesterfield-mo
+Leesburg,VA,47673,Virginia,leesburg-va
+Dunwoody,GA,47591,Georgia,dunwoody-ga
+Hattiesburg,MS,47556,Mississippi,hattiesburg-ms
+Roseville,MI,47555,Michigan,roseville-mi
+Bonita Springs,FL,47547,Florida,bonita-springs-fl
+Portage,MI,47523,Michigan,portage-mi
+St. Louis Park,MN,47411,Minnesota,st-louis-park-mn
+Collierville,TN,47333,Tennessee,collierville-tn
+Middletown,CT,47333,Connecticut,middletown-ct
+Stillwater,OK,47186,Oklahoma,stillwater-ok
+East Providence,RI,47149,Rhode Island,east-providence-ri
+Lawrence,IN,47135,Indiana,lawrence-in
+Wauwatosa,WI,47134,Wisconsin,wauwatosa-wi
+Mentor,OH,46979,Ohio,mentor-oh
+Ceres,CA,46714,California,ceres-ca
+Cedar Hill,TX,46663,Texas,cedar-hill-tx
+Mansfield,OH,46454,Ohio,mansfield-oh
+Binghamton,NY,46444,New York,binghamton-ny
+Coeur d'Alene,ID,46402,Idaho,coeur-d-alene-id
+San Luis Obispo,CA,46377,California,san-luis-obispo-ca
+Minot,ND,46321,North Dakota,minot-nd
+Palm Springs,CA,46281,California,palm-springs-ca
+Pine Bluff,AR,46094,Arkansas,pine-bluff-ar
+Texas City,TX,46081,Texas,texas-city-tx
+Summerville,SC,46074,South Carolina,summerville-sc
+Twin Falls,ID,45981,Idaho,twin-falls-id
+Jeffersonville,IN,45929,Indiana,jeffersonville-in
+San Jacinto,CA,45851,California,san-jacinto-ca
+Madison,AL,45799,Alabama,madison-al
+Altoona,PA,45796,Pennsylvania,altoona-pa
+Columbus,IN,45775,Indiana,columbus-in
+Beavercreek,OH,45712,Ohio,beavercreek-oh
+Apopka,FL,45587,Florida,apopka-fl
+Elmhurst,IL,45556,Illinois,elmhurst-il
+Maricopa,AZ,45508,Arizona,maricopa-az
+Farmington,NM,45426,New Mexico,farmington-nm
+Glenview,IL,45417,Illinois,glenview-il
+Cleveland Heights,OH,45394,Ohio,cleveland-heights-oh
+Draper,UT,45285,Utah,draper-ut
+Lincoln,CA,45237,California,lincoln-ca
+Sierra Vista,AZ,45129,Arizona,sierra-vista-az
+Lacey,WA,44919,Washington,lacey-wa
+Biloxi,MS,44820,Mississippi,biloxi-ms
+Strongsville,OH,44730,Ohio,strongsville-oh
+Barnstable Town,MA,44641,Massachusetts,barnstable-town-ma
+Wylie,TX,44575,Texas,wylie-tx
+Sayreville,NJ,44412,New Jersey,sayreville-nj
+Kannapolis,NC,44359,North Carolina,kannapolis-nc
+Charlottesville,VA,44349,Virginia,charlottesville-va
+Littleton,CO,44275,Colorado,littleton-co
+Titusville,FL,44206,Florida,titusville-fl
+Hackensack,NJ,44113,New Jersey,hackensack-nj
+Newark,CA,44096,California,newark-ca
+Pittsfield,MA,44057,Massachusetts,pittsfield-ma
+York,PA,43935,Pennsylvania,york-pa
+Lombard,IL,43907,Illinois,lombard-il
+Attleboro,MA,43886,Massachusetts,attleboro-ma
+DeKalb,IL,43849,Illinois,dekalb-il
+Blacksburg,VA,43609,Virginia,blacksburg-va
+Dublin,OH,43607,Ohio,dublin-oh
+Haltom City,TX,43580,Texas,haltom-city-tx
+Lompoc,CA,43509,California,lompoc-ca
+El Centro,CA,43363,California,el-centro-ca
+Danville,CA,43341,California,danville-ca
+Jefferson City,MO,43330,Missouri,jefferson-city-mo
+Cutler Bay,FL,43328,Florida,cutler-bay-fl
+Oakland Park,FL,43286,Florida,oakland-park-fl
+North Miami Beach,FL,43250,Florida,north-miami-beach-fl
+Freeport,NY,43167,New York,freeport-ny
+Moline,IL,43116,Illinois,moline-il
+Coachella,CA,43092,California,coachella-ca
+Fort Pierce,FL,43074,Florida,fort-pierce-fl
+Smyrna,TN,43060,Tennessee,smyrna-tn
+Bountiful,UT,43023,Utah,bountiful-ut
+Fond du Lac,WI,42970,Wisconsin,fond-du-lac-wi
+Everett,MA,42935,Massachusetts,everett-ma
+Danville,VA,42907,Virginia,danville-va
+Keller,TX,42907,Texas,keller-tx
+Belleville,IL,42895,Illinois,belleville-il
+Bell Gardens,CA,42889,California,bell-gardens-ca
+Cleveland,TN,42774,Tennessee,cleveland-tn
+North Lauderdale,FL,42757,Florida,north-lauderdale-fl
+Fairfield,OH,42635,Ohio,fairfield-oh
+Salem,MA,42544,Massachusetts,salem-ma
+Rancho Palos Verdes,CA,42448,California,rancho-palos-verdes-ca
+San Bruno,CA,42443,California,san-bruno-ca
+Concord,NH,42419,New Hampshire,concord-nh
+Burlington,VT,42284,Vermont,burlington-vt
+Apex,NC,42214,North Carolina,apex-nc
+Midland,MI,42181,Michigan,midland-mi
+Altamonte Springs,FL,42150,Florida,altamonte-springs-fl
+Hutchinson,KS,41889,Kansas,hutchinson-ks
+Buffalo Grove,IL,41778,Illinois,buffalo-grove-il
+Urbandale,IA,41776,Iowa,urbandale-ia
+State College,PA,41757,Pennsylvania,state-college-pa
+Urbana,IL,41752,Illinois,urbana-il
+Plainfield,IL,41734,Illinois,plainfield-il
+Manassas,VA,41705,Virginia,manassas-va
+Bartlett,IL,41679,Illinois,bartlett-il
+Kearny,NJ,41664,New Jersey,kearny-nj
+Oro Valley,AZ,41627,Arizona,oro-valley-az
+Findlay,OH,41512,Ohio,findlay-oh
+Rohnert Park,CA,41398,California,rohnert-park-ca
+Westfield,MA,41301,Massachusetts,westfield-ma
+Linden,NJ,41301,New Jersey,linden-nj
+Sumter,SC,41190,South Carolina,sumter-sc
+Wilkes-Barre,PA,41108,Pennsylvania,wilkes-barre-pa
+Woonsocket,RI,41026,Rhode Island,woonsocket-ri
+Leominster,MA,41002,Massachusetts,leominster-ma
+Shelton,CT,40999,Connecticut,shelton-ct
+Brea,CA,40963,California,brea-ca
+Covington,KY,40956,Kentucky,covington-ky
+Rockwall,TX,40922,Texas,rockwall-tx
+Meridian,MS,40921,Mississippi,meridian-ms
+Riverton,UT,40921,Utah,riverton-ut
+St. Cloud,FL,40918,Florida,st-cloud-fl
+Quincy,IL,40915,Illinois,quincy-il
+Morgan Hill,CA,40836,California,morgan-hill-ca
+Warren,OH,40768,Ohio,warren-oh
+Edmonds,WA,40727,Washington,edmonds-wa
+Burleson,TX,40714,Texas,burleson-tx
+Beverly,MA,40664,Massachusetts,beverly-ma
+Mankato,MN,40641,Minnesota,mankato-mn
+Hagerstown,MD,40612,Maryland,hagerstown-md
+Prescott,AZ,40590,Arizona,prescott-az
+Campbell,CA,40584,California,campbell-ca
+Cedar Falls,IA,40566,Iowa,cedar-falls-ia
+Beaumont,CA,40481,California,beaumont-ca
+La Puente,CA,40435,California,la-puente-ca
+Crystal Lake,IL,40388,Illinois,crystal-lake-il
+Fitchburg,MA,40383,Massachusetts,fitchburg-ma
+Carol Stream,IL,40379,Illinois,carol-stream-il
+Hickory,NC,40361,North Carolina,hickory-nc
+Streamwood,IL,40351,Illinois,streamwood-il
+Norwich,CT,40347,Connecticut,norwich-ct
+Coppell,TX,40342,Texas,coppell-tx
+San Gabriel,CA,40275,California,san-gabriel-ca
+Holyoke,MA,40249,Massachusetts,holyoke-ma
+Bentonville,AR,40167,Arkansas,bentonville-ar
+Florence,AL,40059,Alabama,florence-al
+Peachtree Corners,GA,40059,Georgia,peachtree-corners-ga
+Brentwood,TN,40021,Tennessee,brentwood-tn
+Bozeman,MT,39860,Montana,bozeman-mt
+New Berlin,WI,39834,Wisconsin,new-berlin-wi
+Goose Creek,SC,39823,South Carolina,goose-creek-sc
+Huntsville,TX,39795,Texas,huntsville-tx
+Prescott Valley,AZ,39791,Arizona,prescott-valley-az
+Maplewood,MN,39765,Minnesota,maplewood-mn
+Romeoville,IL,39650,Illinois,romeoville-il
+Duncanville,TX,39605,Texas,duncanville-tx
+Atlantic City,NJ,39551,New Jersey,atlantic-city-nj
+Clovis,NM,39508,New Mexico,clovis-nm
+The Colony,TX,39458,Texas,the-colony-tx
+Culver City,CA,39428,California,culver-city-ca
+Marlborough,MA,39414,Massachusetts,marlborough-ma
+Hilton Head Island,SC,39412,South Carolina,hilton-head-island-sc
+Moorhead,MN,39398,Minnesota,moorhead-mn
+Calexico,CA,39389,California,calexico-ca
+Bullhead City,AZ,39383,Arizona,bullhead-city-az
+Germantown,TN,39375,Tennessee,germantown-tn
+La Quinta,CA,39331,California,la-quinta-ca
+Lancaster,OH,39325,Ohio,lancaster-oh
+Wausau,WI,39309,Wisconsin,wausau-wi
+Sherman,TX,39296,Texas,sherman-tx
+Ocoee,FL,39172,Florida,ocoee-fl
+Shakopee,MN,39167,Minnesota,shakopee-mn
+Woburn,MA,39083,Massachusetts,woburn-ma
+Bremerton,WA,39056,Washington,bremerton-wa
+Rock Island,IL,38877,Illinois,rock-island-il
+Muskogee,OK,38863,Oklahoma,muskogee-ok
+Cape Girardeau,MO,38816,Missouri,cape-girardeau-mo
+Annapolis,MD,38722,Maryland,annapolis-md
+Greenacres,FL,38696,Florida,greenacres-fl
+Ormond Beach,FL,38661,Florida,ormond-beach-fl
+Hallandale Beach,FL,38632,Florida,hallandale-beach-fl
+Stanton,CA,38623,California,stanton-ca
+Puyallup,WA,38609,Washington,puyallup-wa
+Pacifica,CA,38606,California,pacifica-ca
+Hanover Park,IL,38510,Illinois,hanover-park-il
+Hurst,TX,38448,Texas,hurst-tx
+Lima,OH,38355,Ohio,lima-oh
+Marana,AZ,38290,Arizona,marana-az
+Carpentersville,IL,38241,Illinois,carpentersville-il
+Oakley,CA,38194,California,oakley-ca
+Huber Heights,OH,38142,Ohio,huber-heights-oh
+Lancaster,TX,38071,Texas,lancaster-tx
+Montclair,CA,38027,California,montclair-ca
+Wheeling,IL,38015,Illinois,wheeling-il
+Brookfield,WI,37999,Wisconsin,brookfield-wi
+Park Ridge,IL,37839,Illinois,park-ridge-il
+Florence,SC,37792,South Carolina,florence-sc
+Roy,UT,37733,Utah,roy-ut
+Winter Garden,FL,37711,Florida,winter-garden-fl
+Chelsea,MA,37670,Massachusetts,chelsea-ma
+Valley Stream,NY,37659,New York,valley-stream-ny
+Spartanburg,SC,37647,South Carolina,spartanburg-sc
+Lake Oswego,OR,37610,Oregon,lake-oswego-or
+Friendswood,TX,37587,Texas,friendswood-tx
+Westerville,OH,37530,Ohio,westerville-oh
+Northglenn,CO,37499,Colorado,northglenn-co
+Phenix City,AL,37498,Alabama,phenix-city-al
+Grove City,OH,37490,Ohio,grove-city-oh
+Texarkana,TX,37442,Texas,texarkana-tx
+Addison,IL,37385,Illinois,addison-il
+Dover,DE,37366,Delaware,dover-de
+Lincoln Park,MI,37313,Michigan,lincoln-park-mi
+Calumet City,IL,37240,Illinois,calumet-city-il
+Muskegon,MI,37213,Michigan,muskegon-mi
+Aventura,FL,37199,Florida,aventura-fl
+Martinez,CA,37165,California,martinez-ca
+Greenfield,WI,37159,Wisconsin,greenfield-wi
+Apache Junction,AZ,37130,Arizona,apache-junction-az
+Monrovia,CA,37101,California,monrovia-ca
+Weslaco,TX,37093,Texas,weslaco-tx
+Keizer,OR,37064,Oregon,keizer-or
+Spanish Fork,UT,36956,Utah,spanish-fork-ut
+Beloit,WI,36888,Wisconsin,beloit-wi
+Panama City,FL,36877,Florida,panama-city-fl
